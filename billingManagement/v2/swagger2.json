@@ -1,1552 +1,2465 @@
-
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "",
-    "version": "2.0",
-    "title": "API BillingManagement"
-  },
-  "host": "pleaseChangeIt",
-  "basePath":	"/billingManagement/v2",
-  "schemes": [
-      "http"
-  ],
-  "consumes": [
-      "application/json"
-  ],
-  "produces": [
-      "application/json"
-  ],  
-  "paths": {    
-    "/billingAccount": {        
-    "post": {
-      "tags": [
-         "billingAccount"
-      ],            
-      "operationId": "billingAccountCreate",
-      "summary": "billingAccountCreate",
-      "description": "",       
-      "deprecated": false,
-      "parameters": [
-      
-                          
-        
-                      
-        {
-         "name": "billingAccount",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/BillingAccount"
-          }
-        }          
-      ],
-      "responses": {
-        "201": {
-          "description": "BillingAccount",
-          "schema": {
-            "$ref": "#/definitions/BillingAccount"
-          }
-        }
-      }
-    }
-	,
-    "get": {
-      "tags": [
-         "billingAccount"
-      ],          
-      "operationId": "billingAccountFind",
-      "summary": "billingAccountFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of BillingAccount",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/BillingAccount"
+    "swagger": "2.0", 
+    "info": {
+        "title": "Billing Management", 
+        "description": "This is Swagger UI environment generated for the TMF Billing Management specification", 
+        "version": "2.0"
+    }, 
+    "host": "biologeek.orange-labs.fr", 
+    "basePath": "/api/billingManagement", 
+    "schemes": [
+        "https"
+    ], 
+    "consumes": [
+        "application/json"
+    ], 
+    "produces": [
+        "application/json"
+    ], 
+    "paths": {
+        "/billingAccount": {
+            "get": {
+                "operationId": "listBillingAccount", 
+                "summary": "List or find 'BillingAccount' objects", 
+                "tags": [
+                    "billingAccount"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "ratingType", 
+                        "description": "For filtering: Rating type (prepaid, postpaid) of the billing account"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "name", 
+                        "description": "For filtering: A short descriptive name"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "state", 
+                        "description": "For filtering: Used to track the lifecycle state"
+                    }, 
+                    {
+                        "name": "validFor.startDateTime", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: An instant of time, starting at the TimePeriod"
+                    }, 
+                    {
+                        "name": "validFor.endDateTime", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: An instant of time, ending at the TimePeriod."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "customerBillingCycleSpecification.name", 
+                        "description": "For filtering: A short descriptive name"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "paymentMean.name", 
+                        "description": "For filtering: Name of the payment mean"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "customerAccount.name", 
+                        "description": "For filtering: Name of the customer account"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "customerAccount.status", 
+                        "description": "For filtering: The condition of the account, such as due, paid, in arrears, in collection"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "customerBillFormat.name", 
+                        "description": "For filtering: A short descriptive name"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "customerBillPresentationMedia.name", 
+                        "description": "For filtering: A short descriptive name"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "currency.currencyCode", 
+                        "description": "For filtering: A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "billingAccountBalance.type", 
+                        "description": "For filtering: Type of the balance"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "billingAccountBalance.amount", 
+                        "description": "For filtering: Balance amount"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "billingAccountBalance.status", 
+                        "description": "For filtering: Balance status"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "relatedParty.role", 
+                        "description": "For filtering: Role of the related party."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "relatedParty.name", 
+                        "description": "For filtering: Name of the related party"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/BillingAccount"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "post": {
+                "operationId": "createBillingAccount", 
+                "summary": "Creates a 'BillingAccount'", 
+                "tags": [
+                    "billingAccount"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/BillingAccount_Create"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "billingAccount", 
+                        "description": "The Billing Account to be created"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Created", 
+                        "schema": {
+                            "$ref": "#/definitions/BillingAccount"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/billingAccount/{billingAccountId}": {
-    "get": {
-      "tags": [
-         "billingAccount"
-      ],    
-      "operationId": "billingAccountGet",
-      "summary": "billingAccountGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "billingAccountId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "BillingAccount",
-          "schema": {
-            "$ref": "#/definitions/BillingAccount"
+        }, 
+        "/billingAccount/{id}": {
+            "get": {
+                "operationId": "retrieveBillingAccount", 
+                "summary": "Retrieves a 'BillingAccount' by Id", 
+                "tags": [
+                    "billingAccount"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Billing Account"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/BillingAccount"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "patch": {
+                "operationId": "updateBillingAccount", 
+                "summary": "Updates partially a 'BillingAccount' by Id", 
+                "tags": [
+                    "billingAccount"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Billing Account"
+                    }, 
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/BillingAccount_Update"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "billingAccount", 
+                        "description": "The Billing Account to be updated"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Updated", 
+                        "schema": {
+                            "$ref": "#/definitions/BillingAccount"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	,
-    "patch": {
-      "tags": [
-         "billingAccount"
-      ],            
-      "operationId": "billingAccountPatch",
-      "summary": "billingAccountPatch",
-      "description": "",      
-      "deprecated": false, 
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "billingAccountId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-               
-        {
-         "name": "billingAccount",
-         "in": "body",
-         "required": true,
-         "schema": {
-           "$ref": "#/definitions/BillingAccount"
-         }
-        }                               
-      ], 
-      "responses": {
-        "201": {
-          "description": "Success BillingAccount",
-          "schema": {
-            "$ref": "#/definitions/BillingAccount"
+        }, 
+        "/appliedCustomerBillingCharge": {
+            "get": {
+                "operationId": "listAppliedCustomerBillingCharge", 
+                "summary": "List or find 'AppliedCustomerBillingCharge' objects", 
+                "tags": [
+                    "appliedCustomerBillingCharge"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "name": "date", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "query", 
+                        "type": "string", 
+                        "description": "For filtering: Creation date of the applied customer billing charge"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "currencyCode", 
+                        "description": "For filtering: A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "taxIncludedAmount", 
+                        "description": "For filtering: All taxes included amount to be charged on the customer bill (expressed in the given currency)"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "taxExcludedAmount", 
+                        "description": "For filtering: Tax excluded amount to be charged on the customer bill (expresses in the given currency)."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "productSpecification.version", 
+                        "description": "For filtering: Product specification version"
+                    }, 
+                    {
+                        "name": "productSpecification.lastUpdate", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: Date and time of the last update"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "productSpecification.name", 
+                        "description": "For filtering: Name of the product specification"
+                    }, 
+                    {
+                        "type": "boolean", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "productSpecification.isBundle", 
+                        "description": "For filtering: isBundle determines whether a productSpecification represents a single productSpecification (false), or a bundle of productSpecification (true)."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "productSpecification.brand", 
+                        "description": "For filtering: The manufacturer or trademark of the specification"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "productSpecification.lifecycleStatus", 
+                        "description": "For filtering: Used to indicate the current lifecycle status"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "productSpecification.productNumber", 
+                        "description": "For filtering: An identification number assigned to uniquely identity the specification"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "appliedCustomerBillingTaxRate.amount", 
+                        "description": "For filtering: Tax amount"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "appliedCustomerBillingTaxRate.taxCategory", 
+                        "description": "For filtering: A categorization of the tax rate"
+                    }, 
+                    {
+                        "name": "period.startPeriod", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: Start date of the period"
+                    }, 
+                    {
+                        "name": "period.endPeriod", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: end date of the period"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "serviceId.type", 
+                        "description": "For filtering: Type of the service identifier (e.g. mobile number)"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/AppliedCustomerBillingCharge"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "post": {
+                "operationId": "createAppliedCustomerBillingCharge", 
+                "summary": "Creates a 'AppliedCustomerBillingCharge'", 
+                "tags": [
+                    "appliedCustomerBillingCharge"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/AppliedCustomerBillingCharge_Create"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "appliedCustomerBillingCharge", 
+                        "description": "The Applied Customer Billing Charge to be created"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Created", 
+                        "schema": {
+                            "$ref": "#/definitions/AppliedCustomerBillingCharge"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }             
-    }
-	
-    },    
-    "/customerBillingCycleSpecification": {
-    "get": {
-      "tags": [
-         "customerBillingCycleSpecification"
-      ],          
-      "operationId": "customerBillingCycleSpecificationFind",
-      "summary": "customerBillingCycleSpecificationFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of CustomerBillingCycleSpecification",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomerBillingCycleSpecification"
+        }, 
+        "/appliedCustomerBillingCharge/{id}": {
+            "get": {
+                "operationId": "retrieveAppliedCustomerBillingCharge", 
+                "summary": "Retrieves a 'AppliedCustomerBillingCharge' by Id", 
+                "tags": [
+                    "appliedCustomerBillingCharge"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Applied Customer Billing Charge"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/AppliedCustomerBillingCharge"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/customerBillingCycleSpecification/{customerBillingCycleSpecificationId}": {
-    "get": {
-      "tags": [
-         "customerBillingCycleSpecification"
-      ],    
-      "operationId": "customerBillingCycleSpecificationGet",
-      "summary": "customerBillingCycleSpecificationGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "customerBillingCycleSpecificationId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "CustomerBillingCycleSpecification",
-          "schema": {
-            "$ref": "#/definitions/CustomerBillingCycleSpecification"
+        }, 
+        "/settlementNoteAdvice": {
+            "get": {
+                "operationId": "listSettlementNoteAdvice", 
+                "summary": "List or find 'SettlementNoteAdvice' objects", 
+                "tags": [
+                    "settlementNoteAdvice"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "name": "date", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "query", 
+                        "type": "string", 
+                        "description": "For filtering: Creation date of the settlement note advice"
+                    }, 
+                    {
+                        "name": "paymentDueDate", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "query", 
+                        "type": "string", 
+                        "description": "For filtering: Date at which the due amount should have been paid to the partner"
+                    }, 
+                    {
+                        "name": "taxDate", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "query", 
+                        "type": "string", 
+                        "description": "For filtering: Date of the tax"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "currencyCode", 
+                        "description": "For filtering: A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "taxExcludedAmount", 
+                        "description": "For filtering: All taxes excluded amount (expressed in the given currency)"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "taxIncludedAmount", 
+                        "description": "For filtering: All taxes included amount (expressed in the given currency)"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementMethod.code", 
+                        "description": "For filtering: Code of the settlement method"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementMethod.label", 
+                        "description": "For filtering: A word, term or phrase by which a settlement method is known and distinguished from other settlement method"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteImage.imageFormat", 
+                        "description": "For filtering: The format of the settlement note image (csv, pdf, xls, txt...)"
+                    }, 
+                    {
+                        "type": "integer", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteImage.imageSize", 
+                        "description": "For filtering: The size of the settlement note image (in bytes)"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteImage.imageFileName", 
+                        "description": "For filtering: The name of the file in which the settlement note image is saved."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteImage.imageFileURL", 
+                        "description": "For filtering: The URL of the settlement note image"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "taxItem.taxCategory", 
+                        "description": "For filtering: Tax category (for example VAT)"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "taxItem.taxRate", 
+                        "description": "For filtering: Tax rate"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "taxItem.taxAmount", 
+                        "description": "For filtering: Tax amount"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.itemNumber", 
+                        "description": "For filtering: Unique number assigned to the settlement note item"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.itemId", 
+                        "description": "For filtering: Unique identifier of the settlement note item"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.itemLabel", 
+                        "description": "For filtering: A free description text for the settlement note item"
+                    }, 
+                    {
+                        "type": "integer", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.quantity", 
+                        "description": "For filtering: Quantity"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.taxExcludedUnitPrice", 
+                        "description": "For filtering: Tax excluded unit price to be applied on the given quantity"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.taxExcludedAmount", 
+                        "description": "For filtering: Tax excluded amount equal to quantity * taxExcludedUnitPrice"
+                    }, 
+                    {
+                        "type": "float", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "settlementNoteItem.taxIncludedAmount", 
+                        "description": "For filtering: All taxes included amount equal to taxExcludedAmount + taxAmount"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SettlementNoteAdvice"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	
-    },    
-    "/appliedCustomerBillingCharge": {        
-    "post": {
-      "tags": [
-         "appliedCustomerBillingCharge"
-      ],            
-      "operationId": "appliedCustomerBillingChargeCreate",
-      "summary": "appliedCustomerBillingChargeCreate",
-      "description": "",       
-      "deprecated": false,
-      "parameters": [
-      
-                          
-        
-                      
-        {
-         "name": "appliedCustomerBillingCharge",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AppliedCustomerBillingCharge"
-          }
-        }          
-      ],
-      "responses": {
-        "201": {
-          "description": "AppliedCustomerBillingCharge",
-          "schema": {
-            "$ref": "#/definitions/AppliedCustomerBillingCharge"
-          }
-        }
-      }
-    }
-	,
-    "get": {
-      "tags": [
-         "appliedCustomerBillingCharge"
-      ],          
-      "operationId": "appliedCustomerBillingChargeFind",
-      "summary": "appliedCustomerBillingChargeFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of AppliedCustomerBillingCharge",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AppliedCustomerBillingCharge"
+        }, 
+        "/settlementNoteAdvice/{id}": {
+            "get": {
+                "operationId": "retrieveSettlementNoteAdvice", 
+                "summary": "Retrieves a 'SettlementNoteAdvice' by Id", 
+                "tags": [
+                    "settlementNoteAdvice"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Settlement Note Advice"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SettlementNoteAdvice"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/appliedCustomerBillingCharge/{appliedCustomerBillingChargeId}": {
-    "get": {
-      "tags": [
-         "appliedCustomerBillingCharge"
-      ],    
-      "operationId": "appliedCustomerBillingChargeGet",
-      "summary": "appliedCustomerBillingChargeGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "appliedCustomerBillingChargeId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "AppliedCustomerBillingCharge",
-          "schema": {
-            "$ref": "#/definitions/AppliedCustomerBillingCharge"
+        }, 
+        "/customerBillPresentationMedia": {
+            "get": {
+                "operationId": "listCustomerBillPresentationMedia", 
+                "summary": "List or find 'CustomerBillPresentationMedia' objects", 
+                "tags": [
+                    "customerBillPresentationMedia"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "name", 
+                        "description": "For filtering: A short descriptive name"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CustomerBillPresentationMedia"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	
-    },    
-    "/settlementNoteAdvice": {
-    "get": {
-      "tags": [
-         "settlementNoteAdvice"
-      ],          
-      "operationId": "settlementNoteAdviceFind",
-      "summary": "settlementNoteAdviceFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of SettlementNoteAdvice",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SettlementNoteAdvice"
+        }, 
+        "/customerBillPresentationMedia/{id}": {
+            "get": {
+                "operationId": "retrieveCustomerBillPresentationMedia", 
+                "summary": "Retrieves a 'CustomerBillPresentationMedia' by Id", 
+                "tags": [
+                    "customerBillPresentationMedia"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Customer Bill Presentation Media"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CustomerBillPresentationMedia"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/settlementNoteAdvice/{settlementNoteAdviceId}": {
-    "get": {
-      "tags": [
-         "settlementNoteAdvice"
-      ],    
-      "operationId": "settlementNoteAdviceGet",
-      "summary": "settlementNoteAdviceGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "settlementNoteAdviceId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "SettlementNoteAdvice",
-          "schema": {
-            "$ref": "#/definitions/SettlementNoteAdvice"
+        }, 
+        "/customerBillingCycleSpecification": {
+            "get": {
+                "operationId": "listCustomerBillingCycleSpecification", 
+                "summary": "List or find 'CustomerBillingCycleSpecification' objects", 
+                "tags": [
+                    "customerBillingCycleSpecification"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "name", 
+                        "description": "For filtering: A short descriptive name"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "frequency", 
+                        "description": "For filtering: Frequency of the billing cycle (monthly for instance)"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CustomerBillingCycleSpecification"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	
-    },    
-    "/customerBillFormat": {
-    "get": {
-      "tags": [
-         "customerBillFormat"
-      ],          
-      "operationId": "customerBillFormatFind",
-      "summary": "customerBillFormatFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of CustomerBillFormat",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomerBillFormat"
+        }, 
+        "/customerBillingCycleSpecification/{id}": {
+            "get": {
+                "operationId": "retrieveCustomerBillingCycleSpecification", 
+                "summary": "Retrieves a 'CustomerBillingCycleSpecification' by Id", 
+                "tags": [
+                    "customerBillingCycleSpecification"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Customer Billing Cycle Specification"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CustomerBillingCycleSpecification"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/customerBillFormat/{customerBillFormatId}": {
-    "get": {
-      "tags": [
-         "customerBillFormat"
-      ],    
-      "operationId": "customerBillFormatGet",
-      "summary": "customerBillFormatGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "customerBillFormatId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "CustomerBillFormat",
-          "schema": {
-            "$ref": "#/definitions/CustomerBillFormat"
+        }, 
+        "/customerBillFormat": {
+            "get": {
+                "operationId": "listCustomerBillFormat", 
+                "summary": "List or find 'CustomerBillFormat' objects", 
+                "tags": [
+                    "customerBillFormat"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "name", 
+                        "description": "For filtering: A short descriptive name"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CustomerBillFormat"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	
-    },    
-    "/customerBillPresentationMedia": {
-    "get": {
-      "tags": [
-         "customerBillPresentationMedia"
-      ],          
-      "operationId": "customerBillPresentationMediaFind",
-      "summary": "customerBillPresentationMediaFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of CustomerBillPresentationMedia",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomerBillPresentationMedia"
+        }, 
+        "/customerBillFormat/{id}": {
+            "get": {
+                "operationId": "retrieveCustomerBillFormat", 
+                "summary": "Retrieves a 'CustomerBillFormat' by Id", 
+                "tags": [
+                    "customerBillFormat"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Customer Bill Format"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CustomerBillFormat"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/customerBillPresentationMedia/{customerBillPresentationMediaId}": {
-    "get": {
-      "tags": [
-         "customerBillPresentationMedia"
-      ],    
-      "operationId": "customerBillPresentationMediaGet",
-      "summary": "customerBillPresentationMediaGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "customerBillPresentationMediaId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "CustomerBillPresentationMedia",
-          "schema": {
-            "$ref": "#/definitions/CustomerBillPresentationMedia"
+        }, 
+        "/hub": {
+            "post": {
+                "operationId": "registerListener", 
+                "summary": "Register a listener", 
+                "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
+                "tags": [
+                    "events subscription"
+                ], 
+                "parameters": [
+                    {
+                        "name": "data", 
+                        "schema": {
+                            "$ref": "#/definitions/EventSubscriptionInput"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "description": "Data containing the callback endpoint to deliver the information"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Subscribed", 
+                        "schema": {
+                            "$ref": "#/definitions/EventSubscription"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	
-    },    
-    "/hub": {        
-    "post": {
-      "tags": [
-         "hub"
-      ],            
-      "operationId": "hubCreate",
-      "summary": "hubCreate",
-      "description": "",       
-      "deprecated": false,
-      "parameters": [
-      
-                          
-        
-                      
-        {
-         "name": "hub",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        }          
-      ],
-      "responses": {
-        "201": {
-          "description": "Hub",
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        }
-      }
-    }
-	,
-    "get": {
-      "tags": [
-         "hub"
-      ],          
-      "operationId": "hubFind",
-      "summary": "hubFind",
-      "description": "",       
-      "deprecated": false,
-         
-      "responses": {
-        "200": {
-          "description": "List of Hub",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Hub"
+        }, 
+        "/hub/{id}": {
+            "delete": {
+                "operationId": "unregisterListener", 
+                "summary": "Unregister a listener", 
+                "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
+                "tags": [
+                    "events subscription"
+                ], 
+                "parameters": [
+                    {
+                        "name": "id", 
+                        "type": "string", 
+                        "required": true, 
+                        "in": "path", 
+                        "description": "The id of the registered listener"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Unsubscribed"
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/hub/{hubId}": {
-    "delete": {
-      "tags": [
-         "hub"
-      ],    
-      "operationId": "hubDelete",
-      "summary": "hubDelete",
-      "description": "",
-      "deprecated": false,
-        
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "hubId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  
-        
-      ],
-         
-      "responses": {
-        "204": {
-          "description": "Success"
-          }  
-      }   
-    }
-	,
-    "get": {
-      "tags": [
-         "hub"
-      ],    
-      "operationId": "hubGet",
-      "summary": "hubGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "hubId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "Hub",
-          "schema": {
-            "$ref": "#/definitions/Hub"
+        }, 
+        "/listener/billingAccountStateChangeNotification": {
+            "post": {
+                "operationId": "publishBillingAccountStateChangeNotification", 
+                "summary": "Publishes a 'BillingAccountStateChangeNotification'", 
+                "tags": [
+                    "events publication"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/BillingAccountStateChangeNotification"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "billingAccountStateChangeNotification", 
+                        "description": "The Billing Account State Change Notification to be published"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Published"
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	
+        }, 
+        "/listener/settlementNoteAdviceNotification": {
+            "post": {
+                "operationId": "publishSettlementNoteAdviceNotification", 
+                "summary": "Publishes a 'SettlementNoteAdviceNotification'", 
+                "tags": [
+                    "events publication"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SettlementNoteAdviceNotification"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "settlementNoteAdviceNotification", 
+                        "description": "The Settlement Note Advice Notification to be published"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Published"
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "BillingAccount": {
+            "type": "object", 
+            "description": "A detailed description of a customer's bill structure", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the billing account"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the billing account"
+                }, 
+                "ratingType": {
+                    "type": "string", 
+                    "description": "Rating type (prepaid, postpaid) of the billing account"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "description": "Used to track the lifecycle state"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the billing account is valid"
+                }, 
+                "customerBillingCycleSpecification": {
+                    "$ref": "#/definitions/CustomerBillingCycleSpecificationRef"
+                }, 
+                "paymentMean": {
+                    "$ref": "#/definitions/PaymentMeanRef"
+                }, 
+                "customerAccount": {
+                    "$ref": "#/definitions/CustomerAccountRef"
+                }, 
+                "customerBillFormat": {
+                    "$ref": "#/definitions/CustomerBillFormatRef"
+                }, 
+                "customerBillPresentationMedia": {
+                    "$ref": "#/definitions/CustomerBillPresentationMediaRef"
+                }, 
+                "currency": {
+                    "$ref": "#/definitions/Currency"
+                }, 
+                "billingAccountBalance": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/BillingAccountBalance"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }
+            }
+        }, 
+        "BillingAccount_Create": {
+            "type": "object", 
+            "description": "A detailed description of a customer's bill structure\nSkipped properties: id,href", 
+            "required": [
+                "customerAccount", 
+                "relatedParty"
+            ], 
+            "properties": {
+                "ratingType": {
+                    "type": "string", 
+                    "description": "Rating type (prepaid, postpaid) of the billing account"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "description": "Used to track the lifecycle state"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the billing account is valid"
+                }, 
+                "customerBillingCycleSpecification": {
+                    "$ref": "#/definitions/CustomerBillingCycleSpecificationRef"
+                }, 
+                "paymentMean": {
+                    "$ref": "#/definitions/PaymentMeanRef"
+                }, 
+                "customerAccount": {
+                    "$ref": "#/definitions/CustomerAccountRef"
+                }, 
+                "customerBillFormat": {
+                    "$ref": "#/definitions/CustomerBillFormatRef"
+                }, 
+                "customerBillPresentationMedia": {
+                    "$ref": "#/definitions/CustomerBillPresentationMediaRef"
+                }, 
+                "currency": {
+                    "$ref": "#/definitions/Currency"
+                }, 
+                "billingAccountBalance": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/BillingAccountBalance"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }
+            }
+        }, 
+        "BillingAccount_Update": {
+            "type": "object", 
+            "description": "A detailed description of a customer's bill structure\nSkipped properties: id,href,ratingType,billingAccountBalance", 
+            "properties": {
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "description": "Used to track the lifecycle state"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the billing account is valid"
+                }, 
+                "customerBillingCycleSpecification": {
+                    "$ref": "#/definitions/CustomerBillingCycleSpecificationRef"
+                }, 
+                "paymentMean": {
+                    "$ref": "#/definitions/PaymentMeanRef"
+                }, 
+                "customerAccount": {
+                    "$ref": "#/definitions/CustomerAccountRef"
+                }, 
+                "customerBillFormat": {
+                    "$ref": "#/definitions/CustomerBillFormatRef"
+                }, 
+                "customerBillPresentationMedia": {
+                    "$ref": "#/definitions/CustomerBillPresentationMediaRef"
+                }, 
+                "currency": {
+                    "$ref": "#/definitions/Currency"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }
+            }
+        }, 
+        "AppliedCustomerBillingCharge": {
+            "type": "object", 
+            "description": "An amount, usually of money, for which a person or an organization is financially liable.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the applied customer billing charge"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the applied customer billing charge"
+                }, 
+                "date": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Creation date of the applied customer billing charge"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "Additional data to be displayed on the customer bill for this applied customer billing charge"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "enum": [
+                        "recurring", 
+                        "OneTime", 
+                        "Usage"
+                    ], 
+                    "description": "Type of the applied customer billing charge (recurring, one time or usage) necessary to find the category of the invoice where the charge has to be displayed."
+                }, 
+                "currencyCode": {
+                    "type": "string", 
+                    "description": "A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                }, 
+                "taxIncludedAmount": {
+                    "type": "float", 
+                    "description": "All taxes included amount to be charged on the customer bill (expressed in the given currency)"
+                }, 
+                "taxExcludedAmount": {
+                    "type": "float", 
+                    "description": "Tax excluded amount to be charged on the customer bill (expresses in the given currency)."
+                }, 
+                "productSpecification": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ProductSpecification"
+                    }
+                }, 
+                "appliedCustomerBillingTaxRate": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/AppliedCustomerBillingTaxRate"
+                    }
+                }, 
+                "period": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/Period"
+                    }
+                }, 
+                "serviceId": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ServiceId"
+                    }
+                }
+            }
+        }, 
+        "AppliedCustomerBillingCharge_Create": {
+            "type": "object", 
+            "description": "An amount, usually of money, for which a person or an organization is financially liable.\nSkipped properties: id,href", 
+            "required": [
+                "type", 
+                "currencyCode", 
+                "taxExcludedAmount", 
+                "productSpecification"
+            ], 
+            "properties": {
+                "date": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Creation date of the applied customer billing charge"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "Additional data to be displayed on the customer bill for this applied customer billing charge"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "enum": [
+                        "recurring", 
+                        "OneTime", 
+                        "Usage"
+                    ], 
+                    "description": "Type of the applied customer billing charge (recurring, one time or usage) necessary to find the category of the invoice where the charge has to be displayed."
+                }, 
+                "currencyCode": {
+                    "type": "string", 
+                    "description": "A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                }, 
+                "taxIncludedAmount": {
+                    "type": "float", 
+                    "description": "All taxes included amount to be charged on the customer bill (expressed in the given currency)"
+                }, 
+                "taxExcludedAmount": {
+                    "type": "float", 
+                    "description": "Tax excluded amount to be charged on the customer bill (expresses in the given currency)."
+                }, 
+                "productSpecification": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ProductSpecification"
+                    }
+                }, 
+                "appliedCustomerBillingTaxRate": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/AppliedCustomerBillingTaxRate"
+                    }
+                }, 
+                "period": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/Period"
+                    }
+                }, 
+                "serviceId": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ServiceId"
+                    }
+                }
+            }
+        }, 
+        "SettlementNoteAdvice": {
+            "type": "object", 
+            "description": "The settlement is about transferring money receiving by a CSP to a partner. The settlement is notified to the partner with a settlement note advice containing details in settlement lines.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "A unique identifier for the settlement note advice"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the settlement note advice"
+                }, 
+                "date": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Creation date of the settlement note advice"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "A free description text"
+                }, 
+                "paymentDueDate": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Date at which the due amount should have been paid to the partner"
+                }, 
+                "taxDate": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Date of the tax"
+                }, 
+                "currencyCode": {
+                    "type": "string", 
+                    "description": "A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                }, 
+                "taxExcludedAmount": {
+                    "type": "float", 
+                    "description": "All taxes excluded amount (expressed in the given currency)"
+                }, 
+                "taxIncludedAmount": {
+                    "type": "float", 
+                    "description": "All taxes included amount (expressed in the given currency)"
+                }, 
+                "settlementMethod": {
+                    "$ref": "#/definitions/SettlementMethod"
+                }, 
+                "settlementNoteImage": {
+                    "$ref": "#/definitions/SettlementNoteImage"
+                }, 
+                "receiver": {
+                    "$ref": "#/definitions/ReceiverRef"
+                }, 
+                "taxItem": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/TaxItem"
+                    }
+                }, 
+                "issuer": {
+                    "$ref": "#/definitions/IssuerRef"
+                }, 
+                "settlementNoteItem": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/SettlementNoteItem"
+                    }
+                }
+            }
+        }, 
+        "CustomerBillPresentationMedia": {
+            "type": "object", 
+            "description": "A mean of communicating a customer bill, supported by the associated bill format. For example, post mail, email, web page.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer bill presentation media"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the customer bill presentation media"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }
+            }
+        }, 
+        "CustomerBillingCycleSpecification": {
+            "type": "object", 
+            "description": "A detailed description of when to initiate a billing cycle and the various sub steps of a billing cycle.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer billing cycle specification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the customer billing cycle specification"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }, 
+                "billingDateShift": {
+                    "$ref": "#/definitions/integer", 
+                    "description": "An offset of a billing date. The offset is expressed as number of days with regard to the start of the billing period."
+                }, 
+                "frequency": {
+                    "type": "string", 
+                    "description": "Frequency of the billing cycle (monthly for instance)"
+                }
+            }
+        }, 
+        "CustomerBillFormat": {
+            "type": "object", 
+            "description": "A detailed description of the way in which a customer's bill is presented.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer bill format"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the customer bill format"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }
+            }
+        }, 
+        "TimePeriod": {
+            "type": "object", 
+            "description": "A base / value business entity used to represent a period of time between two timepoints.", 
+            "properties": {
+                "startDateTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "An instant of time, starting at the TimePeriod"
+                }, 
+                "endDateTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "An instant of time, ending at the TimePeriod."
+                }
+            }
+        }, 
+        "CustomerBillingCycleSpecificationRef": {
+            "type": "object", 
+            "description": "CustomerBillingCycleSpecification reference. CustomerBillingCycleSpecification  is a detailed description of when to initiate a billing cycle and the various sub steps of a billing cycle.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer billing cycle specification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the customer billing cycle specification"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }
+            }
+        }, 
+        "PaymentMeanRef": {
+            "type": "object", 
+            "description": "PaymentMean reference. PaymentMean defines a specific mean of payment (e.g direct debit with all details associated).", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the payment mean"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the payment mean"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the payment mean"
+                }
+            }
+        }, 
+        "CustomerAccountRef": {
+            "type": "object", 
+            "description": "CustomerAccount reference. CustomerAccount is used to represent an account for the customer to manage the billing aspects.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer account"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Unique reference of the customer account"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the customer account"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "Detailed description of the customer account"
+                }, 
+                "status": {
+                    "type": "string", 
+                    "description": "The condition of the account, such as due, paid, in arrears, in collection"
+                }
+            }
+        }, 
+        "CustomerBillFormatRef": {
+            "type": "object", 
+            "description": "Customer bill format reference. Customer bill format is a detailed description of the way in which a customer's bill is presented.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer bill format"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the customer bill format"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }
+            }
+        }, 
+        "CustomerBillPresentationMediaRef": {
+            "type": "object", 
+            "description": "Customer bill presentation media reference. CustomerBillPresentationMedia is a mean of communicating a customer bill, supported by the associated bill format. For example, post mail, email, web page.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the customer bill presentation media"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the customer bill presentation media"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "A short descriptive name"
+                }
+            }
+        }, 
+        "Currency": {
+            "type": "object", 
+            "description": "A base / Value business entity used to represent currency", 
+            "properties": {
+                "currencyCode": {
+                    "type": "string", 
+                    "description": "A string used as a code for specifying the currency associated to the given amounts. The ISO4217 norm uses 3 letters to define the currency (for example USD for US dollar or EUR for Euro)."
+                }
+            }
+        }, 
+        "BillingAccountBalance": {
+            "type": "object", 
+            "description": "A detailed description of a customer's bill structure", 
+            "properties": {
+                "type": {
+                    "type": "string", 
+                    "description": "Type of the balance"
+                }, 
+                "amount": {
+                    "type": "float", 
+                    "description": "Balance amount"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "Balance validity period"
+                }, 
+                "status": {
+                    "type": "string", 
+                    "description": "Balance status"
+                }
+            }
+        }, 
+        "RelatedPartyRef": {
+            "type": "object", 
+            "description": "RelatedParty reference. RelatedParty defines party or party role linked to a specific entity.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of a related party"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the related party, could be a party reference or a partyRole reference"
+                }, 
+                "role": {
+                    "type": "string", 
+                    "description": "Role of the related party."
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the related party"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "Validity period of the related party"
+                }
+            }
+        }, 
+        "AppliedCustomerBillingChargeType": {
+            "type": "string", 
+            "enum": [
+                "recurring", 
+                "OneTime", 
+                "Usage"
+            ]
+        }, 
+        "ProductSpecification": {
+            "type": "object", 
+            "description": "Is a detailed description of a tangible or intangible object made available externally in the form of a ProductOffering to customers or other parties playing a party role.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the product specification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the product specification"
+                }, 
+                "version": {
+                    "type": "string", 
+                    "description": "Product specification version"
+                }, 
+                "lastUpdate": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Date and time of the last update"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the product specification"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "A narrative that explains in detail what the product specification is"
+                }, 
+                "isBundle": {
+                    "type": "boolean", 
+                    "description": "isBundle determines whether a productSpecification represents a single productSpecification (false), or a bundle of productSpecification (true)."
+                }, 
+                "brand": {
+                    "type": "string", 
+                    "description": "The manufacturer or trademark of the specification"
+                }, 
+                "lifecycleStatus": {
+                    "type": "string", 
+                    "description": "Used to indicate the current lifecycle status"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the product specification is valid"
+                }, 
+                "productNumber": {
+                    "type": "string", 
+                    "description": "An identification number assigned to uniquely identity the specification"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "productSpecCharacteristic": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ProductSpecCharacteristic"
+                    }
+                }, 
+                "serviceSpecification": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ServiceSpecificationRef"
+                    }
+                }, 
+                "productSpecificationRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ProductSpecificationRelationship"
+                    }
+                }, 
+                "resourceSpecification": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ResourceSpecificationRef"
+                    }
+                }, 
+                "attachment": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/Attachment"
+                    }
+                }, 
+                "bundledProductSpecification": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/BundledProductSpecification"
+                    }
+                }
+            }
+        }, 
+        "AppliedCustomerBillingTaxRate": {
+            "type": "object", 
+            "description": "An amount of money levied on the price of a product by a legislative body.", 
+            "properties": {
+                "amount": {
+                    "type": "float", 
+                    "description": "Tax amount"
+                }, 
+                "taxCategory": {
+                    "type": "string", 
+                    "description": "A categorization of the tax rate"
+                }
+            }
+        }, 
+        "Period": {
+            "type": "object", 
+            "description": "Defines the period of a recurring charge", 
+            "properties": {
+                "startPeriod": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Start date of the period"
+                }, 
+                "endPeriod": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "end date of the period"
+                }
+            }
+        }, 
+        "ServiceId": {
+            "type": "object", 
+            "description": "Defines the identifier of the service.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Identifier of the service"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "description": "Type of the service identifier (e.g. mobile number)"
+                }
+            }
+        }, 
+        "ProductSpecCharacteristic": {
+            "type": "object", 
+            "description": "A characteristic quality or distinctive feature of a ProductSpecification.  The characteristic can be take on a discrete value, such as color, can take on a range of values, (for example, sensitivity of 100-240 mV), or can be derived from a formula (for example, usage time (hrs) = 30 - talk time *3). Certain characteristics, such as color, may be configured during the ordering or some other process.", 
+            "properties": {
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the productSpecCharacteristic"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "A narrative that explains in detail what the productSpecCharacteristic is"
+                }, 
+                "valueType": {
+                    "type": "string", 
+                    "description": "A kind of value that the characteristic can take on, such as numeric, text and so forth"
+                }, 
+                "configurable": {
+                    "type": "boolean", 
+                    "description": "If true, the Boolean indicates that the productSpecCharacteristic is configurable"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the productSpecCharacteristic is valid"
+                }, 
+                "productSpecCharRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ProductSpecCharRelationship"
+                    }
+                }, 
+                "productSpecCharacteristicValue": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/ProductSpecCharacteristicValue"
+                    }
+                }
+            }
+        }, 
+        "ServiceSpecificationRef": {
+            "type": "object", 
+            "description": "Service specification reference: ServiceSpecification(s) required to realize a ProductSpecification.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the service specification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the serviceSpecification"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the requiredServiceSpecification"
+                }, 
+                "version": {
+                    "type": "string", 
+                    "description": "Service specification version"
+                }
+            }
+        }, 
+        "ProductSpecificationRelationship": {
+            "type": "object", 
+            "description": "A migration, substitution, dependency or exclusivity relationship between/among product specifications.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the productSpecification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the productSpecification"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "description": "Type of relationship such as migration, substitution, dependency, exclusivity"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the productSpecificationRelationship is valid"
+                }
+            }
+        }, 
+        "ResourceSpecificationRef": {
+            "type": "object", 
+            "description": "Resource Specification reference: The ResourceSpecification is required to realize a ProductSpecification.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the resource specification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the resource specification"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the requiredResourceSpecification"
+                }, 
+                "version": {
+                    "type": "string", 
+                    "description": "Resource specification version"
+                }
+            }
+        }, 
+        "Attachment": {
+            "type": "object", 
+            "description": "Describes a product through video, pictures...", 
+            "properties": {
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the attachment"
+                }, 
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the attachment"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "description": "Attachment type such as video, picture"
+                }, 
+                "url": {
+                    "type": "string", 
+                    "description": "Uniform Resource Locator, is a web page address (a subset of URI)"
+                }
+            }
+        }, 
+        "BundledProductSpecification": {
+            "type": "object", 
+            "description": "A type of ProductSpecification that belongs to a grouping of ProductSpecifications made available to the market. It inherits of all attributes of ProductSpecification.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the product specification"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the product specification"
+                }, 
+                "lifecycleStatus": {
+                    "type": "string", 
+                    "description": "Used to indicate the current lifecycle status"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the product specification"
+                }
+            }
+        }, 
+        "ProductSpecCharRelationship": {
+            "type": "object", 
+            "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among productSpecCharacteristics.", 
+            "properties": {
+                "type": {
+                    "type": "string", 
+                    "description": "Type of relationship such as aggregation, migration, substitution, dependency, exclusivity"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period for which the productSpecCharRelationship is valid"
+                }
+            }
+        }, 
+        "ProductSpecCharacteristicValue": {
+            "type": "object", 
+            "description": "A number or text that can be assigned to a ProductSpecCharacteristic.", 
+            "properties": {
+                "valueType": {
+                    "type": "string", 
+                    "description": "A kind of value that the characteristic can take on, such as numeric, text, and so forth"
+                }, 
+                "default": {
+                    "type": "boolean", 
+                    "description": "Indicates if the value is the default value for a characteristic"
+                }, 
+                "value": {
+                    "type": "string", 
+                    "description": "A discrete value that the characteristic can take on"
+                }, 
+                "unitOfMeasure": {
+                    "type": "string", 
+                    "description": "Could be minutes, GB..."
+                }, 
+                "valueFrom": {
+                    "type": "string", 
+                    "description": "The low range value that a characteristic can take on"
+                }, 
+                "valueTo": {
+                    "type": "string", 
+                    "description": "The upper range value that a characteristic can take on"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "The period of time for which a value is applicable"
+                }
+            }
+        }, 
+        "SettlementMethod": {
+            "type": "object", 
+            "description": "Is the way in which the CSP provides the payment", 
+            "properties": {
+                "code": {
+                    "type": "string", 
+                    "description": "Code of the settlement method"
+                }, 
+                "label": {
+                    "type": "string", 
+                    "description": "A word, term or phrase by which a settlement method is known and distinguished from other settlement method"
+                }
+            }
+        }, 
+        "SettlementNoteImage": {
+            "type": "object", 
+            "description": "Is the image of the settlement note", 
+            "properties": {
+                "imageFormat": {
+                    "type": "string", 
+                    "description": "The format of the settlement note image (csv, pdf, xls, txt...)"
+                }, 
+                "imageSize": {
+                    "type": "integer", 
+                    "description": "The size of the settlement note image (in bytes)"
+                }, 
+                "imageFileName": {
+                    "type": "string", 
+                    "description": "The name of the file in which the settlement note image is saved."
+                }, 
+                "imageFileURL": {
+                    "type": "string", 
+                    "description": "The URL of the settlement note image"
+                }
+            }
+        }, 
+        "ReceiverRef": {
+            "type": "object", 
+            "description": "Receiver reference. The receiver is the party role who will receive the settlement note.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Identifier of the receiver"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the receiver"
+                }, 
+                "taxRegistration": {
+                    "$ref": "#/definitions/TaxRegistration"
+                }
+            }
+        }, 
+        "TaxItem": {
+            "type": "object", 
+            "description": "A tax item is created for each tax rate and tax type used in the settlement note.", 
+            "properties": {
+                "taxCategory": {
+                    "type": "string", 
+                    "description": "Tax category (for example VAT)"
+                }, 
+                "taxRate": {
+                    "type": "float", 
+                    "description": "Tax rate"
+                }, 
+                "taxAmount": {
+                    "type": "float", 
+                    "description": "Tax amount"
+                }
+            }
+        }, 
+        "IssuerRef": {
+            "type": "object", 
+            "description": "Issuer reference. The issuer is the party role who will issue the settlement note.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Identifier of the issuer"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the issuer"
+                }, 
+                "taxRegistration": {
+                    "$ref": "#/definitions/TaxRegistration"
+                }
+            }
+        }, 
+        "SettlementNoteItem": {
+            "type": "object", 
+            "description": "Concerns a product identified by its catalogue reference. It could also follow a period delimited by a start and an end date.", 
+            "properties": {
+                "itemNumber": {
+                    "type": "string", 
+                    "description": "Unique number assigned to the settlement note item"
+                }, 
+                "itemId": {
+                    "type": "string", 
+                    "description": "Unique identifier of the settlement note item"
+                }, 
+                "itemLabel": {
+                    "type": "string", 
+                    "description": "A free description text for the settlement note item"
+                }, 
+                "quantity": {
+                    "type": "integer", 
+                    "description": "Quantity"
+                }, 
+                "taxExcludedUnitPrice": {
+                    "type": "float", 
+                    "description": "Tax excluded unit price to be applied on the given quantity"
+                }, 
+                "taxExcludedAmount": {
+                    "type": "float", 
+                    "description": "Tax excluded amount equal to quantity * taxExcludedUnitPrice"
+                }, 
+                "taxIncludedAmount": {
+                    "type": "float", 
+                    "description": "All taxes included amount equal to taxExcludedAmount + taxAmount"
+                }, 
+                "period": {
+                    "$ref": "#/definitions/Period"
+                }, 
+                "taxItem": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/TaxItem"
+                    }
+                }
+            }
+        }, 
+        "TaxRegistration": {
+            "type": "object", 
+            "description": "The CSP and the partner could be registered with a tax number in a tax registration system.", 
+            "properties": {
+                "number": {
+                    "type": "string", 
+                    "description": "Tax registration number"
+                }
+            }
+        }, 
+        "BillingAccountStateChangeNotification": {
+            "type": "object", 
+            "description": "BillingAccountStateChange notification is sent to each listener who has subscribed to receive it.", 
+            "properties": {
+                "eventType": {
+                    "type": "string", 
+                    "description": "Type of event"
+                }, 
+                "eventTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Creation date of the event"
+                }, 
+                "eventId": {
+                    "type": "string", 
+                    "description": "Identifier of the event"
+                }, 
+                "resourcePath": {
+                    "type": "string", 
+                    "description": "To indicate which entity is concerned"
+                }, 
+                "fieldPath": {
+                    "type": "string", 
+                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
+                }, 
+                "event": {
+                    "$ref": "#/definitions/BillingAccountEvent"
+                }
+            }
+        }, 
+        "SettlementNoteAdviceNotification": {
+            "type": "object", 
+            "description": "The SettlementNoteAdvice notification is sent to each listener who has subscribed to receive it.", 
+            "properties": {
+                "eventType": {
+                    "type": "string", 
+                    "description": "Type of event"
+                }, 
+                "eventTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Creation date of the event"
+                }, 
+                "eventId": {
+                    "type": "string", 
+                    "description": "Identifier of the event"
+                }, 
+                "resourcePath": {
+                    "type": "string", 
+                    "description": "To indicate which entity is concerned"
+                }, 
+                "fieldPath": {
+                    "type": "string", 
+                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
+                }, 
+                "event": {
+                    "$ref": "#/definitions/SettlementNoteAdviceEvent"
+                }
+            }
+        }, 
+        "BillingAccountEvent": {
+            "type": "object", 
+            "description": "The billingAccount event is generated each time the billing account state is updated.", 
+            "properties": {
+                "billingAccount": {
+                    "$ref": "#/definitions/BillingAccount"
+                }
+            }
+        }, 
+        "SettlementNoteAdviceEvent": {
+            "type": "object", 
+            "description": "The SettlementNoteAdvice event is generated each time a settlement note is created.", 
+            "properties": {
+                "settlementNoteAdvice": {
+                    "$ref": "#/definitions/SettlementNoteAdvice"
+                }
+            }
+        }, 
+        "EventSubscription": {
+            "required": [
+                "id", 
+                "callback"
+            ], 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Id of the listener"
+                }, 
+                "callback": {
+                    "type": "string", 
+                    "description": "The callback being registered."
+                }, 
+                "query": {
+                    "type": "string", 
+                    "description": "additional data to be passed"
+                }
+            }
+        }, 
+        "EventSubscriptionInput": {
+            "required": [
+                "callback"
+            ], 
+            "properties": {
+                "callback": {
+                    "type": "string", 
+                    "description": "The callback being registered."
+                }, 
+                "query": {
+                    "type": "string", 
+                    "description": "additional data to be passed"
+                }
+            }
+        }, 
+        "Error": {
+            "required": [
+                "code", 
+                "message"
+            ], 
+            "properties": {
+                "code": {
+                    "type": "integer", 
+                    "description": "An integer coding the error type. This is given to caller so he can translate them if required."
+                }, 
+                "message": {
+                    "type": "string", 
+                    "description": "A short localized string that describes the error."
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "(optional) A long localized error description if needed. It can contain precise information about which parameter is missing, or what are the identifier acceptable values."
+                }, 
+                "infoURL": {
+                    "type": "string", 
+                    "description": "(optional) A URL to online documentation that provides more information about the error."
+                }
+            }
+        }
     }
-  },
-"definitions": {
-  
-
-    "BillingAccount": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "ratingType": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "state": {
-          
-          "type": "string"
-        }
-        ,
-        "validFor": {
-          
-                "$ref": "#/definitions/ValidFor"
-  
-        }
-        ,
-        "customerAccount": {
-          
-                "$ref": "#/definitions/Reference"
-  
-        }
-        ,
-        "customerBillingCycleSpecification": {
-          
-                "$ref": "#/definitions/CustomerBillingCycleSpecification"
-  
-        }
-        ,
-        "customerBillFormat": {
-          
-                "$ref": "#/definitions/CustomerBillFormat"
-  
-        }
-        ,
-        "customerBillPresentationMedia": {
-          
-                "$ref": "#/definitions/Reference"
-  
-        }
-        ,
-        "currency": {
-          
-                "$ref": "#/definitions/Currency"
-  
-        }
-        ,
-        "billingAccountBalance": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/BillingAccountBalance"
-  
-              }
-            
-        }
-        ,
-        "relatedParty": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/Reference"
-  
-              }
-            
-        }
-        ,
-        "paymentMean": {
-          
-                "$ref": "#/definitions/Reference"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Currency": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "currencyCode": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "CustomerBillPresentationMedia": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "CustomerBillFormat": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "CustomerBillingCycleSpecification": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "billingDateShift": {
-          
-          "type": "integer",
-          "format": "int32"
-        }
-        ,
-        "frequency": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "BillingAccountBalance": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "type": {
-          
-          "type": "string"
-        }
-        ,
-        "amount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "validFor": {
-          
-                "$ref": "#/definitions/ValidFor"
-  
-        }
-        ,
-        "status": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "ValidFor": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "startDateTime": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "endDateTime": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "AppliedCustomerBillingCharge": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "date": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        ,
-        "type": {
-          
-          "type": "string"
-        }
-        ,
-        "currencyCode": {
-          
-          "type": "string"
-        }
-        ,
-        "taxIncludedAmount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "taxExcludedAmount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "appliedCustomerBillingTaxRate": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/AppliedCustomerBillingTaxRate"
-  
-              }
-            
-        }
-        ,
-        "serviceId": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/ServiceId"
-  
-              }
-            
-        }
-        ,
-        "productSpecification": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/ProductSpecification"
-  
-              }
-            
-        }
-        ,
-        "period": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/Period"
-  
-              }
-            
-        }
-        
-      }
-    }
-                
-  ,
-
-    "AppliedCustomerBillingTaxRate": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "amount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "taxCategory": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "ServiceId": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "type": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "ProductSpecification": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "productNumber": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Period": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "startPeriod": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "endPeriod": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "SettlementNoteAdvice": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "date": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        ,
-        "paymentDueDate": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "taxDate": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "currencyCode": {
-          
-          "type": "string"
-        }
-        ,
-        "taxExcludedAmount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "taxIncludedAmount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "taxItem": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/TaxItem"
-  
-              }
-            
-        }
-        ,
-        "settlementMethod": {
-          
-                "$ref": "#/definitions/SettlementMethod"
-  
-        }
-        ,
-        "receiver": {
-          
-                "$ref": "#/definitions/Receiver"
-  
-        }
-        ,
-        "issuer": {
-          
-                "$ref": "#/definitions/Issuer"
-  
-        }
-        ,
-        "settlementNoteImage": {
-          
-                "$ref": "#/definitions/SettlementNoteImage"
-  
-        }
-        ,
-        "settlementNoteItem": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/SettlementNoteItem"
-  
-              }
-            
-        }
-        
-      }
-    }
-                
-  ,
-
-    "TaxItem": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "taxCategory": {
-          
-          "type": "string"
-        }
-        ,
-        "taxRate": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "taxAmount": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "SettlementMethod": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "code": {
-          
-          "type": "string"
-        }
-        ,
-        "label": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Receiver": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "taxRegistration": {
-          
-                "$ref": "#/definitions/TaxRegistration"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Issuer": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "taxRegistration": {
-          
-                "$ref": "#/definitions/TaxRegistration"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "SettlementNoteImage": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "imageFormat": {
-          
-          "type": "string"
-        }
-        ,
-        "imageSize": {
-          
-          "type": "string"
-        }
-        ,
-        "imageFileName": {
-          
-          "type": "string"
-        }
-        ,
-        "imageFileURL": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "SettlementNoteItem": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "itemNumber": {
-          
-          "type": "string"
-        }
-        ,
-        "itemId": {
-          
-          "type": "string"
-        }
-        ,
-        "itemLabel": {
-          
-          "type": "string"
-        }
-        ,
-        "quantity": {
-          
-          "type": "string"
-        }
-        ,
-        "taxItem": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/TaxItem"
-  
-              }
-            
-        }
-        ,
-        "period": {
-          
-                "$ref": "#/definitions/Period"
-  
-        }
-        ,
-        "productSpecification": {
-          
-                "$ref": "#/definitions/ProductSpecification"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "TaxRegistration": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "number": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Hub": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "callback": {
-          
-          "type": "string"
-        }
-        ,
-        "query": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Reference": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "role": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  
-  }
 }
-	

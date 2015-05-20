@@ -1,987 +1,1342 @@
-
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "",
-    "version": "2.0",
-    "title": "API SlaManagement"
-  },
-  "host": "pleaseChangeIt",
-  "basePath":	"/slaManagement/v2",
-  "schemes": [
-      "http"
-  ],
-  "consumes": [
-      "application/json"
-  ],
-  "produces": [
-      "application/json"
-  ],  
-  "paths": {    
-    "/sla": {        
-    "post": {
-      "tags": [
-         "sla"
-      ],            
-      "operationId": "slaCreate",
-      "summary": "slaCreate",
-      "description": "",       
-      "deprecated": false,
-      "parameters": [
-      
-                          
-        
-                      
-        {
-         "name": "sla",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Sla"
-          }
-        }          
-      ],
-      "responses": {
-        "201": {
-          "description": "Sla",
-          "schema": {
-            "$ref": "#/definitions/Sla"
-          }
-        }
-      }
-    }
-	,
-    "get": {
-      "tags": [
-         "sla"
-      ],          
-      "operationId": "slaFind",
-      "summary": "slaFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of Sla",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Sla"
+    "swagger": "2.0", 
+    "info": {
+        "title": "SLA Management", 
+        "description": "This is Swagger UI environment generated for the TMF SLA Management specification", 
+        "version": "2.0"
+    }, 
+    "host": "biologeek.orange-labs.fr", 
+    "basePath": "/api/slaManagement", 
+    "schemes": [
+        "https"
+    ], 
+    "consumes": [
+        "application/json"
+    ], 
+    "produces": [
+        "application/json"
+    ], 
+    "paths": {
+        "/sla": {
+            "get": {
+                "operationId": "listSla", 
+                "summary": "List or find 'ServiceLevelAgreement' objects", 
+                "tags": [
+                    "sla"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "name", 
+                        "description": "For filtering: Name of the Service Level Agreement (SLA)"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "version", 
+                        "description": "For filtering: Version of the Service Level Agreement (SLA)"
+                    }, 
+                    {
+                        "name": "validFor.startDateTime", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: An instant of time, starting at the TimePeriod"
+                    }, 
+                    {
+                        "name": "validFor.endDateTime", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "path", 
+                        "type": "string", 
+                        "description": "For filtering: An instant of time, ending at the TimePeriod."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "state", 
+                        "description": "For filtering: State of the Service Level Agreement (SLA)"
+                    }, 
+                    {
+                        "type": "boolean", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "approved", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "name": "approvalDate", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "query", 
+                        "type": "string", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "rule.metric", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "rule.unit", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "rule.referenceValue", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "rule.operator", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "rule.tolerance", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "rule.consequence", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "relatedParty.role", 
+                        "description": "For filtering: Role of the related party."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "relatedParty.name", 
+                        "description": "For filtering: Name of the related party"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "template.name", 
+                        "description": "For filtering: "
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ServiceLevelAgreement"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "post": {
+                "operationId": "createSla", 
+                "summary": "Creates a 'ServiceLevelAgreement'", 
+                "tags": [
+                    "sla"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ServiceLevelAgreement_Create"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "sla", 
+                        "description": "The Service Level Agreement to be created"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Created", 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceLevelAgreement"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/sla/{slaId}": {
-    "delete": {
-      "tags": [
-         "sla"
-      ],    
-      "operationId": "slaDelete",
-      "summary": "slaDelete",
-      "description": "",
-      "deprecated": false,
-        
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  
-        
-      ],
-         
-      "responses": {
-        "204": {
-          "description": "Success"
-          }  
-      }   
-    }
-	,
-    "get": {
-      "tags": [
-         "sla"
-      ],    
-      "operationId": "slaGet",
-      "summary": "slaGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "Sla",
-          "schema": {
-            "$ref": "#/definitions/Sla"
+        }, 
+        "/sla/{id}": {
+            "get": {
+                "operationId": "retrieveSla", 
+                "summary": "Retrieves a 'ServiceLevelAgreement' by Id", 
+                "tags": [
+                    "sla"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Service Level Agreement"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ServiceLevelAgreement"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "put": {
+                "operationId": "updateSla", 
+                "summary": "Updates a 'ServiceLevelAgreement' by Id", 
+                "tags": [
+                    "sla"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Service Level Agreement"
+                    }, 
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ServiceLevelAgreement_Update"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "sla", 
+                        "description": "The Service Level Agreement to be updated"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Updated", 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceLevelAgreement"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "patch": {
+                "operationId": "updateSla", 
+                "summary": "Updates partially a 'ServiceLevelAgreement' by Id", 
+                "tags": [
+                    "sla"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Service Level Agreement"
+                    }, 
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ServiceLevelAgreement_Update"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "sla", 
+                        "description": "The Service Level Agreement to be updated"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Updated", 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceLevelAgreement"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "delete": {
+                "operationId": "deleteSla", 
+                "summary": "Deletes a 'ServiceLevelAgreement' by Id", 
+                "tags": [
+                    "sla"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Service Level Agreement"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	,
-    "patch": {
-      "tags": [
-         "sla"
-      ],            
-      "operationId": "slaPatch",
-      "summary": "slaPatch",
-      "description": "",      
-      "deprecated": false, 
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-               
-        {
-         "name": "sla",
-         "in": "body",
-         "required": true,
-         "schema": {
-           "$ref": "#/definitions/Sla"
-         }
-        }                               
-      ], 
-      "responses": {
-        "201": {
-          "description": "Success Sla",
-          "schema": {
-            "$ref": "#/definitions/Sla"
+        }, 
+        "/slaViolation": {
+            "get": {
+                "operationId": "listSlaViolation", 
+                "summary": "List or find 'SLAViolation' objects", 
+                "tags": [
+                    "slaViolation"
+                ], 
+                "parameters": [
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "fields", 
+                        "description": "Comma separated properties to display in response"
+                    }, 
+                    {
+                        "name": "date", 
+                        "format": "date-time", 
+                        "required": false, 
+                        "in": "query", 
+                        "type": "string", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "relatedParty.role", 
+                        "description": "For filtering: Role of the related party."
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "relatedParty.name", 
+                        "description": "For filtering: Name of the related party"
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.unit", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.referenceValue", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.operator", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.actualValue", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.tolerance", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.violationAverage", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.comment", 
+                        "description": "For filtering: "
+                    }, 
+                    {
+                        "type": "string", 
+                        "required": false, 
+                        "in": "path", 
+                        "name": "violation.consequence", 
+                        "description": "For filtering: "
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SLAViolation"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "post": {
+                "operationId": "createSlaViolation", 
+                "summary": "Creates a 'SLAViolation'", 
+                "tags": [
+                    "slaViolation"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolation_Create"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "slaViolation", 
+                        "description": "The SLA Violation to be created"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Created", 
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolation"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }             
-    }
-	,
-    "put": {
-      "tags": [
-         "sla"
-      ],            
-      "operationId": "slaUpdate",
-      "summary": "slaUpdate",
-      "description": "",      
-      "deprecated": false, 
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-               
-        {
-         "name": "sla",
-         "in": "body",
-         "required": true,
-         "schema": {
-           "$ref": "#/definitions/Sla"
-         }
-        }                               
-      ], 
-      "responses": {
-        "201": {
-          "description": "Success Sla",
-          "schema": {
-            "$ref": "#/definitions/Sla"
+        }, 
+        "/slaViolation/{id}": {
+            "get": {
+                "operationId": "retrieveSlaViolation", 
+                "summary": "Retrieves a 'SLAViolation' by Id", 
+                "tags": [
+                    "slaViolation"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the SLA Violation"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SLAViolation"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "put": {
+                "operationId": "updateSlaViolation", 
+                "summary": "Updates a 'SLAViolation' by Id", 
+                "tags": [
+                    "slaViolation"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the SLA Violation"
+                    }, 
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolation_Update"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "slaViolation", 
+                        "description": "The SLA Violation to be updated"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Updated", 
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolation"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "patch": {
+                "operationId": "updateSlaViolation", 
+                "summary": "Updates partially a 'SLAViolation' by Id", 
+                "tags": [
+                    "slaViolation"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the SLA Violation"
+                    }, 
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolation_Update"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "slaViolation", 
+                        "description": "The SLA Violation to be updated"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Updated", 
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolation"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }, 
+            "delete": {
+                "operationId": "deleteSlaViolation", 
+                "summary": "Deletes a 'SLAViolation' by Id", 
+                "tags": [
+                    "slaViolation"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the SLA Violation"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }             
-    }
-	
-    },    
-    "/slaViolation": {        
-    "post": {
-      "tags": [
-         "slaViolation"
-      ],            
-      "operationId": "slaViolationCreate",
-      "summary": "slaViolationCreate",
-      "description": "",       
-      "deprecated": false,
-      "parameters": [
-      
-                          
-        
-                      
-        {
-         "name": "slaViolation",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/SlaViolation"
-          }
-        }          
-      ],
-      "responses": {
-        "201": {
-          "description": "SlaViolation",
-          "schema": {
-            "$ref": "#/definitions/SlaViolation"
-          }
-        }
-      }
-    }
-	,
-    "get": {
-      "tags": [
-         "slaViolation"
-      ],          
-      "operationId": "slaViolationFind",
-      "summary": "slaViolationFind",
-      "description": "",       
-      "deprecated": false,
-        
-      "parameters": [    
-
-                                  
-        
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-  
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "List of SlaViolation",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SlaViolation"
+        }, 
+        "/hub": {
+            "post": {
+                "operationId": "registerListener", 
+                "summary": "Register a listener", 
+                "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
+                "tags": [
+                    "events subscription"
+                ], 
+                "parameters": [
+                    {
+                        "name": "data", 
+                        "schema": {
+                            "$ref": "#/definitions/EventSubscriptionInput"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "description": "Data containing the callback endpoint to deliver the information"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Subscribed", 
+                        "schema": {
+                            "$ref": "#/definitions/EventSubscription"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/slaViolation/{slaViolationId}": {
-    "delete": {
-      "tags": [
-         "slaViolation"
-      ],    
-      "operationId": "slaViolationDelete",
-      "summary": "slaViolationDelete",
-      "description": "",
-      "deprecated": false,
-        
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaViolationId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  
-        
-      ],
-         
-      "responses": {
-        "204": {
-          "description": "Success"
-          }  
-      }   
-    }
-	,
-    "get": {
-      "tags": [
-         "slaViolation"
-      ],    
-      "operationId": "slaViolationGet",
-      "summary": "slaViolationGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaViolationId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-        {
-          "name": "fields",
-          "in": "query",
-          "required": false,            
-          "description": "",
-          
-          "type": "string"                      
-        }    
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "SlaViolation",
-          "schema": {
-            "$ref": "#/definitions/SlaViolation"
+        }, 
+        "/hub/{id}": {
+            "delete": {
+                "operationId": "unregisterListener", 
+                "summary": "Unregister a listener", 
+                "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
+                "tags": [
+                    "events subscription"
+                ], 
+                "parameters": [
+                    {
+                        "name": "id", 
+                        "type": "string", 
+                        "required": true, 
+                        "in": "path", 
+                        "description": "The id of the registered listener"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Unsubscribed"
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }        
-    }     
-	,
-    "patch": {
-      "tags": [
-         "slaViolation"
-      ],            
-      "operationId": "slaViolationPatch",
-      "summary": "slaViolationPatch",
-      "description": "",      
-      "deprecated": false, 
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaViolationId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  ,
-               
-        {
-         "name": "slaViolation",
-         "in": "body",
-         "required": true,
-         "schema": {
-           "$ref": "#/definitions/SlaViolation"
-         }
-        }                               
-      ], 
-      "responses": {
-        "201": {
-          "description": "Success SlaViolation",
-          "schema": {
-            "$ref": "#/definitions/SlaViolation"
+        }, 
+        "/listener/slaViolationCreateNotification": {
+            "post": {
+                "operationId": "publishSlaViolationCreateNotification", 
+                "summary": "Publishes a 'SLAViolationCreateNotification'", 
+                "tags": [
+                    "events publication"
+                ], 
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SLAViolationCreateNotification"
+                        }, 
+                        "required": true, 
+                        "in": "body", 
+                        "name": "slaViolationCreateNotification", 
+                        "description": "The SLA Violation Create Notification to be published"
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Published"
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
-      }             
-    }
-	,
-    "put": {
-      "tags": [
-         "slaViolation"
-      ],            
-      "operationId": "slaViolationUpdate",
-      "summary": "slaViolationUpdate",
-      "description": "",      
-      "deprecated": false, 
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "slaViolationId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
         }
-  ,
-               
-        {
-         "name": "slaViolation",
-         "in": "body",
-         "required": true,
-         "schema": {
-           "$ref": "#/definitions/SlaViolation"
-         }
-        }                               
-      ], 
-      "responses": {
-        "201": {
-          "description": "Success SlaViolation",
-          "schema": {
-            "$ref": "#/definitions/SlaViolation"
+    }, 
+    "definitions": {
+        "ServiceLevelAgreement": {
+            "type": "object", 
+            "description": "Part of a business agreement between a Service Provider and a Customer, quantitatively specifying the service performance level the Service Provider commits to deliver.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the Service Level Agreement (SLA)"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the Service Level Agreement (SLA)"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the Service Level Agreement (SLA)"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "Description of the Service Level Agreement (SLA)"
+                }, 
+                "version": {
+                    "type": "string", 
+                    "description": "Version of the Service Level Agreement (SLA)"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "Period where the clauses of the SLA are applicable"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "description": "State of the Service Level Agreement (SLA)"
+                }, 
+                "approved": {
+                    "type": "boolean"
+                }, 
+                "approvalDate": {
+                    "type": "string", 
+                    "format": "date-time"
+                }, 
+                "rule": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/Rule"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "template": {
+                    "$ref": "#/definitions/TemplateRef"
+                }
             }
-          }
-      }             
-    }
-	
-    },    
-    "/hub": {        
-    "post": {
-      "tags": [
-         "hub"
-      ],            
-      "operationId": "hubCreate",
-      "summary": "hubCreate",
-      "description": "",       
-      "deprecated": false,
-      "parameters": [
-      
-                          
-        
-                      
-        {
-         "name": "hub",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        }          
-      ],
-      "responses": {
-        "201": {
-          "description": "Hub",
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        }
-      }
-    }
-	,
-    "get": {
-      "tags": [
-         "hub"
-      ],          
-      "operationId": "hubFind",
-      "summary": "hubFind",
-      "description": "",       
-      "deprecated": false,
-         
-      "responses": {
-        "200": {
-          "description": "List of Hub",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Hub"
+        }, 
+        "ServiceLevelAgreement_Create": {
+            "type": "object", 
+            "description": "Part of a business agreement between a Service Provider and a Customer, quantitatively specifying the service performance level the Service Provider commits to deliver.\nSkipped properties: id,href", 
+            "required": [
+                "name"
+            ], 
+            "properties": {
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the Service Level Agreement (SLA)"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "Description of the Service Level Agreement (SLA)"
+                }, 
+                "version": {
+                    "type": "string", 
+                    "description": "Version of the Service Level Agreement (SLA)"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "Period where the clauses of the SLA are applicable"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "description": "State of the Service Level Agreement (SLA)"
+                }, 
+                "approved": {
+                    "type": "boolean"
+                }, 
+                "approvalDate": {
+                    "type": "string", 
+                    "format": "date-time"
+                }, 
+                "rule": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/Rule"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "template": {
+                    "$ref": "#/definitions/TemplateRef"
+                }
             }
-          } 
-        }          
-      }
-    }
-	
-    },    
-    "/hub/{hubId}": {
-    "delete": {
-      "tags": [
-         "hub"
-      ],    
-      "operationId": "hubDelete",
-      "summary": "hubDelete",
-      "description": "",
-      "deprecated": false,
-        
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "hubId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-  
-        
-      ],
-         
-      "responses": {
-        "204": {
-          "description": "Success"
-          }  
-      }   
-    }
-	,
-    "get": {
-      "tags": [
-         "hub"
-      ],    
-      "operationId": "hubGet",
-      "summary": "hubGet",
-      "description": "",
-      "deprecated": false,
-            
-      "parameters": [
-      
-                                  
-            
-        {
-          "name": "hubId",
-          "in": "path",
-          "required": true,            
-          "type": "string"
-        }
-        
-
-      ],
-         
-      "responses": {
-        "200": {
-          "description": "Hub",
-          "schema": {
-            "$ref": "#/definitions/Hub"
+        }, 
+        "ServiceLevelAgreement_Update": {
+            "type": "object", 
+            "description": "Part of a business agreement between a Service Provider and a Customer, quantitatively specifying the service performance level the Service Provider commits to deliver.\nSkipped properties: id,href,id", 
+            "properties": {
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the Service Level Agreement (SLA)"
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "Description of the Service Level Agreement (SLA)"
+                }, 
+                "version": {
+                    "type": "string", 
+                    "description": "Version of the Service Level Agreement (SLA)"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "Period where the clauses of the SLA are applicable"
+                }, 
+                "state": {
+                    "type": "string", 
+                    "description": "State of the Service Level Agreement (SLA)"
+                }, 
+                "approved": {
+                    "type": "boolean"
+                }, 
+                "approvalDate": {
+                    "type": "string", 
+                    "format": "date-time"
+                }, 
+                "rule": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/Rule"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "template": {
+                    "$ref": "#/definitions/TemplateRef"
+                }
             }
-          }
-      }        
-    }     
-	
+        }, 
+        "SLAViolation": {
+            "type": "object", 
+            "properties": {
+                "id": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "date": {
+                    "type": "string", 
+                    "format": "date-time"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "violation": {
+                    "$ref": "#/definitions/Violation"
+                }, 
+                "sla": {
+                    "$ref": "#/definitions/SLARef"
+                }
+            }
+        }, 
+        "SLAViolation_Create": {
+            "type": "object", 
+            "description": "\nSkipped properties: id,href", 
+            "properties": {
+                "date": {
+                    "type": "string", 
+                    "format": "date-time"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "violation": {
+                    "$ref": "#/definitions/Violation"
+                }, 
+                "sla": {
+                    "$ref": "#/definitions/SLARef"
+                }
+            }
+        }, 
+        "SLAViolation_Update": {
+            "type": "object", 
+            "description": "\nSkipped properties: id,href,id", 
+            "properties": {
+                "date": {
+                    "type": "string", 
+                    "format": "date-time"
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                }, 
+                "violation": {
+                    "$ref": "#/definitions/Violation"
+                }, 
+                "sla": {
+                    "$ref": "#/definitions/SLARef"
+                }
+            }
+        }, 
+        "TimePeriod": {
+            "type": "object", 
+            "description": "A base / value business entity used to represent a period of time between two timepoints.", 
+            "properties": {
+                "startDateTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "An instant of time, starting at the TimePeriod"
+                }, 
+                "endDateTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "An instant of time, ending at the TimePeriod."
+                }
+            }
+        }, 
+        "Rule": {
+            "type": "object", 
+            "properties": {
+                "id": {
+                    "type": "string"
+                }, 
+                "metric": {
+                    "type": "string"
+                }, 
+                "unit": {
+                    "type": "string"
+                }, 
+                "referenceValue": {
+                    "type": "string"
+                }, 
+                "operator": {
+                    "type": "string"
+                }, 
+                "tolerance": {
+                    "type": "string"
+                }, 
+                "consequence": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "RelatedPartyRef": {
+            "type": "object", 
+            "description": "RelatedParty reference. RelatedParty defines party or party role linked to a specific entity.", 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of a related party"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the related party, could be a party reference or a partyRole reference"
+                }, 
+                "role": {
+                    "type": "string", 
+                    "description": "Role of the related party."
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the related party"
+                }, 
+                "validFor": {
+                    "$ref": "#/definitions/TimePeriod", 
+                    "description": "Validity period of the related party"
+                }
+            }
+        }, 
+        "TemplateRef": {
+            "type": "object", 
+            "properties": {
+                "id": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "description": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "Violation": {
+            "type": "object", 
+            "properties": {
+                "unit": {
+                    "type": "string"
+                }, 
+                "referenceValue": {
+                    "type": "string"
+                }, 
+                "operator": {
+                    "type": "string"
+                }, 
+                "actualValue": {
+                    "type": "string"
+                }, 
+                "tolerance": {
+                    "type": "string"
+                }, 
+                "violationAverage": {
+                    "type": "string"
+                }, 
+                "comment": {
+                    "type": "string"
+                }, 
+                "consequence": {
+                    "type": "string"
+                }, 
+                "attachment": {
+                    "$ref": "#/definitions/AttachmentRef"
+                }, 
+                "rule": {
+                    "$ref": "#/definitions/RuleRef"
+                }
+            }
+        }, 
+        "SLARef": {
+            "type": "object", 
+            "description": "SLA reference. SLA is part of a business agreement between a Service Provider and a Customer, quantitatively specifying the service performance level the Service Provider commits to deliver.", 
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "description": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "AttachmentRef": {
+            "type": "object", 
+            "description": "Attachement reference. Attachement describes a product through video, pictures...", 
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "description": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "RuleRef": {
+            "type": "object", 
+            "description": "Rule reference. Rule is a common pattern or Template for the SLA parameters, metrics, and thresholds", 
+            "properties": {
+                "href": {
+                    "type": "string"
+                }, 
+                "description": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "SLAViolationCreateNotification": {
+            "type": "object", 
+            "properties": {
+                "eventType": {
+                    "type": "string", 
+                    "description": "Type of event"
+                }, 
+                "eventTime": {
+                    "type": "string", 
+                    "format": "date-time", 
+                    "description": "Creation date of the event"
+                }, 
+                "eventId": {
+                    "type": "string", 
+                    "description": "Identifier of the event"
+                }, 
+                "resourcePath": {
+                    "type": "string", 
+                    "description": "To indicate which entity is concerned"
+                }, 
+                "fieldPath": {
+                    "type": "string", 
+                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
+                }, 
+                "event": {
+                    "$ref": "#/definitions/SLAViolationEvent"
+                }
+            }
+        }, 
+        "SLAViolationEvent": {
+            "type": "object", 
+            "properties": {
+                "slaViolation": {
+                    "$ref": "#/definitions/SLAViolation"
+                }
+            }
+        }, 
+        "EventSubscription": {
+            "required": [
+                "id", 
+                "callback"
+            ], 
+            "properties": {
+                "id": {
+                    "type": "string", 
+                    "description": "Id of the listener"
+                }, 
+                "callback": {
+                    "type": "string", 
+                    "description": "The callback being registered."
+                }, 
+                "query": {
+                    "type": "string", 
+                    "description": "additional data to be passed"
+                }
+            }
+        }, 
+        "EventSubscriptionInput": {
+            "required": [
+                "callback"
+            ], 
+            "properties": {
+                "callback": {
+                    "type": "string", 
+                    "description": "The callback being registered."
+                }, 
+                "query": {
+                    "type": "string", 
+                    "description": "additional data to be passed"
+                }
+            }
+        }, 
+        "Error": {
+            "required": [
+                "code", 
+                "message"
+            ], 
+            "properties": {
+                "code": {
+                    "type": "integer", 
+                    "description": "An integer coding the error type. This is given to caller so he can translate them if required."
+                }, 
+                "message": {
+                    "type": "string", 
+                    "description": "A short localized string that describes the error."
+                }, 
+                "description": {
+                    "type": "string", 
+                    "description": "(optional) A long localized error description if needed. It can contain precise information about which parameter is missing, or what are the identifier acceptable values."
+                }, 
+                "infoURL": {
+                    "type": "string", 
+                    "description": "(optional) A URL to online documentation that provides more information about the error."
+                }
+            }
+        }
     }
-  },
-"definitions": {
-  
-
-    "Sla": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        ,
-        "version": {
-          
-          "type": "string"
-        }
-        ,
-        "validFor": {
-          
-                "$ref": "#/definitions/ValidFor"
-  
-        }
-        ,
-        "relatedParty": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/RelatedParty"
-  
-              }
-            
-        }
-        ,
-        "rule": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/Rule"
-  
-              }
-            
-        }
-        ,
-        "template": {
-          
-                "$ref": "#/definitions/Template"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "RelatedParty": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "role": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "validFor": {
-          
-                "$ref": "#/definitions/ValidFor"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Rule": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "metric": {
-          
-          "type": "string"
-        }
-        ,
-        "unit": {
-          
-          "type": "string"
-        }
-        ,
-        "referenceValue": {
-          
-          "type": "string"
-        }
-        ,
-        "operator": {
-          
-          "type": "string"
-        }
-        ,
-        "tolerance": {
-          
-          "type": "string"
-        }
-        ,
-        "consequence": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Template": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "name": {
-          
-          "type": "string"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "ValidFor": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "startDateTime": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "endDateTime": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "SlaViolation": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "integer",
-          "format": "int64"
-        }
-        ,
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "date": {
-          
-          "type": "string",
-          "format": "date-time"
-        }
-        ,
-        "sla": {
-          
-                "$ref": "#/definitions/SlaRef"
-  
-        }
-        ,
-        "violation": {
-          
-                "$ref": "#/definitions/Violation"
-  
-        }
-        ,
-        "relatedParty": {
-          
-              "type": "array",
-              "items": {
-                  
-                "$ref": "#/definitions/RelatedParty"
-  
-              }
-            
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Violation": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "unit": {
-          
-          "type": "string"
-        }
-        ,
-        "referenceValue": {
-          
-          "type": "string"
-        }
-        ,
-        "operator": {
-          
-          "type": "string"
-        }
-        ,
-        "actualValue": {
-          
-          "type": "string"
-        }
-        ,
-        "tolerance": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "violationAverage": {
-          
-          "type": "number",
-          "format": "float"
-        }
-        ,
-        "comment": {
-          
-          "type": "string"
-        }
-        ,
-        "consequence": {
-          
-          "type": "string"
-        }
-        ,
-        "attachment": {
-          
-                "$ref": "#/definitions/Attachment"
-  
-        }
-        ,
-        "rule": {
-          
-                "$ref": "#/definitions/RuleRef"
-  
-        }
-        
-      }
-    }
-                
-  ,
-
-    "SlaRef": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Attachment": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "RuleRef": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "href": {
-          
-          "type": "string"
-        }
-        ,
-        "description": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  ,
-
-    "Hub": {
-      
-      "type": "object",
-      "properties": {      
-      
-        "id": {
-          
-          "type": "string"
-        }
-        ,
-        "callback": {
-          
-          "type": "string"
-        }
-        ,
-        "query": {
-          
-          "type": "string"
-        }
-        
-      }
-    }
-                
-  
-  }
 }
-	
