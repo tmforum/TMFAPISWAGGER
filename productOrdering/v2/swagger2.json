@@ -1,1291 +1,815 @@
+
 {
-    "swagger": "2.0", 
-    "info": {
-        "title": "Product Order Management", 
-        "description": "This is Swagger UI environment generated for the TMF Product Order Management specification", 
-        "version": "2.0"
-    }, 
-    "host": "biologeek.orange-labs.fr", 
-    "basePath": "/api/productOrderManagement", 
-    "schemes": [
-        "https"
-    ], 
-    "consumes": [
-        "application/json"
-    ], 
-    "produces": [
-        "application/json"
-    ], 
-    "paths": {
-        "/productOrder": {
-            "get": {
-                "operationId": "listProductOrder", 
-                "summary": "List or find 'ProductOrder' objects", 
-                "tags": [
-                    "productOrder"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "externalId", 
-                        "description": "For filtering: ID given by the consumer and only understandable by him (to facilitate his searches afterwards)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "priority", 
-                        "description": "For filtering: A way that can be used by consumers to prioritize orders in OM system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "category", 
-                        "description": "For filtering: Used to categorize the order from a business perspective that can be useful for the OM system (e.g. \"enterprise\", \"residential\", ...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "state", 
-                        "description": "For filtering: State of the order : described in the state-machine diagram"
-                    }, 
-                    {
-                        "name": "orderDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Date when the order was created"
-                    }, 
-                    {
-                        "name": "completionDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Date when the order was completed"
-                    }, 
-                    {
-                        "name": "requestedStartDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Order start date wished by the requestor"
-                    }, 
-                    {
-                        "name": "requestedCompletionDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Requested delivery date from the requestor perspective"
-                    }, 
-                    {
-                        "name": "expectedCompletionDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Expected delivery date amended by the provider"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "notificationContact", 
-                        "description": "For filtering: Contact attached to the order to send back information regarding this order"
-                    }, 
-                    {
-                        "name": "note.date", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: Date of the note"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "note.author", 
-                        "description": "For filtering: Author of the note"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "note.text", 
-                        "description": "For filtering: Text of the note"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "orderItem.state", 
-                        "description": "For filtering: State of the order item : described in the state machine diagram"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "orderItem.appointment", 
-                        "description": "For filtering: Used to precise that an appointment was set up with a related party for this order item"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.role", 
-                        "description": "For filtering: Role of the related party."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.name", 
-                        "description": "For filtering: Name of the related party"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ProductOrder"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createProductOrder", 
-                "summary": "Creates a 'ProductOrder'", 
-                "tags": [
-                    "productOrder"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrder_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrder", 
-                        "description": "The Product Order to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrder"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "2.0",
+    "title": "API ProductOrdering"
+  },
+  "host": "env-0693795.jelastic.servint.net",
+  "basePath":	"/DSProductOrdering/api/productOrdering/v2",
+  "schemes": [
+      "http"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],  
+  "paths": {    
+    "/productOrder": {
+    "get": {
+      "tags": [
+         "productOrder"
+      ],          
+      "operationId": "productOrderFind",
+      "summary": "productOrderFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of ProductOrder",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ProductOrder"
             }
-        }, 
-        "/productOrder/{id}": {
-            "get": {
-                "operationId": "retrieveProductOrder", 
-                "summary": "Retrieves a 'ProductOrder' by Id", 
-                "tags": [
-                    "productOrder"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Product Order"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/ProductOrder"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "patch": {
-                "operationId": "updateProductOrder", 
-                "summary": "Updates partially a 'ProductOrder' by Id", 
-                "tags": [
-                    "productOrder"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Product Order"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrder_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrder", 
-                        "description": "The Product Order to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrder"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "delete": {
-                "operationId": "deleteProductOrder", 
-                "summary": "Deletes a 'ProductOrder' by Id", 
-                "tags": [
-                    "productOrder"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Product Order"
-                    }
-                ], 
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub": {
-            "post": {
-                "operationId": "registerListener", 
-                "summary": "Register a listener", 
-                "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "data", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscriptionInput"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "description": "Data containing the callback endpoint to deliver the information"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Subscribed", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscription"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub/{id}": {
-            "delete": {
-                "operationId": "unregisterListener", 
-                "summary": "Unregister a listener", 
-                "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "id", 
-                        "type": "string", 
-                        "required": true, 
-                        "in": "path", 
-                        "description": "The id of the registered listener"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Unsubscribed"
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/productOrderInformationRequiredNotification": {
-            "post": {
-                "operationId": "publishProductOrderInformationRequiredNotification", 
-                "summary": "Publishes a 'ProductOrderInformationRequiredNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrderInformationRequiredNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrderInformationRequiredNotification", 
-                        "description": "The Product Order Information Required Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/productOrderRemoveNotification": {
-            "post": {
-                "operationId": "publishProductOrderRemoveNotification", 
-                "summary": "Publishes a 'ProductOrderRemoveNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrderRemoveNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrderRemoveNotification", 
-                        "description": "The Product Order Remove Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/productOrderCreationNotification": {
-            "post": {
-                "operationId": "publishProductOrderCreationNotification", 
-                "summary": "Publishes a 'ProductOrderCreationNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrderCreationNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrderCreationNotification", 
-                        "description": "The Product Order Creation Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/productOrderValueChangeNotification": {
-            "post": {
-                "operationId": "publishProductOrderValueChangeNotification", 
-                "summary": "Publishes a 'ProductOrderValueChangeNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrderValueChangeNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrderValueChangeNotification", 
-                        "description": "The Product Order Value Change Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/productOrderStateChangeNotification": {
-            "post": {
-                "operationId": "publishProductOrderStateChangeNotification", 
-                "summary": "Publishes a 'ProductOrderStateChangeNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/ProductOrderStateChangeNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "productOrderStateChangeNotification", 
-                        "description": "The Product Order State Change Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }
-    }, 
-    "definitions": {
-        "ProductOrder": {
-            "type": "object", 
-            "description": "A Product Order is a type of order which  can  be used to place an order  between a customer and a service provider or between a service provider and a partner and vice versa,", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "ID created on repository side (OM system)"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Hyperlink to access the order"
-                }, 
-                "externalId": {
-                    "type": "string", 
-                    "description": "ID given by the consumer and only understandable by him (to facilitate his searches afterwards)"
-                }, 
-                "priority": {
-                    "type": "string", 
-                    "description": "A way that can be used by consumers to prioritize orders in OM system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Description of the product order"
-                }, 
-                "category": {
-                    "type": "string", 
-                    "description": "Used to categorize the order from a business perspective that can be useful for the OM system (e.g. \"enterprise\", \"residential\", ...)"
-                }, 
-                "state": {
-                    "type": "string", 
-                    "description": "State of the order : described in the state-machine diagram"
-                }, 
-                "orderDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date when the order was created"
-                }, 
-                "completionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date when the order was completed"
-                }, 
-                "requestedStartDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Order start date wished by the requestor"
-                }, 
-                "requestedCompletionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Requested delivery date from the requestor perspective"
-                }, 
-                "expectedCompletionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Expected delivery date amended by the provider"
-                }, 
-                "notificationContact": {
-                    "type": "string", 
-                    "description": "Contact attached to the order to send back information regarding this order"
-                }, 
-                "note": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Note"
-                    }
-                }, 
-                "orderItem": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrderItem"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }
-            }
-        }, 
-        "ProductOrder_Create": {
-            "type": "object", 
-            "description": "A Product Order is a type of order which  can  be used to place an order  between a customer and a service provider or between a service provider and a partner and vice versa,\nSkipped properties: id,href", 
-            "required": [
-                "relatedParty", 
-                "orderItem", 
-                "orderItem", 
-                "orderItem", 
-                "orderItem"
-            ], 
-            "properties": {
-                "externalId": {
-                    "type": "string", 
-                    "description": "ID given by the consumer and only understandable by him (to facilitate his searches afterwards)"
-                }, 
-                "priority": {
-                    "type": "string", 
-                    "description": "A way that can be used by consumers to prioritize orders in OM system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Description of the product order"
-                }, 
-                "category": {
-                    "type": "string", 
-                    "description": "Used to categorize the order from a business perspective that can be useful for the OM system (e.g. \"enterprise\", \"residential\", ...)"
-                }, 
-                "state": {
-                    "type": "string", 
-                    "description": "State of the order : described in the state-machine diagram"
-                }, 
-                "orderDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date when the order was created"
-                }, 
-                "completionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date when the order was completed"
-                }, 
-                "requestedStartDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Order start date wished by the requestor"
-                }, 
-                "requestedCompletionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Requested delivery date from the requestor perspective"
-                }, 
-                "expectedCompletionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Expected delivery date amended by the provider"
-                }, 
-                "notificationContact": {
-                    "type": "string", 
-                    "description": "Contact attached to the order to send back information regarding this order"
-                }, 
-                "note": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Note"
-                    }
-                }, 
-                "orderItem": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrderItem"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }
-            }
-        }, 
-        "ProductOrder_Update": {
-            "type": "object", 
-            "description": "A Product Order is a type of order which  can  be used to place an order  between a customer and a service provider or between a service provider and a partner and vice versa,\nSkipped properties: id,href,id,href,externalId,orderDate,completionDate,orderItem,orderItem", 
-            "properties": {
-                "priority": {
-                    "type": "string", 
-                    "description": "A way that can be used by consumers to prioritize orders in OM system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Description of the product order"
-                }, 
-                "category": {
-                    "type": "string", 
-                    "description": "Used to categorize the order from a business perspective that can be useful for the OM system (e.g. \"enterprise\", \"residential\", ...)"
-                }, 
-                "state": {
-                    "type": "string", 
-                    "description": "State of the order : described in the state-machine diagram"
-                }, 
-                "requestedStartDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Order start date wished by the requestor"
-                }, 
-                "requestedCompletionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Requested delivery date from the requestor perspective"
-                }, 
-                "expectedCompletionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Expected delivery date amended by the provider"
-                }, 
-                "notificationContact": {
-                    "type": "string", 
-                    "description": "Contact attached to the order to send back information regarding this order"
-                }, 
-                "note": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Note"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }
-            }
-        }, 
-        "Note": {
-            "type": "object", 
-            "description": "Extra information about the ticket or a product order", 
-            "properties": {
-                "date": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date of the note"
-                }, 
-                "author": {
-                    "type": "string", 
-                    "description": "Author of the note"
-                }, 
-                "text": {
-                    "type": "string", 
-                    "description": "Text of the note"
-                }
-            }
-        }, 
-        "OrderItem": {
-            "type": "object", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Identifier of the line item (generally it is a sequence number 01, 02, 03, ...)"
-                }, 
-                "action": {
-                    "$ref": "#/definitions/string", 
-                    "description": "Can be \"add\" / \"modify\" / \"no_change\"/ \"delete\""
-                }, 
-                "state": {
-                    "type": "string", 
-                    "description": "State of the order item : described in the state machine diagram"
-                }, 
-                "appointment": {
-                    "type": "string", 
-                    "description": "Used to precise that an appointment was set up with a related party for this order item"
-                }, 
-                "billingAccount": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/BillingAccountRef"
-                    }
-                }, 
-                "productOffering": {
-                    "$ref": "#/definitions/ProductOfferingRef"
-                }, 
-                "product": {
-                    "$ref": "#/definitions/ProductRef"
-                }
-            }
-        }, 
-        "RelatedPartyRef": {
-            "type": "object", 
-            "description": "RelatedParty reference. RelatedParty defines party or party role linked to a specific entity.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of a related party"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the related party, could be a party reference or a partyRole reference"
-                }, 
-                "role": {
-                    "type": "string", 
-                    "description": "Role of the related party."
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the related party"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the related party"
-                }
-            }
-        }, 
-        "BillingAccountRef": {
-            "type": "object", 
-            "description": "BillingAccount reference. A BillingAccount is a detailed description of a customer's bill structure.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the billing account"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the billing account"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the billing account"
-                }
-            }
-        }, 
-        "ProductOfferingRef": {
-            "type": "object", 
-            "description": "ProductOffering reference. A product offering represents entities that are orderable from the provider of the catalog, this resource includes pricing information.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the product offering"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the product offering"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the product offering"
-                }, 
-                "bundledProductOffering": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/BundledProductOfferingRef"
-                    }
-                }
-            }
-        }, 
-        "ProductRef": {
-            "type": "object", 
-            "description": "Product reference. Configure the product characteristics (only configurable characteristics and necessary only if a non default value is selected) and/or identify the product that needs to be modified/deleted\nMay be a bundle product instantiation, in this case, it will contain the list of bundled product to instantiate\n<u>Nota</u> : Each product to instantiate corresponds to a purchased productOffering. In case of bundles, the order of the list in the productOffering bundle must match the order of the list in the product instance bundle to deliver.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the product"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the product"
-                }, 
-                "productRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ProductRelationship"
-                    }
-                }, 
-                "place": {
-                    "$ref": "#/definitions/Place"
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ProductCharacteristic"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }
-            }
-        }, 
-        "BundledProductOfferingRef": {
-            "type": "object", 
-            "description": "BundledProductOffering Reference. A type of ProductOffering that belongs to a grouping of ProductOfferings made available to the market. It inherits of all attributes of ProductOffering.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the product offering"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the product offering"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the product offering"
-                }
-            }
-        }, 
-        "ProductRelationship": {
-            "type": "object", 
-            "description": "Linked products to the one instantiate, it can be :\n<ul>\n <li>\"bundled\" if the product is a bundle and you want to describe the \"bundled\" products inside this bundle</li>\n <li> \"reliesOn\" if the product needs another already owned product to rely on (e.g. an option on an already owned mobile access product)</li>\n</ul>\n\"targets\" or \"isTargeted\" (depending on the way of expressing the link) for any other kind of links that may be useful", 
-            "properties": {
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the product relationship. It can be :\n<ul>\n <li>\"bundled\" if the product is a bundle and you want to describe the \"bundled\" products inside this bundle</li>\n <li> \"reliesOn\" if the product needs another already owned product to rely on (e.g. an option on an already owned mobile access product)</li>\n</ul>\n\"targets\" or \"isTargeted\" (depending on the way of expressing the link) for any other kind of links that may be useful"
-                }, 
-                "product": {
-                    "$ref": "#/definitions/ProductRef"
-                }
-            }
-        }, 
-        "Place": {
-            "type": "object", 
-            "description": "Used to defined a place useful for the product (for example a delivery geographical place)", 
-            "properties": {
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of a place (for instance in google map)"
-                }, 
-                "role": {
-                    "type": "string", 
-                    "description": "Role of the place (for instance delivery geographical place)"
-                }
-            }
-        }, 
-        "ProductCharacteristic": {
-            "type": "object", 
-            "description": "Characteristics of the product to instantiate or to modify", 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the characteristic"
-                }, 
-                "value": {
-                    "type": "string", 
-                    "description": "Value of the characteristic"
-                }
-            }
-        }, 
-        "TimePeriod": {
-            "type": "object", 
-            "description": "A base / value business entity used to represent a period of time between two timepoints.", 
-            "properties": {
-                "startDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, starting at the TimePeriod"
-                }, 
-                "endDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, ending at the TimePeriod."
-                }
-            }
-        }, 
-        "ProductOrderInformationRequiredNotification": {
-            "type": "object", 
-            "description": "The ProductOrderInformationRequired notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/ProductOrderEvent"
-                }
-            }
-        }, 
-        "ProductOrderRemoveNotification": {
-            "type": "object", 
-            "description": "The ProductOrderRemove notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ProductOrderEvent"
-                    }
-                }
-            }
-        }, 
-        "ProductOrderCreationNotification": {
-            "type": "object", 
-            "description": "The ProductOrderCreation notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/ProductOrderEvent"
-                }
-            }
-        }, 
-        "ProductOrderValueChangeNotification": {
-            "type": "object", 
-            "description": "The ProductOrderValueChange notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/ProductOrderEvent"
-                }
-            }
-        }, 
-        "ProductOrderStateChangeNotification": {
-            "type": "object", 
-            "description": "The ProductOrderStateChange notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/ProductOrderEvent"
-                }
-            }
-        }, 
-        "ProductOrderEvent": {
-            "type": "object", 
-            "description": "The ProductOrder event is generated each time a product order is created, updated or an information is required.", 
-            "properties": {
-                "productOrder": {
-                    "$ref": "#/definitions/ProductOrder"
-                }
-            }
-        }, 
-        "EventSubscription": {
-            "required": [
-                "id", 
-                "callback"
-            ], 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Id of the listener"
-                }, 
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "EventSubscriptionInput": {
-            "required": [
-                "callback"
-            ], 
-            "properties": {
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "Error": {
-            "required": [
-                "code", 
-                "message"
-            ], 
-            "properties": {
-                "code": {
-                    "type": "integer", 
-                    "description": "An integer coding the error type. This is given to caller so he can translate them if required."
-                }, 
-                "message": {
-                    "type": "string", 
-                    "description": "A short localized string that describes the error."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "(optional) A long localized error description if needed. It can contain precise information about which parameter is missing, or what are the identifier acceptable values."
-                }, 
-                "infoURL": {
-                    "type": "string", 
-                    "description": "(optional) A URL to online documentation that provides more information about the error."
-                }
-            }
-        }
+          } 
+        }          
+      }
     }
+	,        
+    "post": {
+      "tags": [
+         "productOrder"
+      ],            
+      "operationId": "productOrderInCreate",
+      "summary": "productOrderInCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "productOrder",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ProductOrderIn"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "ProductOrderIn",
+          "schema": {
+            "$ref": "#/definitions/ProductOrderIn"
+          }
+        }
+      }
+    }
+	
+    },    
+    "/productOrder/{productOrderId}": {
+    "get": {
+      "tags": [
+         "productOrder"
+      ],    
+      "operationId": "productOrderGet",
+      "summary": "productOrderGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "productOrderId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "ProductOrder",
+          "schema": {
+            "$ref": "#/definitions/ProductOrder"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "productOrder"
+      ],            
+      "operationId": "productOrderPatch",
+      "summary": "productOrderPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "productOrderId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "productOrder",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/ProductOrder"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success ProductOrder",
+          "schema": {
+            "$ref": "#/definitions/ProductOrder"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/hub": {        
+    "post": {
+      "tags": [
+         "hub"
+      ],            
+      "operationId": "hubCreate",
+      "summary": "hubCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "hub",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],          
+      "operationId": "hubFind",
+      "summary": "hubFind",
+      "description": "",       
+      "deprecated": false,
+         
+      "responses": {
+        "200": {
+          "description": "List of Hub",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Hub"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/hub/{hubId}": {
+    "delete": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubDelete",
+      "summary": "hubDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubGet",
+      "summary": "hubGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+            }
+          }
+      }        
+    }     
+	
+    }
+  },
+"definitions": {
+  
+
+    "ProductOrder": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "integer",
+          "format": "int64"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "externalId": {
+          
+          "type": "string"
+        }
+        ,
+        "priority": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        ,
+        "category": {
+          
+          "type": "string"
+        }
+        ,
+        "state": {
+          
+          "type": "string",    
+          "enum": [   
+          
+            "Acknowledged",
+            "InProgress",
+            "Cancelled",
+            "Completed",
+            "Rejected",
+            "Pending",
+            "Held",
+            "Failed",
+            "Partial"
+          ]
+  
+        }
+        ,
+        "orderDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "completionDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "requestedStartDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "requestedCompletionDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "expectedCompletionDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "notificationContact": {
+          
+          "type": "string"
+        }
+        ,
+        "note": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Note"
+  
+              }
+            
+        }
+        ,
+        "relatedParty": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Reference"
+  
+              }
+            
+        }
+        ,
+        "orderItem": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/OrderItem"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ProductOrderIn": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "externalId": {
+          
+          "type": "string"
+        }
+        ,
+        "priority": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        ,
+        "category": {
+          
+          "type": "string"
+        }
+        ,
+        "state": {
+          
+          "type": "string",    
+          "enum": [   
+          
+            "Acknowledged",
+            "InProgress",
+            "Cancelled",
+            "Completed",
+            "Rejected",
+            "Pending",
+            "Held",
+            "Failed",
+            "Partial"
+          ]
+  
+        }
+        ,
+        "orderDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "completionDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "requestedStartDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "requestedCompletionDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "expectedCompletionDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "notificationContact": {
+          
+          "type": "string"
+        }
+        ,
+        "note": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Note"
+  
+              }
+            
+        }
+        ,
+        "relatedParty": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Reference"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Note": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "text": {
+          
+          "type": "string"
+        }
+        ,
+        "date": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "author": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "OrderItem": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "action": {
+          
+          "type": "string"
+        }
+        ,
+        "state": {
+          
+          "type": "string",    
+          "enum": [   
+          
+            "Acknowledged",
+            "InProgress",
+            "Cancelled",
+            "Completed",
+            "Rejected",
+            "Pending",
+            "Held",
+            "Failed",
+            "Partial"
+          ]
+  
+        }
+        ,
+        "billingAccount": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Reference"
+  
+              }
+            
+        }
+        ,
+        "appointment": {
+          
+          "type": "string"
+        }
+        ,
+        "productOffering": {
+          
+                "$ref": "#/definitions/ProductOffering"
+  
+        }
+        ,
+        "product": {
+          
+                "$ref": "#/definitions/Product"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Product": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "place": {
+          
+                "$ref": "#/definitions/Reference"
+  
+        }
+        ,
+        "productCharacteristic": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ProductCharacteristic"
+  
+              }
+            
+        }
+        ,
+        "relatedParty": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Reference"
+  
+              }
+            
+        }
+        ,
+        "productRelationship": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ProductRelationship"
+  
+              }
+            
+        }
+        ,
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ProductCharacteristic": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "value": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ProductRelationship": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "type": {
+          
+          "type": "string",    
+          "enum": [   
+          
+            "reliesOn",
+            "bundled",
+            "targets",
+            "isTargeted"
+          ]
+  
+        }
+        ,
+        "product": {
+          
+                "$ref": "#/definitions/Product"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Reference": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "role": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ProductOffering": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "bundledProductOffering": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Reference"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Hub": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "callback": {
+          
+          "type": "string"
+        }
+        ,
+        "query": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  
+  }
 }
+	

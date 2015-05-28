@@ -1,2360 +1,1276 @@
+
 {
-    "swagger": "2.0", 
-    "info": {
-        "title": "Party Management", 
-        "description": "This is Swagger UI environment generated for the TMF Party Management specification", 
-        "version": "2.0"
-    }, 
-    "host": "biologeek.orange-labs.fr", 
-    "basePath": "/api/partyManagement", 
-    "schemes": [
-        "https"
-    ], 
-    "consumes": [
-        "application/json"
-    ], 
-    "produces": [
-        "application/json"
-    ], 
-    "paths": {
-        "/individual": {
-            "get": {
-                "operationId": "listIndividual", 
-                "summary": "List or find 'Individual' objects", 
-                "tags": [
-                    "individual"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "gender", 
-                        "description": "For filtering: Gender"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "placeOfBirth", 
-                        "description": "For filtering: An hyperlink to the place of birth"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "countryOfBirth", 
-                        "description": "For filtering: The country of birth"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "nationality", 
-                        "description": "For filtering: Nationality"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "maritalStatus", 
-                        "description": "For filtering: Marital status (married, divorced, widow...)"
-                    }, 
-                    {
-                        "name": "birthDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Birth date"
-                    }, 
-                    {
-                        "name": "deathDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Death date"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "title", 
-                        "description": "For filtering: Used for titles (aristocratic, social...): Pr, Dr, Sir..."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "givenName", 
-                        "description": "For filtering: First name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "familyName", 
-                        "description": "For filtering: Last name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "middleName", 
-                        "description": "For filtering: Middle name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fullName", 
-                        "description": "For filtering: Full name flatten (first, middle, and last names)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "formattedName", 
-                        "description": "For filtering: A formatted name useful for specific contexts (chinese, japonese, korean,...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "location", 
-                        "description": "For filtering: Temporary current location of the individual (may be used if the individual has approved its sharing)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "status", 
-                        "description": "For filtering: Status of the individual (Initialized, Validated, Deceased)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.role", 
-                        "description": "For filtering: Role of the related party."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.name", 
-                        "description": "For filtering: Name of the related party"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "characteristic.name", 
-                        "description": "For filtering: Name of the characteristic"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "characteristic.value", 
-                        "description": "For filtering: Value of the characteristic"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "externalReference.type", 
-                        "description": "For filtering: Reference type"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "individualIdentification.type", 
-                        "description": "For filtering: Identification type (passport, national identity card, driver's license, social security number, birth certificate)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "individualIdentification.identificationId", 
-                        "description": "For filtering: Identifier"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "individualIdentification.issuingAuthority", 
-                        "description": "For filtering: Authority which has issued the identifier (social security, town hall...)"
-                    }, 
-                    {
-                        "name": "individualIdentification.issuingDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: Date at which the identifier was issued"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "disability.disability", 
-                        "description": "For filtering: Physical or mental handicap"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.title", 
-                        "description": "For filtering: useful for titles (aristocratic, social...) Dr, Pr, Sir..."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.givenName", 
-                        "description": "For filtering: First name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.familyName", 
-                        "description": "For filtering: Last name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.middleName", 
-                        "description": "For filtering: Middle name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.fullName", 
-                        "description": "For filtering: Full name flatten (first, middle, and last name)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.formattedName", 
-                        "description": "For filtering: A formatted name useful for specific contexts (chinese, japanese, korean...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.nameType", 
-                        "description": "For filtering: Co., Inc., Ltd., Plc., Gmbh."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.tradingName", 
-                        "description": "For filtering: The name that the organization trades under"
-                    }, 
-                    {
-                        "type": "boolean", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contactMedium.preferred", 
-                        "description": "For filtering: If true, indicates that is the preferred contact medium"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contactMedium.type", 
-                        "description": "For filtering: Email address, telephone number, postal address"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Individual"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createIndividual", 
-                "summary": "Creates a 'Individual'", 
-                "tags": [
-                    "individual"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Individual_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "individual", 
-                        "description": "The Individual to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/Individual"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/individual/{id}": {
-            "get": {
-                "operationId": "retrieveIndividual", 
-                "summary": "Retrieves a 'Individual' by Id", 
-                "tags": [
-                    "individual"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Individual"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Individual"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "put": {
-                "operationId": "updateIndividual", 
-                "summary": "Updates a 'Individual' by Id", 
-                "tags": [
-                    "individual"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Individual"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Individual_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "individual", 
-                        "description": "The Individual to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/Individual"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "patch": {
-                "operationId": "updateIndividual", 
-                "summary": "Updates partially a 'Individual' by Id", 
-                "tags": [
-                    "individual"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Individual"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Individual_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "individual", 
-                        "description": "The Individual to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/Individual"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/organization": {
-            "get": {
-                "operationId": "listOrganization", 
-                "summary": "List or find 'Organization' objects", 
-                "tags": [
-                    "organization"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "type": "boolean", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "isLegalEntity", 
-                        "description": "For filtering: To tag if the organization is a legal entity known by a national referential"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "type", 
-                        "description": "For filtering: Type of the organization (company...)"
-                    }, 
-                    {
-                        "name": "existsDuring.startDateTime", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: An instant of time, starting at the TimePeriod"
-                    }, 
-                    {
-                        "name": "existsDuring.endDateTime", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: An instant of time, ending at the TimePeriod."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "tradingName", 
-                        "description": "For filtering: The name that the organization (unit) trades under"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "nameType", 
-                        "description": "For filtering: Co., Inc., Ltd., Pty Ltd., Plc., Gmbh."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "status", 
-                        "description": "For filtering: Status of the organization (initialized, validated, closed)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.title", 
-                        "description": "For filtering: useful for titles (aristocratic, social...) Dr, Pr, Sir..."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.givenName", 
-                        "description": "For filtering: First name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.familyName", 
-                        "description": "For filtering: Last name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.middleName", 
-                        "description": "For filtering: Middle name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.fullName", 
-                        "description": "For filtering: Full name flatten (first, middle, and last name)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.formattedName", 
-                        "description": "For filtering: A formatted name useful for specific contexts (chinese, japanese, korean...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.nameType", 
-                        "description": "For filtering: Co., Inc., Ltd., Plc., Gmbh."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "otherName.tradingName", 
-                        "description": "For filtering: The name that the organization trades under"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "externalReference.type", 
-                        "description": "For filtering: Reference type"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.role", 
-                        "description": "For filtering: Role of the related party."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.name", 
-                        "description": "For filtering: Name of the related party"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "organizationParentRelationship.relationshipType", 
-                        "description": "For filtering: Juridical, hierarchical, geographical, functional..."
-                    }, 
-                    {
-                        "type": "boolean", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contactMedium.preferred", 
-                        "description": "For filtering: If true, indicates that is the preferred contact medium"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contactMedium.type", 
-                        "description": "For filtering: Email address, telephone number, postal address"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "characteristic.name", 
-                        "description": "For filtering: Name of the characteristic"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "characteristic.value", 
-                        "description": "For filtering: Value of the characteristic"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "organizationChildRelationship.relationshipType", 
-                        "description": "For filtering: Juridical, hierarchical, geographical, functional..."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "organizationIdentification.type", 
-                        "description": "For filtering: Type of identification information used to identify the company in a country or internationally"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "organizationIdentification.identificationId", 
-                        "description": "For filtering: Identifier"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "organizationIdentification.issuingAuthority", 
-                        "description": "For filtering: Authority which has issued the identifier (chamber of commerce...)"
-                    }, 
-                    {
-                        "name": "organizationIdentification.issuingDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: Date at which the identifier was issued"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Organization"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createOrganization", 
-                "summary": "Creates a 'Organization'", 
-                "tags": [
-                    "organization"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Organization_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "organization", 
-                        "description": "The Organization to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/Organization"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/organization/{id}": {
-            "get": {
-                "operationId": "retrieveOrganization", 
-                "summary": "Retrieves a 'Organization' by Id", 
-                "tags": [
-                    "organization"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Organization"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Organization"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "put": {
-                "operationId": "updateOrganization", 
-                "summary": "Updates a 'Organization' by Id", 
-                "tags": [
-                    "organization"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Organization"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Organization_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "organization", 
-                        "description": "The Organization to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/Organization"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "patch": {
-                "operationId": "updateOrganization", 
-                "summary": "Updates partially a 'Organization' by Id", 
-                "tags": [
-                    "organization"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Organization"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Organization_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "organization", 
-                        "description": "The Organization to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/Organization"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "delete": {
-                "operationId": "deleteOrganization", 
-                "summary": "Deletes a 'Organization' by Id", 
-                "tags": [
-                    "organization"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Organization"
-                    }
-                ], 
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub": {
-            "post": {
-                "operationId": "registerListener", 
-                "summary": "Register a listener", 
-                "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "data", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscriptionInput"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "description": "Data containing the callback endpoint to deliver the information"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Subscribed", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscription"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub/{id}": {
-            "delete": {
-                "operationId": "unregisterListener", 
-                "summary": "Unregister a listener", 
-                "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "id", 
-                        "type": "string", 
-                        "required": true, 
-                        "in": "path", 
-                        "description": "The id of the registered listener"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Unsubscribed"
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/individualUpdateNotification": {
-            "post": {
-                "operationId": "publishIndividualUpdateNotification", 
-                "summary": "Publishes a 'IndividualUpdateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/IndividualUpdateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "individualUpdateNotification", 
-                        "description": "The Individual Update Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/individualDeleteNotification": {
-            "post": {
-                "operationId": "publishIndividualDeleteNotification", 
-                "summary": "Publishes a 'IndividualDeleteNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/IndividualDeleteNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "individualDeleteNotification", 
-                        "description": "The Individual Delete Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/individualCreateNotification": {
-            "post": {
-                "operationId": "publishIndividualCreateNotification", 
-                "summary": "Publishes a 'IndividualCreateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/IndividualCreateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "individualCreateNotification", 
-                        "description": "The Individual Create Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/organizationCreateNotification": {
-            "post": {
-                "operationId": "publishOrganizationCreateNotification", 
-                "summary": "Publishes a 'OrganizationCreateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/OrganizationCreateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "organizationCreateNotification", 
-                        "description": "The Organization Create Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/organizationDeleteNotification": {
-            "post": {
-                "operationId": "publishOrganizationDeleteNotification", 
-                "summary": "Publishes a 'OrganizationDeleteNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/OrganizationDeleteNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "organizationDeleteNotification", 
-                        "description": "The Organization Delete Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/organizationUpdateNotification": {
-            "post": {
-                "operationId": "publishOrganizationUpdateNotification", 
-                "summary": "Publishes a 'OrganizationUpdateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/OrganizationUpdateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "organizationUpdateNotification", 
-                        "description": "The Organization Update Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "2.0",
+    "title": "API PartyManagement"
+  },
+  "host": "env-0693795.jelastic.servint.net",
+  "basePath":	"/DSPartyManagement/api/partyManagement/v2",
+  "schemes": [
+      "http"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],  
+  "paths": {    
+    "/individual": {        
+    "post": {
+      "tags": [
+         "individual"
+      ],            
+      "operationId": "individualCreate",
+      "summary": "individualCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "individual",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Individual"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Individual",
+          "schema": {
+            "$ref": "#/definitions/Individual"
+          }
         }
-    }, 
-    "definitions": {
-        "Individual": {
-            "type": "object", 
-            "description": "Represents a physical person", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier for the individual"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the individual"
-                }, 
-                "gender": {
-                    "type": "string", 
-                    "description": "Gender"
-                }, 
-                "placeOfBirth": {
-                    "type": "string", 
-                    "description": "An hyperlink to the place of birth"
-                }, 
-                "countryOfBirth": {
-                    "type": "string", 
-                    "description": "The country of birth"
-                }, 
-                "nationality": {
-                    "type": "string", 
-                    "description": "Nationality"
-                }, 
-                "maritalStatus": {
-                    "type": "string", 
-                    "description": "Marital status (married, divorced, widow...)"
-                }, 
-                "birthDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Birth date"
-                }, 
-                "deathDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Death date"
-                }, 
-                "title": {
-                    "type": "string", 
-                    "description": "Used for titles (aristocratic, social...): Pr, Dr, Sir..."
-                }, 
-                "givenName": {
-                    "type": "string", 
-                    "description": "First name"
-                }, 
-                "familyName": {
-                    "type": "string", 
-                    "description": "Last name"
-                }, 
-                "middleName": {
-                    "type": "string", 
-                    "description": "Middle name"
-                }, 
-                "fullName": {
-                    "type": "string", 
-                    "description": "Full name flatten (first, middle, and last names)"
-                }, 
-                "formattedName": {
-                    "type": "string", 
-                    "description": "A formatted name useful for specific contexts (chinese, japonese, korean,...)"
-                }, 
-                "location": {
-                    "type": "string", 
-                    "description": "Temporary current location of the individual (may be used if the individual has approved its sharing)"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the individual (Initialized, Validated, Deceased)"
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "externalReference": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ExternalReference"
-                    }
-                }, 
-                "individualIdentification": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/IndividualIdentification"
-                    }
-                }, 
-                "disability": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Disability"
-                    }
-                }, 
-                "otherName": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OtherName"
-                    }
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }
-            }
-        }, 
-        "Individual_Create": {
-            "type": "object", 
-            "description": "Represents a physical person\nSkipped properties: id,href", 
-            "required": [
-                "givenName", 
-                "familyName"
-            ], 
-            "properties": {
-                "gender": {
-                    "type": "string", 
-                    "description": "Gender"
-                }, 
-                "placeOfBirth": {
-                    "type": "string", 
-                    "description": "An hyperlink to the place of birth"
-                }, 
-                "countryOfBirth": {
-                    "type": "string", 
-                    "description": "The country of birth"
-                }, 
-                "nationality": {
-                    "type": "string", 
-                    "description": "Nationality"
-                }, 
-                "maritalStatus": {
-                    "type": "string", 
-                    "description": "Marital status (married, divorced, widow...)"
-                }, 
-                "birthDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Birth date"
-                }, 
-                "deathDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Death date"
-                }, 
-                "title": {
-                    "type": "string", 
-                    "description": "Used for titles (aristocratic, social...): Pr, Dr, Sir..."
-                }, 
-                "givenName": {
-                    "type": "string", 
-                    "description": "First name"
-                }, 
-                "familyName": {
-                    "type": "string", 
-                    "description": "Last name"
-                }, 
-                "middleName": {
-                    "type": "string", 
-                    "description": "Middle name"
-                }, 
-                "fullName": {
-                    "type": "string", 
-                    "description": "Full name flatten (first, middle, and last names)"
-                }, 
-                "formattedName": {
-                    "type": "string", 
-                    "description": "A formatted name useful for specific contexts (chinese, japonese, korean,...)"
-                }, 
-                "location": {
-                    "type": "string", 
-                    "description": "Temporary current location of the individual (may be used if the individual has approved its sharing)"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the individual (Initialized, Validated, Deceased)"
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "externalReference": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ExternalReference"
-                    }
-                }, 
-                "individualIdentification": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/IndividualIdentification"
-                    }
-                }, 
-                "disability": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Disability"
-                    }
-                }, 
-                "otherName": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OtherName"
-                    }
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }
-            }
-        }, 
-        "Individual_Update": {
-            "type": "object", 
-            "description": "Represents a physical person\nSkipped properties: id,href,id,placeOfBirth,birthDate", 
-            "properties": {
-                "gender": {
-                    "type": "string", 
-                    "description": "Gender"
-                }, 
-                "countryOfBirth": {
-                    "type": "string", 
-                    "description": "The country of birth"
-                }, 
-                "nationality": {
-                    "type": "string", 
-                    "description": "Nationality"
-                }, 
-                "maritalStatus": {
-                    "type": "string", 
-                    "description": "Marital status (married, divorced, widow...)"
-                }, 
-                "deathDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Death date"
-                }, 
-                "title": {
-                    "type": "string", 
-                    "description": "Used for titles (aristocratic, social...): Pr, Dr, Sir..."
-                }, 
-                "givenName": {
-                    "type": "string", 
-                    "description": "First name"
-                }, 
-                "familyName": {
-                    "type": "string", 
-                    "description": "Last name"
-                }, 
-                "middleName": {
-                    "type": "string", 
-                    "description": "Middle name"
-                }, 
-                "fullName": {
-                    "type": "string", 
-                    "description": "Full name flatten (first, middle, and last names)"
-                }, 
-                "formattedName": {
-                    "type": "string", 
-                    "description": "A formatted name useful for specific contexts (chinese, japonese, korean,...)"
-                }, 
-                "location": {
-                    "type": "string", 
-                    "description": "Temporary current location of the individual (may be used if the individual has approved its sharing)"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the individual (Initialized, Validated, Deceased)"
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "externalReference": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ExternalReference"
-                    }
-                }, 
-                "individualIdentification": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/IndividualIdentification"
-                    }
-                }, 
-                "disability": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Disability"
-                    }
-                }, 
-                "otherName": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OtherName"
-                    }
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }
-            }
-        }, 
-        "Organization": {
-            "type": "object", 
-            "description": "Represents a group of people identified by shared interests or purpose. Because of the complex nature of many businesses, both organizations and organization units are represented by the same business entity in this model.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier for the organization"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the organization"
-                }, 
-                "isLegalEntity": {
-                    "type": "boolean", 
-                    "description": "To tag if the organization is a legal entity known by a national referential"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the organization (company...)"
-                }, 
-                "existsDuring": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Details the establishment of the organization and its cessation"
-                }, 
-                "tradingName": {
-                    "type": "string", 
-                    "description": "The name that the organization (unit) trades under"
-                }, 
-                "nameType": {
-                    "type": "string", 
-                    "description": "Co., Inc., Ltd., Pty Ltd., Plc., Gmbh."
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the organization (initialized, validated, closed)"
-                }, 
-                "otherName": {
-                    "$ref": "#/definitions/OtherName"
-                }, 
-                "externalReference": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ExternalReference"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }, 
-                "organizationParentRelationship": {
-                    "$ref": "#/definitions/OrganizationParentRelationship"
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "organizationChildRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrganizationChildRelationship"
-                    }
-                }, 
-                "organizationIdentification": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrganizationIdentification"
-                    }
-                }
-            }
-        }, 
-        "Organization_Create": {
-            "type": "object", 
-            "description": "Represents a group of people identified by shared interests or purpose. Because of the complex nature of many businesses, both organizations and organization units are represented by the same business entity in this model.\nSkipped properties: id,href", 
-            "required": [
-                "tradingName"
-            ], 
-            "properties": {
-                "isLegalEntity": {
-                    "type": "boolean", 
-                    "description": "To tag if the organization is a legal entity known by a national referential"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the organization (company...)"
-                }, 
-                "existsDuring": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Details the establishment of the organization and its cessation"
-                }, 
-                "tradingName": {
-                    "type": "string", 
-                    "description": "The name that the organization (unit) trades under"
-                }, 
-                "nameType": {
-                    "type": "string", 
-                    "description": "Co., Inc., Ltd., Pty Ltd., Plc., Gmbh."
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the organization (initialized, validated, closed)"
-                }, 
-                "otherName": {
-                    "$ref": "#/definitions/OtherName"
-                }, 
-                "externalReference": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ExternalReference"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }, 
-                "organizationParentRelationship": {
-                    "$ref": "#/definitions/OrganizationParentRelationship"
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "organizationChildRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrganizationChildRelationship"
-                    }
-                }, 
-                "organizationIdentification": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrganizationIdentification"
-                    }
-                }
-            }
-        }, 
-        "Organization_Update": {
-            "type": "object", 
-            "description": "Represents a group of people identified by shared interests or purpose. Because of the complex nature of many businesses, both organizations and organization units are represented by the same business entity in this model.\nSkipped properties: id,href,id", 
-            "properties": {
-                "isLegalEntity": {
-                    "type": "boolean", 
-                    "description": "To tag if the organization is a legal entity known by a national referential"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the organization (company...)"
-                }, 
-                "existsDuring": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Details the establishment of the organization and its cessation"
-                }, 
-                "tradingName": {
-                    "type": "string", 
-                    "description": "The name that the organization (unit) trades under"
-                }, 
-                "nameType": {
-                    "type": "string", 
-                    "description": "Co., Inc., Ltd., Pty Ltd., Plc., Gmbh."
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the organization (initialized, validated, closed)"
-                }, 
-                "otherName": {
-                    "$ref": "#/definitions/OtherName"
-                }, 
-                "externalReference": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ExternalReference"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }, 
-                "organizationParentRelationship": {
-                    "$ref": "#/definitions/OrganizationParentRelationship"
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "organizationChildRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrganizationChildRelationship"
-                    }
-                }, 
-                "organizationIdentification": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/OrganizationIdentification"
-                    }
-                }
-            }
-        }, 
-        "RelatedPartyRef": {
-            "type": "object", 
-            "description": "RelatedParty reference. RelatedParty defines party or party role linked to a specific entity.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of a related party"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the related party, could be a party reference or a partyRole reference"
-                }, 
-                "role": {
-                    "type": "string", 
-                    "description": "Role of the related party."
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the related party"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the related party"
-                }
-            }
-        }, 
-        "Characteristic": {
-            "type": "object", 
-            "description": "Describes the characteristics of an individual  or an organization such as individual hobbies, center of interests.", 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the characteristic"
-                }, 
-                "value": {
-                    "type": "string", 
-                    "description": "Value of the characteristic"
-                }
-            }
-        }, 
-        "ExternalReference": {
-            "type": "object", 
-            "description": "To manage touch points to external OTT identifiers for the individual or the organization (facebook, google+,...)", 
-            "properties": {
-                "href": {
-                    "type": "string", 
-                    "description": "External reference"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Reference type"
-                }
-            }
-        }, 
-        "IndividualIdentification": {
-            "type": "object", 
-            "description": "Represents our registration of information used as proof of identity by an individual (passport, national identity card, driver's license, social security number, birth certificate)", 
-            "properties": {
-                "type": {
-                    "type": "string", 
-                    "description": "Identification type (passport, national identity card, driver's license, social security number, birth certificate)"
-                }, 
-                "identificationId": {
-                    "type": "string", 
-                    "description": "Identifier"
-                }, 
-                "issuingAuthority": {
-                    "type": "string", 
-                    "description": "Authority which has issued the identifier (social security, town hall...)"
-                }, 
-                "issuingDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date at which the identifier was issued"
-                }
-            }
-        }, 
-        "Disability": {
-            "type": "object", 
-            "description": "Lack or inadequate strength or ability", 
-            "properties": {
-                "disability": {
-                    "type": "string", 
-                    "description": "Physical or mental handicap"
-                }
-            }
-        }, 
-        "OtherName": {
-            "type": "object", 
-            "description": "To keep track of other names (for example the old name of a woman before marriage or an artist name)", 
-            "properties": {
-                "title": {
-                    "type": "string", 
-                    "description": "useful for titles (aristocratic, social...) Dr, Pr, Sir..."
-                }, 
-                "givenName": {
-                    "type": "string", 
-                    "description": "First name"
-                }, 
-                "familyName": {
-                    "type": "string", 
-                    "description": "Last name"
-                }, 
-                "middleName": {
-                    "type": "string", 
-                    "description": "Middle name"
-                }, 
-                "fullName": {
-                    "type": "string", 
-                    "description": "Full name flatten (first, middle, and last name)"
-                }, 
-                "formattedName": {
-                    "type": "string", 
-                    "description": "A formatted name useful for specific contexts (chinese, japanese, korean...)"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The period for which the other name is valid"
-                }, 
-                "nameType": {
-                    "type": "string", 
-                    "description": "Co., Inc., Ltd., Plc., Gmbh."
-                }, 
-                "tradingName": {
-                    "type": "string", 
-                    "description": "The name that the organization trades under"
-                }
-            }
-        }, 
-        "ContactMedium": {
-            "type": "object", 
-            "description": "Indicates the contact medium that could be used to contact the customer.", 
-            "properties": {
-                "preferred": {
-                    "type": "boolean", 
-                    "description": "If true, indicates that is the preferred contact medium"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Email address, telephone number, postal address"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The time period that the contact medium is valid for"
-                }, 
-                "medium": {
-                    "$ref": "#/definitions/Medium"
-                }
-            }
-        }, 
-        "TimePeriod": {
-            "type": "object", 
-            "description": "A base / value business entity used to represent a period of time between two timepoints.", 
-            "properties": {
-                "startDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, starting at the TimePeriod"
-                }, 
-                "endDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, ending at the TimePeriod."
-                }
-            }
-        }, 
-        "Medium": {
-            "type": "object", 
-            "description": "Describes the contact medium that could be used to contact the customer", 
-            "properties": {
-                "city": {
-                    "type": "string", 
-                    "description": "City"
-                }, 
-                "country": {
-                    "type": "string", 
-                    "description": "Country"
-                }, 
-                "emailAddress": {
-                    "type": "string", 
-                    "description": "Full email address in standard format"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of medium (fax, mobile phone...)"
-                }, 
-                "number": {
-                    "type": "string", 
-                    "description": "Phone number"
-                }, 
-                "postcode": {
-                    "type": "string", 
-                    "description": "Postcode"
-                }, 
-                "stateOrProvince": {
-                    "type": "string", 
-                    "description": "State or province"
-                }, 
-                "street1": {
-                    "type": "string", 
-                    "description": "Describes the street"
-                }, 
-                "street2": {
-                    "type": "string", 
-                    "description": "Complementary street description"
-                }
-            }
-        }, 
-        "OrganizationParentRelationship": {
-            "type": "object", 
-            "description": "Represents the links between organizations: useful to describe an organization structure between headquarters, affiliates,... It indicates the parent of the organization.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the parent organization"
-                }, 
-                "relationshipType": {
-                    "type": "string", 
-                    "description": "Juridical, hierarchical, geographical, functional..."
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the parent organization"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The time period the relationship is valid"
-                }
-            }
-        }, 
-        "OrganizationChildRelationship": {
-            "type": "object", 
-            "description": "Represents the links between organizations: useful to describe an organization structure between headquarters, affiliates,... It indicates the children of the organization", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the child organization"
-                }, 
-                "relationshipType": {
-                    "type": "string", 
-                    "description": "Juridical, hierarchical, geographical, functional..."
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the child organization"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The time period the relationship is valid"
-                }
-            }
-        }, 
-        "OrganizationIdentification": {
-            "type": "object", 
-            "description": "Represents our registration of information used as proof of identity by an organization", 
-            "properties": {
-                "type": {
-                    "type": "string", 
-                    "description": "Type of identification information used to identify the company in a country or internationally"
-                }, 
-                "identificationId": {
-                    "type": "string", 
-                    "description": "Identifier"
-                }, 
-                "issuingAuthority": {
-                    "type": "string", 
-                    "description": "Authority which has issued the identifier (chamber of commerce...)"
-                }, 
-                "issuingDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date at which the identifier was issued"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The period for which the identification information is valid."
-                }
-            }
-        }, 
-        "IndividualUpdateNotification": {
-            "type": "object", 
-            "description": "The IndividualUpdate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/IndividualEvent"
-                }
-            }
-        }, 
-        "IndividualDeleteNotification": {
-            "type": "object", 
-            "description": "The IndividualDelete notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/IndividualEvent"
-                }
-            }
-        }, 
-        "IndividualCreateNotification": {
-            "type": "object", 
-            "description": "The IndividualCreate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/IndividualEvent"
-                }
-            }
-        }, 
-        "OrganizationCreateNotification": {
-            "type": "object", 
-            "description": "The OrganizationCreate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/OrganizationEvent"
-                }
-            }
-        }, 
-        "OrganizationDeleteNotification": {
-            "type": "object", 
-            "description": "The OrganizationDelete notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/OrganizationEvent"
-                }
-            }
-        }, 
-        "OrganizationUpdateNotification": {
-            "type": "object", 
-            "description": "The OrganizationUpdate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/OrganizationEvent"
-                }
-            }
-        }, 
-        "IndividualEvent": {
-            "type": "object", 
-            "description": "The Individual event is generated each time an individual is created, updated or deleted.", 
-            "properties": {
-                "individual": {
-                    "$ref": "#/definitions/Individual"
-                }
-            }
-        }, 
-        "OrganizationEvent": {
-            "type": "object", 
-            "description": "The Organization event is generated each time an organization has been created, changed or removed.", 
-            "properties": {
-                "organization": {
-                    "$ref": "#/definitions/Organization"
-                }
-            }
-        }, 
-        "EventSubscription": {
-            "required": [
-                "id", 
-                "callback"
-            ], 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Id of the listener"
-                }, 
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "EventSubscriptionInput": {
-            "required": [
-                "callback"
-            ], 
-            "properties": {
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "Error": {
-            "required": [
-                "code", 
-                "message"
-            ], 
-            "properties": {
-                "code": {
-                    "type": "integer", 
-                    "description": "An integer coding the error type. This is given to caller so he can translate them if required."
-                }, 
-                "message": {
-                    "type": "string", 
-                    "description": "A short localized string that describes the error."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "(optional) A long localized error description if needed. It can contain precise information about which parameter is missing, or what are the identifier acceptable values."
-                }, 
-                "infoURL": {
-                    "type": "string", 
-                    "description": "(optional) A URL to online documentation that provides more information about the error."
-                }
-            }
-        }
+      }
     }
+	,
+    "get": {
+      "tags": [
+         "individual"
+      ],          
+      "operationId": "individualFind",
+      "summary": "individualFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of Individual",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Individual"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/individual/{individualId}": {
+    "delete": {
+      "tags": [
+         "individual"
+      ],    
+      "operationId": "individualDelete",
+      "summary": "individualDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "individualId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "individual"
+      ],    
+      "operationId": "individualGet",
+      "summary": "individualGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "individualId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Individual",
+          "schema": {
+            "$ref": "#/definitions/Individual"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "individual"
+      ],            
+      "operationId": "individualPatch",
+      "summary": "individualPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "individualId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "individual",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/Individual"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success Individual",
+          "schema": {
+            "$ref": "#/definitions/Individual"
+            }
+          }
+      }             
+    }
+	,
+    "put": {
+      "tags": [
+         "individual"
+      ],            
+      "operationId": "individualUpdate",
+      "summary": "individualUpdate",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "individualId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "individual",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/Individual"
+         }
+        }                               
+      ], 
+      "responses": {
+        "201": {
+          "description": "Success Individual",
+          "schema": {
+            "$ref": "#/definitions/Individual"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/organization": {        
+    "post": {
+      "tags": [
+         "organization"
+      ],            
+      "operationId": "organizationCreate",
+      "summary": "organizationCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "organization",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Organization"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Organization",
+          "schema": {
+            "$ref": "#/definitions/Organization"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "organization"
+      ],          
+      "operationId": "organizationFind",
+      "summary": "organizationFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of Organization",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Organization"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/organization/{organizationId}": {
+    "get": {
+      "tags": [
+         "organization"
+      ],    
+      "operationId": "organizationGet",
+      "summary": "organizationGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "organizationId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Organization",
+          "schema": {
+            "$ref": "#/definitions/Organization"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "organization"
+      ],            
+      "operationId": "organizationPatch",
+      "summary": "organizationPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "organizationId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "organization",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/Organization"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success Organization",
+          "schema": {
+            "$ref": "#/definitions/Organization"
+            }
+          }
+      }             
+    }
+	,
+    "put": {
+      "tags": [
+         "organization"
+      ],            
+      "operationId": "organizationUpdate",
+      "summary": "organizationUpdate",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "organizationId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "organization",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/Organization"
+         }
+        }                               
+      ], 
+      "responses": {
+        "201": {
+          "description": "Success Organization",
+          "schema": {
+            "$ref": "#/definitions/Organization"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/hub": {        
+    "post": {
+      "tags": [
+         "hub"
+      ],            
+      "operationId": "hubCreate",
+      "summary": "hubCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "hub",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],          
+      "operationId": "hubFind",
+      "summary": "hubFind",
+      "description": "",       
+      "deprecated": false,
+         
+      "responses": {
+        "200": {
+          "description": "List of Hub",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Hub"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/hub/{hubId}": {
+    "delete": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubDelete",
+      "summary": "hubDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubGet",
+      "summary": "hubGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+            }
+          }
+      }        
+    }     
+	
+    }
+  },
+"definitions": {
+  
+
+    "Individual": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "integer",
+          "format": "int64"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "gender": {
+          
+          "type": "string"
+        }
+        ,
+        "placeOfBirth": {
+          
+          "type": "string"
+        }
+        ,
+        "countryOfBirth": {
+          
+          "type": "string"
+        }
+        ,
+        "nationality": {
+          
+          "type": "string"
+        }
+        ,
+        "maritalStatus": {
+          
+          "type": "string"
+        }
+        ,
+        "birthDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "title": {
+          
+          "type": "string"
+        }
+        ,
+        "givenName": {
+          
+          "type": "string"
+        }
+        ,
+        "familyName": {
+          
+          "type": "string"
+        }
+        ,
+        "middleName": {
+          
+          "type": "string"
+        }
+        ,
+        "fullName": {
+          
+          "type": "string"
+        }
+        ,
+        "formattedName": {
+          
+          "type": "string"
+        }
+        ,
+        "location": {
+          
+          "type": "string"
+        }
+        ,
+        "status": {
+          
+          "type": "string"
+        }
+        ,
+        "disability": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Disability"
+  
+              }
+            
+        }
+        ,
+        "characteristic": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Characteristic"
+  
+              }
+            
+        }
+        ,
+        "otherName": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/OtherName"
+  
+              }
+            
+        }
+        ,
+        "individualIdentification": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/IndividualIdentification"
+  
+              }
+            
+        }
+        ,
+        "externalReference": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ExternalReference"
+  
+              }
+            
+        }
+        ,
+        "relatedParty": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/RelatedParty"
+  
+              }
+            
+        }
+        ,
+        "contactMedium": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ContactMedium"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ExternalReference": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "RelatedParty": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "role": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ContactMedium": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "medium": {
+          
+                "$ref": "#/definitions/Medium"
+  
+        }
+        ,
+        "preferred": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Medium": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "city": {
+          
+          "type": "string"
+        }
+        ,
+        "country": {
+          
+          "type": "string"
+        }
+        ,
+        "postcode": {
+          
+          "type": "string"
+        }
+        ,
+        "stateOrProvince": {
+          
+          "type": "string"
+        }
+        ,
+        "streetOne": {
+          
+          "type": "string"
+        }
+        ,
+        "streetTwo": {
+          
+          "type": "string"
+        }
+        ,
+        "emailAddress": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "number": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "IndividualIdentification": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "identificationId": {
+          
+          "type": "string"
+        }
+        ,
+        "issuingAuthority": {
+          
+          "type": "string"
+        }
+        ,
+        "issuingDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "OtherName": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "title": {
+          
+          "type": "string"
+        }
+        ,
+        "givenName": {
+          
+          "type": "string"
+        }
+        ,
+        "familyName": {
+          
+          "type": "string"
+        }
+        ,
+        "middleName": {
+          
+          "type": "string"
+        }
+        ,
+        "fullName": {
+          
+          "type": "string"
+        }
+        ,
+        "formattedName": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "nameType": {
+          
+          "type": "string"
+        }
+        ,
+        "tradingName": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Characteristic": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "value": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Disability": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "disability": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ValidFor": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "startDateTime": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "endDateTime": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Organization": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "integer",
+          "format": "int64"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "isLegalEntity": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "existsDuring": {
+          
+                "$ref": "#/definitions/ExistsDuring"
+  
+        }
+        ,
+        "tradingName": {
+          
+          "type": "string"
+        }
+        ,
+        "nameType": {
+          
+          "type": "string"
+        }
+        ,
+        "status": {
+          
+          "type": "string"
+        }
+        ,
+        "otherName": {
+          
+                "$ref": "#/definitions/OtherName"
+  
+        }
+        ,
+        "characteristic": {
+          
+                "$ref": "#/definitions/Characteristic"
+  
+        }
+        ,
+        "organizationIdentification": {
+          
+                "$ref": "#/definitions/OrganizationIdentification"
+  
+        }
+        ,
+        "externalReference": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ExternalReference"
+  
+              }
+            
+        }
+        ,
+        "relatedParty": {
+          
+                "$ref": "#/definitions/RelatedParty"
+  
+        }
+        ,
+        "organizationParentRelationship": {
+          
+                "$ref": "#/definitions/OrganizationParentRelationship"
+  
+        }
+        ,
+        "organizationChildRelationship": {
+          
+                "$ref": "#/definitions/OrganizationChildRelationship"
+  
+        }
+        ,
+        "contactMedium": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ContactMedium"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "OrganizationIdentification": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "identificationId": {
+          
+          "type": "string"
+        }
+        ,
+        "issuingAuthority": {
+          
+          "type": "string"
+        }
+        ,
+        "issuingDate": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "OrganizationParentRelationship": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "relationshipType": {
+          
+          "type": "string"
+        }
+        ,
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "OrganizationChildRelationship": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "relationshipType": {
+          
+          "type": "string"
+        }
+        ,
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ExistsDuring": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "startDateTime": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "endDateTime": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Hub": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "callback": {
+          
+          "type": "string"
+        }
+        ,
+        "query": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  
+  }
 }
+	

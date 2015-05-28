@@ -1,918 +1,546 @@
+
 {
-    "swagger": "2.0", 
-    "info": {
-        "title": "Trouble Ticket Management", 
-        "description": "This is Swagger UI environment generated for the TMF Trouble Ticket Management specification", 
-        "version": "2.0"
-    }, 
-    "host": "biologeek.orange-labs.fr", 
-    "basePath": "/api/troubleTicketManagement", 
-    "schemes": [
-        "https"
-    ], 
-    "consumes": [
-        "application/json"
-    ], 
-    "produces": [
-        "application/json"
-    ], 
-    "paths": {
-        "/ticket": {
-            "get": {
-                "operationId": "listTicket", 
-                "summary": "List or find 'Ticket' objects", 
-                "tags": [
-                    "ticket"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "correlationId", 
-                        "description": "For filtering: Additional identifier coming from an external system"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "severity", 
-                        "description": "For filtering: The severity of the trouble. It can be for example : minor, major, critical"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "type", 
-                        "description": "For filtering: Type of trouble ticket"
-                    }, 
-                    {
-                        "name": "creationDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: The date on which the trouble was discovered"
-                    }, 
-                    {
-                        "name": "targetResolutionDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Foreseen trouble resolution date"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "status", 
-                        "description": "For filtering: The current status of the Trouble Ticket"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "subStatus", 
-                        "description": "For filtering: The current sub status of the Trouble Ticket"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "statusChangeReason", 
-                        "description": "For filtering: The reason of state change"
-                    }, 
-                    {
-                        "name": "statusChangeDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: The date of state change"
-                    }, 
-                    {
-                        "name": "resolutionDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: The date on which the service was brought back to its original condition"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedObject.involvement", 
-                        "description": "For filtering: Consequence of the ticket on the related object (for instance disputed, adjusted...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedObject.reference", 
-                        "description": "For filtering: Reference of object"
-                    }, 
-                    {
-                        "name": "note.date", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: Date of the note"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "note.author", 
-                        "description": "For filtering: Author of the note"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "note.text", 
-                        "description": "For filtering: Text of the note"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.role", 
-                        "description": "For filtering: Role of the related party."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.name", 
-                        "description": "For filtering: Name of the related party"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Ticket"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createTicket", 
-                "summary": "Creates a 'Ticket'", 
-                "tags": [
-                    "ticket"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Ticket_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "ticket", 
-                        "description": "The Ticket to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/Ticket"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/ticket/{id}": {
-            "get": {
-                "operationId": "retrieveTicket", 
-                "summary": "Retrieves a 'Ticket' by Id", 
-                "tags": [
-                    "ticket"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Ticket"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Ticket"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub": {
-            "post": {
-                "operationId": "registerListener", 
-                "summary": "Register a listener", 
-                "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "data", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscriptionInput"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "description": "Data containing the callback endpoint to deliver the information"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Subscribed", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscription"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub/{id}": {
-            "delete": {
-                "operationId": "unregisterListener", 
-                "summary": "Unregister a listener", 
-                "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "id", 
-                        "type": "string", 
-                        "required": true, 
-                        "in": "path", 
-                        "description": "The id of the registered listener"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Unsubscribed"
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/ticketClearanceRequestNotification": {
-            "post": {
-                "operationId": "publishTicketClearanceRequestNotification", 
-                "summary": "Publishes a 'TicketClearanceRequestNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/TicketClearanceRequestNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "ticketClearanceRequestNotification", 
-                        "description": "The Ticket Clearance Request Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/ticketUpdateNotification": {
-            "post": {
-                "operationId": "publishTicketUpdateNotification", 
-                "summary": "Publishes a 'TicketUpdateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/TicketUpdateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "ticketUpdateNotification", 
-                        "description": "The Ticket Update Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/ticketInformationRequiredNotification": {
-            "post": {
-                "operationId": "publishTicketInformationRequiredNotification", 
-                "summary": "Publishes a 'TicketInformationRequiredNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/TicketInformationRequiredNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "ticketInformationRequiredNotification", 
-                        "description": "The Ticket Information Required Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/ticketStateChangeNotification": {
-            "post": {
-                "operationId": "publishTicketStateChangeNotification", 
-                "summary": "Publishes a 'TicketStateChangeNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/TicketStateChangeNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "ticketStateChangeNotification", 
-                        "description": "The Ticket State Change Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "2.0",
+    "title": "API TroubleTicket"
+  },
+  "host": "env-0693795.jelastic.servint.net",
+  "basePath":	"/DSTroubleTicket/api/troubleTicketManagement/v2",
+  "schemes": [
+      "http"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],  
+  "paths": {    
+    "/troubleTicket": {        
+    "post": {
+      "tags": [
+         "troubleTicket"
+      ],            
+      "operationId": "troubleTicketCreate",
+      "summary": "troubleTicketCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "troubleTicket",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TroubleTicket"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "TroubleTicket",
+          "schema": {
+            "$ref": "#/definitions/TroubleTicket"
+          }
         }
-    }, 
-    "definitions": {
-        "Ticket": {
-            "type": "object", 
-            "description": "A trouble ticket represents a record used for reporting and managing the resolution of resource problems", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the trouble ticket"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the trouble ticket"
-                }, 
-                "correlationId": {
-                    "type": "string", 
-                    "description": "Additional identifier coming from an external system"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Description of the trouble"
-                }, 
-                "severity": {
-                    "type": "string", 
-                    "description": "The severity of the trouble. It can be for example : minor, major, critical"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of trouble ticket"
-                }, 
-                "creationDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date on which the trouble was discovered"
-                }, 
-                "targetResolutionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Foreseen trouble resolution date"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "The current status of the Trouble Ticket"
-                }, 
-                "subStatus": {
-                    "type": "string", 
-                    "description": "The current sub status of the Trouble Ticket"
-                }, 
-                "statusChangeReason": {
-                    "type": "string", 
-                    "description": "The reason of state change"
-                }, 
-                "statusChangeDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date of state change"
-                }, 
-                "resolutionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date on which the service was brought back to its original condition"
-                }, 
-                "relatedObject": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedObject"
-                    }
-                }, 
-                "note": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Note"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }
-            }
-        }, 
-        "Ticket_Create": {
-            "type": "object", 
-            "description": "A trouble ticket represents a record used for reporting and managing the resolution of resource problems\nSkipped properties: id,href", 
-            "required": [
-                "description", 
-                "severity", 
-                "type"
-            ], 
-            "properties": {
-                "correlationId": {
-                    "type": "string", 
-                    "description": "Additional identifier coming from an external system"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Description of the trouble"
-                }, 
-                "severity": {
-                    "type": "string", 
-                    "description": "The severity of the trouble. It can be for example : minor, major, critical"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of trouble ticket"
-                }, 
-                "creationDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date on which the trouble was discovered"
-                }, 
-                "targetResolutionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Foreseen trouble resolution date"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "The current status of the Trouble Ticket"
-                }, 
-                "subStatus": {
-                    "type": "string", 
-                    "description": "The current sub status of the Trouble Ticket"
-                }, 
-                "statusChangeReason": {
-                    "type": "string", 
-                    "description": "The reason of state change"
-                }, 
-                "statusChangeDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date of state change"
-                }, 
-                "resolutionDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date on which the service was brought back to its original condition"
-                }, 
-                "relatedObject": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedObject"
-                    }
-                }, 
-                "note": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Note"
-                    }
-                }, 
-                "relatedParty": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/RelatedPartyRef"
-                    }
-                }
-            }
-        }, 
-        "RelatedObject": {
-            "type": "object", 
-            "description": "Defines objects linked with trouble ticket.", 
-            "properties": {
-                "involvement": {
-                    "type": "string", 
-                    "description": "Consequence of the ticket on the related object (for instance disputed, adjusted...)"
-                }, 
-                "reference": {
-                    "type": "string", 
-                    "description": "Reference of object"
-                }
-            }
-        }, 
-        "Note": {
-            "type": "object", 
-            "description": "Extra information about the ticket or a product order", 
-            "properties": {
-                "date": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date of the note"
-                }, 
-                "author": {
-                    "type": "string", 
-                    "description": "Author of the note"
-                }, 
-                "text": {
-                    "type": "string", 
-                    "description": "Text of the note"
-                }
-            }
-        }, 
-        "RelatedPartyRef": {
-            "type": "object", 
-            "description": "RelatedParty reference. RelatedParty defines party or party role linked to a specific entity.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of a related party"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the related party, could be a party reference or a partyRole reference"
-                }, 
-                "role": {
-                    "type": "string", 
-                    "description": "Role of the related party."
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the related party"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the related party"
-                }
-            }
-        }, 
-        "TimePeriod": {
-            "type": "object", 
-            "description": "A base / value business entity used to represent a period of time between two timepoints.", 
-            "properties": {
-                "startDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, starting at the TimePeriod"
-                }, 
-                "endDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, ending at the TimePeriod."
-                }
-            }
-        }, 
-        "TicketClearanceRequestNotification": {
-            "type": "object", 
-            "description": "The TicketClearanceRequest notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/TicketEvent"
-                }
-            }
-        }, 
-        "TicketUpdateNotification": {
-            "type": "object", 
-            "description": "The TicketUpdate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/TicketEvent"
-                }
-            }
-        }, 
-        "TicketInformationRequiredNotification": {
-            "type": "object", 
-            "description": "The TicketInformationRequired notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/TicketEvent"
-                }
-            }
-        }, 
-        "TicketStateChangeNotification": {
-            "type": "object", 
-            "description": "The TicketStateChange notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/TicketEvent"
-                }
-            }
-        }, 
-        "TicketEvent": {
-            "type": "object", 
-            "description": "The Ticket event is generated each time a ticket is updated.", 
-            "properties": {
-                "ticket": {
-                    "$ref": "#/definitions/Ticket"
-                }
-            }
-        }, 
-        "EventSubscription": {
-            "required": [
-                "id", 
-                "callback"
-            ], 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Id of the listener"
-                }, 
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "EventSubscriptionInput": {
-            "required": [
-                "callback"
-            ], 
-            "properties": {
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "Error": {
-            "required": [
-                "code", 
-                "message"
-            ], 
-            "properties": {
-                "code": {
-                    "type": "integer", 
-                    "description": "An integer coding the error type. This is given to caller so he can translate them if required."
-                }, 
-                "message": {
-                    "type": "string", 
-                    "description": "A short localized string that describes the error."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "(optional) A long localized error description if needed. It can contain precise information about which parameter is missing, or what are the identifier acceptable values."
-                }, 
-                "infoURL": {
-                    "type": "string", 
-                    "description": "(optional) A URL to online documentation that provides more information about the error."
-                }
-            }
-        }
+      }
     }
+	,
+    "get": {
+      "tags": [
+         "troubleTicket"
+      ],          
+      "operationId": "troubleTicketFind",
+      "summary": "troubleTicketFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of TroubleTicket",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TroubleTicket"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/troubleTicket/{troubleTicketId}": {
+    "get": {
+      "tags": [
+         "troubleTicket"
+      ],    
+      "operationId": "troubleTicketGet",
+      "summary": "troubleTicketGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "troubleTicketId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "TroubleTicket",
+          "schema": {
+            "$ref": "#/definitions/TroubleTicket"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "troubleTicket"
+      ],            
+      "operationId": "troubleTicketPatch",
+      "summary": "troubleTicketPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "troubleTicketId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "troubleTicket",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/TroubleTicket"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success TroubleTicket",
+          "schema": {
+            "$ref": "#/definitions/TroubleTicket"
+            }
+          }
+      }             
+    }
+	,
+    "put": {
+      "tags": [
+         "troubleTicket"
+      ],            
+      "operationId": "troubleTicketUpdate",
+      "summary": "troubleTicketUpdate",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "troubleTicketId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "troubleTicket",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/TroubleTicket"
+         }
+        }                               
+      ], 
+      "responses": {
+        "201": {
+          "description": "Success TroubleTicket",
+          "schema": {
+            "$ref": "#/definitions/TroubleTicket"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/hub": {        
+    "post": {
+      "tags": [
+         "hub"
+      ],            
+      "operationId": "hubCreate",
+      "summary": "hubCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "hub",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],          
+      "operationId": "hubFind",
+      "summary": "hubFind",
+      "description": "",       
+      "deprecated": false,
+         
+      "responses": {
+        "200": {
+          "description": "List of Hub",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Hub"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/hub/{hubId}": {
+    "delete": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubDelete",
+      "summary": "hubDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubGet",
+      "summary": "hubGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+            }
+          }
+      }        
+    }     
+	
+    }
+  },
+"definitions": {
+  
+
+    "Note": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "date": {
+          
+          "type": "string",
+          "format": "date"
+        }
+        ,
+        "author": {
+          
+          "type": "string"
+        }
+        ,
+        "text": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "RelatedObject": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "involvement": {
+          
+          "type": "string"
+        }
+        ,
+        "reference": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "RelatedParty": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "role": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "TroubleTicket": {
+            
+      "required": [
+      
+        "status",
+        "statusChangeReason"
+      ],
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "correlationId": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        ,
+        "severity": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "creationDate": {
+          
+          "type": "string",
+          "format": "date"
+        }
+        ,
+        "targetResolutionDate": {
+          
+          "type": "string",
+          "format": "date"
+        }
+        ,
+        "status": {
+          
+          "type": "string",    
+          "enum": [   
+          
+            "Submitted",
+            "Rejected",
+            "Acknowledged",
+            "InProgress",
+            "InProgressHeld",
+            "InProgressPending",
+            "Resolved",
+            "Closed",
+            "Cancelled"
+          ]
+  
+        }
+        ,
+        "statusChangeReason": {
+          
+          "type": "string"
+        }
+        ,
+        "statusChangeDate": {
+          
+          "type": "string",
+          "format": "date"
+        }
+        ,
+        "relatedParty": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/RelatedParty"
+  
+              }
+            
+        }
+        ,
+        "relatedObject": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/RelatedObject"
+  
+              }
+            
+        }
+        ,
+        "note": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Note"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Hub": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "callback": {
+          
+          "type": "string"
+        }
+        ,
+        "query": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  
+  }
 }
+	

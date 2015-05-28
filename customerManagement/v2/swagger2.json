@@ -1,2769 +1,1669 @@
+
 {
-    "swagger": "2.0", 
-    "info": {
-        "title": "Customer Management", 
-        "description": "This is Swagger UI environment generated for the TMF Customer Management specification", 
-        "version": "2.0"
-    }, 
-    "host": "biologeek.orange-labs.fr", 
-    "basePath": "/api/customerManagement", 
-    "schemes": [
-        "https"
-    ], 
-    "consumes": [
-        "application/json"
-    ], 
-    "produces": [
-        "application/json"
-    ], 
-    "paths": {
-        "/customer": {
-            "get": {
-                "operationId": "listCustomer", 
-                "summary": "List or find 'Customer' objects", 
-                "tags": [
-                    "customer"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "name", 
-                        "description": "For filtering: Displayable name"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "status", 
-                        "description": "For filtering: Used to tack the lifecycle status, e.g. existing, prospective or former customer"
-                    }, 
-                    {
-                        "name": "validFor.startDateTime", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: An instant of time, starting at the TimePeriod"
-                    }, 
-                    {
-                        "name": "validFor.endDateTime", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: An instant of time, ending at the TimePeriod."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "customerRank", 
-                        "description": "For filtering: Relative importance of this customer compared to other customers"
-                    }, 
-                    {
-                        "name": "customerCreditProfile.creditProfileDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: The date the profile was established"
-                    }, 
-                    {
-                        "type": "integer", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerCreditProfile.creditRiskRating", 
-                        "description": "For filtering: This is an integer whose value is used to rate the risk"
-                    }, 
-                    {
-                        "type": "integer", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerCreditProfile.creditScore", 
-                        "description": "For filtering: A measure of a person's or an organization's creditworthiness calculated on the basis of a combination of factors such as their income and credit history."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccount.name", 
-                        "description": "For filtering: Name of the customer account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccount.status", 
-                        "description": "For filtering: The condition of the account, such as due, paid, in arrears, in collection"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.role", 
-                        "description": "For filtering: Role of the related party."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.name", 
-                        "description": "For filtering: Name of the related party"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "characteristic.name", 
-                        "description": "For filtering: Name of the characteristic"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "characteristic.value", 
-                        "description": "For filtering: Value of the characteristic"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentMean.name", 
-                        "description": "For filtering: Name of the payment mean"
-                    }, 
-                    {
-                        "type": "boolean", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contactMedium.preferred", 
-                        "description": "For filtering: If true, indicates that is the preferred contact medium"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contactMedium.type", 
-                        "description": "For filtering: Email address, telephone number, postal address"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Customer"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createCustomer", 
-                "summary": "Creates a 'Customer'", 
-                "tags": [
-                    "customer"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Customer_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customer", 
-                        "description": "The Customer to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/Customer"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/customer/{id}": {
-            "get": {
-                "operationId": "retrieveCustomer", 
-                "summary": "Retrieves a 'Customer' by Id", 
-                "tags": [
-                    "customer"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/Customer"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "put": {
-                "operationId": "updateCustomer", 
-                "summary": "Updates a 'Customer' by Id", 
-                "tags": [
-                    "customer"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Customer_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customer", 
-                        "description": "The Customer to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/Customer"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "patch": {
-                "operationId": "updateCustomer", 
-                "summary": "Updates partially a 'Customer' by Id", 
-                "tags": [
-                    "customer"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/Customer_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customer", 
-                        "description": "The Customer to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/Customer"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "delete": {
-                "operationId": "deleteCustomer", 
-                "summary": "Deletes a 'Customer' by Id", 
-                "tags": [
-                    "customer"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer"
-                    }
-                ], 
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/customerAccount": {
-            "get": {
-                "operationId": "listCustomerAccount", 
-                "summary": "List or find 'CustomerAccount' objects", 
-                "tags": [
-                    "customerAccount"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "name": "lastModified", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "For filtering: Date of last modification of the customer account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "name", 
-                        "description": "For filtering: Name of the customer account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "accountType", 
-                        "description": "For filtering: A categorization of an account, such as individual, joint, and so forth, whose instances share some of the same characteristics."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "status", 
-                        "description": "For filtering: The condition of the account, such as due, paid, in arrears, in collection."
-                    }, 
-                    {
-                        "type": "float", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "creditLimit", 
-                        "description": "For filtering: The maximum amount of money that may be charged on an account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "pin", 
-                        "description": "For filtering: A multi digit personal identification number that is used"
-                    }, 
-                    {
-                        "type": "float", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "receivableBalance", 
-                        "description": "For filtering: Overall receivable balance for the customer account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contact.contactType", 
-                        "description": "For filtering: Type of contact (primary, secondary...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contact.contactName", 
-                        "description": "For filtering: A displayable name for that contact"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "contact.partyRoleType", 
-                        "description": "For filtering: Identifies what kind of party role type is linked to the contact (a customer account manager...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentPlan.status", 
-                        "description": "For filtering: Status of the payment plan (effective, ineffective)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentPlan.type", 
-                        "description": "For filtering: Type of payment plan"
-                    }, 
-                    {
-                        "type": "integer", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentPlan.priority", 
-                        "description": "For filtering: Priority of the payment plan"
-                    }, 
-                    {
-                        "type": "float", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentPlan.amount", 
-                        "description": "For filtering: Amount paid"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentPlan.paymentFrequency", 
-                        "description": "For filtering: Monthly, bimonthly"
-                    }, 
-                    {
-                        "type": "integer", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "paymentPlan.numberOfPayments", 
-                        "description": "For filtering: Number of payments used to spread the global payment"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountBalance.type", 
-                        "description": "For filtering: Type of the balance : deposit balance, disputed balance, loyalty balance, receivable balance..."
-                    }, 
-                    {
-                        "type": "float", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountBalance.amount", 
-                        "description": "For filtering: Balance amount"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountBalance.status", 
-                        "description": "For filtering: Due, paid..."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountRelationship.relationshipType", 
-                        "description": "For filtering: Type of relationship"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountTaxExemption.issuingJurisdiction", 
-                        "description": "For filtering: Name of the taxing jurisdiction for which taxes are exempt"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountTaxExemption.certificateNumber", 
-                        "description": "For filtering: Identifier of a document that shows proof of exemption from taxes for the taxing jurisdiction"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customerAccountTaxExemption.reason", 
-                        "description": "For filtering: Reason of the tax exemption"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "customer.name", 
-                        "description": "For filtering: Displayable name"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/CustomerAccount"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createCustomerAccount", 
-                "summary": "Creates a 'CustomerAccount'", 
-                "tags": [
-                    "customerAccount"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccount_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerAccount", 
-                        "description": "The Customer Account to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccount"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/customerAccount/{id}": {
-            "get": {
-                "operationId": "retrieveCustomerAccount", 
-                "summary": "Retrieves a 'CustomerAccount' by Id", 
-                "tags": [
-                    "customerAccount"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer Account"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/CustomerAccount"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "patch": {
-                "operationId": "updateCustomerAccount", 
-                "summary": "Updates partially a 'CustomerAccount' by Id", 
-                "tags": [
-                    "customerAccount"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer Account"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccount_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerAccount", 
-                        "description": "The Customer Account to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccount"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "delete": {
-                "operationId": "deleteCustomerAccount", 
-                "summary": "Deletes a 'CustomerAccount' by Id", 
-                "tags": [
-                    "customerAccount"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Customer Account"
-                    }
-                ], 
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/paymentMean": {
-            "get": {
-                "operationId": "listPaymentMean", 
-                "summary": "List or find 'PaymentMean' objects", 
-                "tags": [
-                    "paymentMean"
-                ], 
-                "parameters": [
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "fields", 
-                        "description": "Comma separated properties to display in response"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "name", 
-                        "description": "For filtering: Name of the payment mean"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "type", 
-                        "description": "For filtering: Type of the payment mean"
-                    }, 
-                    {
-                        "name": "validFor.startDateTime", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: An instant of time, starting at the TimePeriod"
-                    }, 
-                    {
-                        "name": "validFor.endDateTime", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: An instant of time, ending at the TimePeriod."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.role", 
-                        "description": "For filtering: Role of the related party."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "relatedParty.name", 
-                        "description": "For filtering: Name of the related party"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "creditCard.creditCardHolder", 
-                        "description": "For filtering: Name of the credit card holder"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "creditCard.type", 
-                        "description": "For filtering: Credit card type (Mastercard, Visa,...)"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "creditCard.number", 
-                        "description": "For filtering: Card number"
-                    }, 
-                    {
-                        "name": "creditCard.expirationDate", 
-                        "format": "date-time", 
-                        "required": false, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "For filtering: Expiration date of the card"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "bankAccount.BIC", 
-                        "description": "For filtering: Identifier of the bank according to its international code"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "bankAccount.domiciliation", 
-                        "description": "For filtering: Address of the bank agency which manages the bank account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "bankAccount.IBAN", 
-                        "description": "For filtering: International format to describe a bank account"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "path", 
-                        "name": "bankAccount.accountHolder", 
-                        "description": "For filtering: Name of the holder of the bank account"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/PaymentMean"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "post": {
-                "operationId": "createPaymentMean", 
-                "summary": "Creates a 'PaymentMean'", 
-                "tags": [
-                    "paymentMean"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMean_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "paymentMean", 
-                        "description": "The Payment Mean to be created"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMean"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/paymentMean/{id}": {
-            "get": {
-                "operationId": "retrievePaymentMean", 
-                "summary": "Retrieves a 'PaymentMean' by Id", 
-                "tags": [
-                    "paymentMean"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Payment Mean"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Ok", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/PaymentMean"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "patch": {
-                "operationId": "updatePaymentMean", 
-                "summary": "Updates partially a 'PaymentMean' by Id", 
-                "tags": [
-                    "paymentMean"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Payment Mean"
-                    }, 
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMean_Update"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "paymentMean", 
-                        "description": "The Payment Mean to be updated"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Updated", 
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMean"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }, 
-            "delete": {
-                "operationId": "deletePaymentMean", 
-                "summary": "Deletes a 'PaymentMean' by Id", 
-                "tags": [
-                    "paymentMean"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Payment Mean"
-                    }
-                ], 
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub": {
-            "post": {
-                "operationId": "registerListener", 
-                "summary": "Register a listener", 
-                "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "data", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscriptionInput"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "description": "Data containing the callback endpoint to deliver the information"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Subscribed", 
-                        "schema": {
-                            "$ref": "#/definitions/EventSubscription"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/hub/{id}": {
-            "delete": {
-                "operationId": "unregisterListener", 
-                "summary": "Unregister a listener", 
-                "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.", 
-                "tags": [
-                    "events subscription"
-                ], 
-                "parameters": [
-                    {
-                        "name": "id", 
-                        "type": "string", 
-                        "required": true, 
-                        "in": "path", 
-                        "description": "The id of the registered listener"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Unsubscribed"
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/customerAccountUpdateNotification": {
-            "post": {
-                "operationId": "publishCustomerAccountUpdateNotification", 
-                "summary": "Publishes a 'CustomerAccountUpdateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccountUpdateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerAccountUpdateNotification", 
-                        "description": "The Customer Account Update Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/customerDeleteNotification": {
-            "post": {
-                "operationId": "publishCustomerDeleteNotification", 
-                "summary": "Publishes a 'CustomerDeleteNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerDeleteNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerDeleteNotification", 
-                        "description": "The Customer Delete Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/customerAccountDeleteNotification": {
-            "post": {
-                "operationId": "publishCustomerAccountDeleteNotification", 
-                "summary": "Publishes a 'CustomerAccountDeleteNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccountDeleteNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerAccountDeleteNotification", 
-                        "description": "The Customer Account Delete Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/customerUpdateNotification": {
-            "post": {
-                "operationId": "publishCustomerUpdateNotification", 
-                "summary": "Publishes a 'CustomerUpdateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerUpdateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerUpdateNotification", 
-                        "description": "The Customer Update Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/customerAccountCreateNotification": {
-            "post": {
-                "operationId": "publishCustomerAccountCreateNotification", 
-                "summary": "Publishes a 'CustomerAccountCreateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerAccountCreateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerAccountCreateNotification", 
-                        "description": "The Customer Account Create Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/customerCreateNotification": {
-            "post": {
-                "operationId": "publishCustomerCreateNotification", 
-                "summary": "Publishes a 'CustomerCreateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CustomerCreateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "customerCreateNotification", 
-                        "description": "The Customer Create Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/paymentMeanDeleteNotification": {
-            "post": {
-                "operationId": "publishPaymentMeanDeleteNotification", 
-                "summary": "Publishes a 'PaymentMeanDeleteNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMeanDeleteNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "paymentMeanDeleteNotification", 
-                        "description": "The Payment Mean Delete Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/paymentMeanCreateNotification": {
-            "post": {
-                "operationId": "publishPaymentMeanCreateNotification", 
-                "summary": "Publishes a 'PaymentMeanCreateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMeanCreateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "paymentMeanCreateNotification", 
-                        "description": "The Payment Mean Create Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-        "/listener/paymentMeanUpdateNotification": {
-            "post": {
-                "operationId": "publishPaymentMeanUpdateNotification", 
-                "summary": "Publishes a 'PaymentMeanUpdateNotification'", 
-                "tags": [
-                    "events publication"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/PaymentMeanUpdateNotification"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "paymentMeanUpdateNotification", 
-                        "description": "The Payment Mean Update Notification to be published"
-                    }
-                ], 
-                "responses": {
-                    "201": {
-                        "description": "Published"
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "2.0",
+    "title": "API CustomerManagement"
+  },
+  "host": "env-0693795.jelastic.servint.net",
+  "basePath":	"/DSCustomerManagement/api/customerManagement/v2",
+  "schemes": [
+      "http"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],  
+  "paths": {    
+    "/customer": {        
+    "post": {
+      "tags": [
+         "customer"
+      ],            
+      "operationId": "customerCreate",
+      "summary": "customerCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "customer",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Customer"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Customer",
+          "schema": {
+            "$ref": "#/definitions/Customer"
+          }
         }
-    }, 
-    "definitions": {
-        "Customer": {
-            "type": "object", 
-            "description": "A person or an organization that buys products and services from the enterprise or receives free offers or services. This is modeled as a party playing the role of customer. A customer is a type of party role.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the customer"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Unique reference of the customer."
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Displayable name"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Used to tack the lifecycle status, e.g. existing, prospective or former customer"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "To manage startDate and endDate of customer states"
-                }, 
-                "customerRank": {
-                    "type": "string", 
-                    "description": "Relative importance of this customer compared to other customers"
-                }, 
-                "customerCreditProfile": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerCreditProfile"
-                    }
-                }, 
-                "customerAccount": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRef"
-                    }
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "paymentMean": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/PaymentMeanRef"
-                    }
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }
-            }
-        }, 
-        "Customer_Create": {
-            "type": "object", 
-            "description": "A person or an organization that buys products and services from the enterprise or receives free offers or services. This is modeled as a party playing the role of customer. A customer is a type of party role.\nSkipped properties: id,href", 
-            "required": [
-                "name"
-            ], 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Displayable name"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Used to tack the lifecycle status, e.g. existing, prospective or former customer"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "To manage startDate and endDate of customer states"
-                }, 
-                "customerRank": {
-                    "type": "string", 
-                    "description": "Relative importance of this customer compared to other customers"
-                }, 
-                "customerCreditProfile": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerCreditProfile"
-                    }
-                }, 
-                "customerAccount": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRef"
-                    }
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "paymentMean": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/PaymentMeanRef"
-                    }
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }
-            }
-        }, 
-        "Customer_Update": {
-            "type": "object", 
-            "description": "A person or an organization that buys products and services from the enterprise or receives free offers or services. This is modeled as a party playing the role of customer. A customer is a type of party role.\nSkipped properties: id,href,id", 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Displayable name"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Used to tack the lifecycle status, e.g. existing, prospective or former customer"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "To manage startDate and endDate of customer states"
-                }, 
-                "customerRank": {
-                    "type": "string", 
-                    "description": "Relative importance of this customer compared to other customers"
-                }, 
-                "customerCreditProfile": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerCreditProfile"
-                    }
-                }, 
-                "customerAccount": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRef"
-                    }
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }, 
-                "characteristic": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Characteristic"
-                    }
-                }, 
-                "paymentMean": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/PaymentMeanRef"
-                    }
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }
-            }
-        }, 
-        "CustomerAccount": {
-            "type": "object", 
-            "description": "Is used to represent an account for the customer to manage the billing aspects.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the customer account"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Unique reference of the customer account"
-                }, 
-                "lastModified": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date of last modification of the customer account"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the customer account"
-                }, 
-                "accountType": {
-                    "type": "string", 
-                    "description": "A categorization of an account, such as individual, joint, and so forth, whose instances share some of the same characteristics."
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "The condition of the account, such as due, paid, in arrears, in collection."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer account"
-                }, 
-                "creditLimit": {
-                    "type": "float", 
-                    "description": "The maximum amount of money that may be charged on an account"
-                }, 
-                "pin": {
-                    "type": "string", 
-                    "description": "A multi digit personal identification number that is used"
-                }, 
-                "receivableBalance": {
-                    "type": "float", 
-                    "description": "Overall receivable balance for the customer account"
-                }, 
-                "contact": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Contact"
-                    }
-                }, 
-                "paymentPlan": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/PaymentPlan"
-                    }
-                }, 
-                "customerAccountBalance": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountBalance"
-                    }
-                }, 
-                "customerAccountRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRelationship"
-                    }
-                }, 
-                "customerAccountTaxExemption": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountTaxExemption"
-                    }
-                }, 
-                "customer": {
-                    "$ref": "#/definitions/CustomerRef"
-                }
-            }
-        }, 
-        "CustomerAccount_Create": {
-            "type": "object", 
-            "description": "Is used to represent an account for the customer to manage the billing aspects.\nSkipped properties: id,href", 
-            "required": [
-                "name", 
-                "accountType"
-            ], 
-            "properties": {
-                "lastModified": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Date of last modification of the customer account"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the customer account"
-                }, 
-                "accountType": {
-                    "type": "string", 
-                    "description": "A categorization of an account, such as individual, joint, and so forth, whose instances share some of the same characteristics."
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "The condition of the account, such as due, paid, in arrears, in collection."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer account"
-                }, 
-                "creditLimit": {
-                    "type": "float", 
-                    "description": "The maximum amount of money that may be charged on an account"
-                }, 
-                "pin": {
-                    "type": "string", 
-                    "description": "A multi digit personal identification number that is used"
-                }, 
-                "receivableBalance": {
-                    "type": "float", 
-                    "description": "Overall receivable balance for the customer account"
-                }, 
-                "contact": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Contact"
-                    }
-                }, 
-                "paymentPlan": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/PaymentPlan"
-                    }
-                }, 
-                "customerAccountBalance": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountBalance"
-                    }
-                }, 
-                "customerAccountRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRelationship"
-                    }
-                }, 
-                "customerAccountTaxExemption": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountTaxExemption"
-                    }
-                }, 
-                "customer": {
-                    "$ref": "#/definitions/CustomerRef"
-                }
-            }
-        }, 
-        "CustomerAccount_Update": {
-            "type": "object", 
-            "description": "Is used to represent an account for the customer to manage the billing aspects.\nSkipped properties: id,href,id,lastModified", 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the customer account"
-                }, 
-                "accountType": {
-                    "type": "string", 
-                    "description": "A categorization of an account, such as individual, joint, and so forth, whose instances share some of the same characteristics."
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "The condition of the account, such as due, paid, in arrears, in collection."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer account"
-                }, 
-                "creditLimit": {
-                    "type": "float", 
-                    "description": "The maximum amount of money that may be charged on an account"
-                }, 
-                "pin": {
-                    "type": "string", 
-                    "description": "A multi digit personal identification number that is used"
-                }, 
-                "receivableBalance": {
-                    "type": "float", 
-                    "description": "Overall receivable balance for the customer account"
-                }, 
-                "contact": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/Contact"
-                    }
-                }, 
-                "paymentPlan": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/PaymentPlan"
-                    }
-                }, 
-                "customerAccountBalance": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountBalance"
-                    }
-                }, 
-                "customerAccountRelationship": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRelationship"
-                    }
-                }, 
-                "customerAccountTaxExemption": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountTaxExemption"
-                    }
-                }, 
-                "customer": {
-                    "$ref": "#/definitions/CustomerRef"
-                }
-            }
-        }, 
-        "PaymentMean": {
-            "type": "object", 
-            "description": "Defines a specific mean of payment (e.g. direct debit with all details associated)", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the payment mean"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Unique reference of the payment mean"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the payment mean"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the payment mean"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the payment mean"
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }, 
-                "creditCard": {
-                    "$ref": "#/definitions/CreditCard"
-                }, 
-                "bankAccount": {
-                    "$ref": "#/definitions/BankAccount"
-                }
-            }
-        }, 
-        "PaymentMean_Create": {
-            "type": "object", 
-            "description": "Defines a specific mean of payment (e.g. direct debit with all details associated)\nSkipped properties: id,href", 
-            "required": [
-                "name", 
-                "relatedParty"
-            ], 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the payment mean"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the payment mean"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the payment mean"
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }, 
-                "creditCard": {
-                    "$ref": "#/definitions/CreditCard"
-                }, 
-                "bankAccount": {
-                    "$ref": "#/definitions/BankAccount"
-                }
-            }
-        }, 
-        "PaymentMean_Update": {
-            "type": "object", 
-            "description": "Defines a specific mean of payment (e.g. direct debit with all details associated)\nSkipped properties: id,href,id,href", 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the payment mean"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the payment mean"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the payment mean"
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }, 
-                "creditCard": {
-                    "$ref": "#/definitions/CreditCard"
-                }, 
-                "bankAccount": {
-                    "$ref": "#/definitions/BankAccount"
-                }
-            }
-        }, 
-        "TimePeriod": {
-            "type": "object", 
-            "description": "A base / value business entity used to represent a period of time between two timepoints.", 
-            "properties": {
-                "startDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, starting at the TimePeriod"
-                }, 
-                "endDateTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "An instant of time, ending at the TimePeriod."
-                }
-            }
-        }, 
-        "CustomerCreditProfile": {
-            "type": "object", 
-            "description": "Credit profile for the customer (containing credit scoring, ...). By default only the current credit profile  is retrieved. It can be used as a list to give the customer credit profiles history, the first one in the list will be the current one.", 
-            "properties": {
-                "creditProfileDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "The date the profile was established"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The period for which the profile is valid"
-                }, 
-                "creditRiskRating": {
-                    "type": "integer", 
-                    "description": "This is an integer whose value is used to rate the risk"
-                }, 
-                "creditScore": {
-                    "type": "integer", 
-                    "description": "A measure of a person's or an organization's creditworthiness calculated on the basis of a combination of factors such as their income and credit history."
-                }
-            }
-        }, 
-        "CustomerAccountRef": {
-            "type": "object", 
-            "description": "CustomerAccount reference. CustomerAccount is used to represent an account for the customer to manage the billing aspects.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the customer account"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Unique reference of the customer account"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the customer account"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer account"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "The condition of the account, such as due, paid, in arrears, in collection"
-                }
-            }
-        }, 
-        "RelatedPartyRef": {
-            "type": "object", 
-            "description": "RelatedParty reference. RelatedParty defines party or party role linked to a specific entity.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of a related party"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the related party, could be a party reference or a partyRole reference"
-                }, 
-                "role": {
-                    "type": "string", 
-                    "description": "Role of the related party."
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the related party"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the related party"
-                }
-            }
-        }, 
-        "Characteristic": {
-            "type": "object", 
-            "description": "Describes the characteristics of an individual  or an organization such as individual hobbies, center of interests.", 
-            "properties": {
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the characteristic"
-                }, 
-                "value": {
-                    "type": "string", 
-                    "description": "Value of the characteristic"
-                }
-            }
-        }, 
-        "PaymentMeanRef": {
-            "type": "object", 
-            "description": "PaymentMean reference. PaymentMean defines a specific mean of payment (e.g direct debit with all details associated).", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the payment mean"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Reference of the payment mean"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Name of the payment mean"
-                }
-            }
-        }, 
-        "ContactMedium": {
-            "type": "object", 
-            "description": "Indicates the contact medium that could be used to contact the customer.", 
-            "properties": {
-                "preferred": {
-                    "type": "boolean", 
-                    "description": "If true, indicates that is the preferred contact medium"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Email address, telephone number, postal address"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "The time period that the contact medium is valid for"
-                }, 
-                "medium": {
-                    "$ref": "#/definitions/Medium"
-                }
-            }
-        }, 
-        "Medium": {
-            "type": "object", 
-            "description": "Describes the contact medium that could be used to contact the customer", 
-            "properties": {
-                "city": {
-                    "type": "string", 
-                    "description": "City"
-                }, 
-                "country": {
-                    "type": "string", 
-                    "description": "Country"
-                }, 
-                "emailAddress": {
-                    "type": "string", 
-                    "description": "Full email address in standard format"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of medium (fax, mobile phone...)"
-                }, 
-                "number": {
-                    "type": "string", 
-                    "description": "Phone number"
-                }, 
-                "postcode": {
-                    "type": "string", 
-                    "description": "Postcode"
-                }, 
-                "stateOrProvince": {
-                    "type": "string", 
-                    "description": "State or province"
-                }, 
-                "street1": {
-                    "type": "string", 
-                    "description": "Describes the street"
-                }, 
-                "street2": {
-                    "type": "string", 
-                    "description": "Complementary street description"
-                }
-            }
-        }, 
-        "Contact": {
-            "type": "object", 
-            "description": "An individual or an organization used as a contact point for a customer account and accessed via some contact medium.", 
-            "properties": {
-                "contactType": {
-                    "type": "string", 
-                    "description": "Type of contact (primary, secondary...)"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of that contact"
-                }, 
-                "contactName": {
-                    "type": "string", 
-                    "description": "A displayable name for that contact"
-                }, 
-                "partyRoleType": {
-                    "type": "string", 
-                    "description": "Identifies what kind of party role type is linked to the contact (a customer account manager...)"
-                }, 
-                "contactMedium": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/ContactMedium"
-                    }
-                }, 
-                "relatedParty": {
-                    "$ref": "#/definitions/RelatedPartyRef"
-                }
-            }
-        }, 
-        "PaymentPlan": {
-            "type": "object", 
-            "description": "Defines a plan for payment (when a customer wants to spread his payments)", 
-            "properties": {
-                "status": {
-                    "type": "string", 
-                    "description": "Status of the payment plan (effective, ineffective)"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Type of payment plan"
-                }, 
-                "priority": {
-                    "type": "integer", 
-                    "description": "Priority of the payment plan"
-                }, 
-                "amount": {
-                    "type": "float", 
-                    "description": "Amount paid"
-                }, 
-                "paymentFrequency": {
-                    "type": "string", 
-                    "description": "Monthly, bimonthly"
-                }, 
-                "numberOfPayments": {
-                    "type": "integer", 
-                    "description": "Number of payments used to spread the global payment"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of the payment plan"
-                }, 
-                "paymentMean": {
-                    "$ref": "#/definitions/PaymentMeanRef"
-                }
-            }
-        }, 
-        "CustomerAccountBalance": {
-            "type": "object", 
-            "description": "Balances linked to the customer account", 
-            "properties": {
-                "type": {
-                    "type": "string", 
-                    "description": "Type of the balance : deposit balance, disputed balance, loyalty balance, receivable balance..."
-                }, 
-                "amount": {
-                    "type": "float", 
-                    "description": "Balance amount"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Balance validity period"
-                }, 
-                "status": {
-                    "type": "string", 
-                    "description": "Due, paid..."
-                }
-            }
-        }, 
-        "CustomerAccountRelationship": {
-            "type": "object", 
-            "description": "Significant connection between customer accounts", 
-            "properties": {
-                "relationshipType": {
-                    "type": "string", 
-                    "description": "Type of relationship"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Validity period of that relationship"
-                }, 
-                "customerAccount": {
-                    "type": "array", 
-                    "items": {
-                        "$ref": "#/definitions/CustomerAccountRef"
-                    }
-                }
-            }
-        }, 
-        "CustomerAccountTaxExemption": {
-            "type": "object", 
-            "description": "Proof of freedom from taxes imposed by a taxing jurisdiction", 
-            "properties": {
-                "issuingJurisdiction": {
-                    "type": "string", 
-                    "description": "Name of the taxing jurisdiction for which taxes are exempt"
-                }, 
-                "certificateNumber": {
-                    "type": "string", 
-                    "description": "Identifier of a document that shows proof of exemption from taxes for the taxing jurisdiction"
-                }, 
-                "reason": {
-                    "type": "string", 
-                    "description": "Reason of the tax exemption"
-                }, 
-                "validFor": {
-                    "$ref": "#/definitions/TimePeriod", 
-                    "description": "Period for which the exemption is valid"
-                }
-            }
-        }, 
-        "CustomerRef": {
-            "type": "object", 
-            "description": "Customer reference. A customer is a person or an organization that buys products or services from the enterprise or receives free offers or services. This is modeled as a party playing the role of customer.", 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Unique identifier of the customer"
-                }, 
-                "href": {
-                    "type": "string", 
-                    "description": "Unique reference of the customer"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "description": "Displayable name"
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "Detailed description of the customer"
-                }
-            }
-        }, 
-        "CreditCard": {
-            "type": "object", 
-            "description": "Describes the credit card information", 
-            "properties": {
-                "creditCardHolder": {
-                    "type": "string", 
-                    "description": "Name of the credit card holder"
-                }, 
-                "type": {
-                    "type": "string", 
-                    "description": "Credit card type (Mastercard, Visa,...)"
-                }, 
-                "number": {
-                    "type": "string", 
-                    "description": "Card number"
-                }, 
-                "expirationDate": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Expiration date of the card"
-                }
-            }
-        }, 
-        "BankAccount": {
-            "type": "object", 
-            "description": "Describes the information of a bank account", 
-            "properties": {
-                "BIC": {
-                    "type": "string", 
-                    "description": "Identifier of the bank according to its international code"
-                }, 
-                "domiciliation": {
-                    "type": "string", 
-                    "description": "Address of the bank agency which manages the bank account"
-                }, 
-                "IBAN": {
-                    "type": "string", 
-                    "description": "International format to describe a bank account"
-                }, 
-                "accountHolder": {
-                    "type": "string", 
-                    "description": "Name of the holder of the bank account"
-                }
-            }
-        }, 
-        "CustomerAccountUpdateNotification": {
-            "type": "object", 
-            "description": "The CustomerAccountUpdate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/CustomerAccountEvent"
-                }
-            }
-        }, 
-        "CustomerDeleteNotification": {
-            "type": "object", 
-            "description": "The CustomerDelete notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/CustomerEvent"
-                }
-            }
-        }, 
-        "CustomerAccountDeleteNotification": {
-            "type": "object", 
-            "description": "The CustomerAccountDelete notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/CustomerAccountEvent"
-                }
-            }
-        }, 
-        "CustomerUpdateNotification": {
-            "type": "object", 
-            "description": "The CustomerUpdate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/CustomerEvent"
-                }
-            }
-        }, 
-        "CustomerAccountCreateNotification": {
-            "type": "object", 
-            "description": "The CustomerAccountCreate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/CustomerAccountEvent"
-                }
-            }
-        }, 
-        "CustomerCreateNotification": {
-            "type": "object", 
-            "description": "The CustomerCreate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/CustomerEvent"
-                }
-            }
-        }, 
-        "PaymentMeanDeleteNotification": {
-            "type": "object", 
-            "description": "The PaymentMeanDelete notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/PaymentMeanEvent"
-                }
-            }
-        }, 
-        "PaymentMeanCreateNotification": {
-            "type": "object", 
-            "description": "The PaymentMeanCreate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/PaymentMeanEvent"
-                }
-            }
-        }, 
-        "PaymentMeanUpdateNotification": {
-            "type": "object", 
-            "description": "The PaymentMeanUpdate notification is sent to each listener who has subscribed to receive it.", 
-            "properties": {
-                "eventType": {
-                    "type": "string", 
-                    "description": "Type of event"
-                }, 
-                "eventTime": {
-                    "type": "string", 
-                    "format": "date-time", 
-                    "description": "Creation date of the event"
-                }, 
-                "eventId": {
-                    "type": "string", 
-                    "description": "Identifier of the event"
-                }, 
-                "resourcePath": {
-                    "type": "string", 
-                    "description": "To indicate which entity is concerned"
-                }, 
-                "fieldPath": {
-                    "type": "string", 
-                    "description": "details which field is missing, its structure is quite similar to GET filter criteria"
-                }, 
-                "event": {
-                    "$ref": "#/definitions/PaymentMeanEvent"
-                }
-            }
-        }, 
-        "CustomerAccountEvent": {
-            "type": "object", 
-            "description": "The CustomerAccount event is generated each time a customer account is created, updated, or deleted.", 
-            "properties": {
-                "customerAccount": {
-                    "$ref": "#/definitions/CustomerAccount"
-                }
-            }
-        }, 
-        "CustomerEvent": {
-            "type": "object", 
-            "description": "The Customer event is generated each time a customer has been created, updated, or deleted.", 
-            "properties": {
-                "customer": {
-                    "$ref": "#/definitions/Customer"
-                }
-            }
-        }, 
-        "PaymentMeanEvent": {
-            "type": "object", 
-            "description": "The PaymentMean event is generated each time a payment mean is created, updated, or deleted.", 
-            "properties": {
-                "paymentMean": {
-                    "$ref": "#/definitions/PaymentMean"
-                }
-            }
-        }, 
-        "EventSubscription": {
-            "required": [
-                "id", 
-                "callback"
-            ], 
-            "properties": {
-                "id": {
-                    "type": "string", 
-                    "description": "Id of the listener"
-                }, 
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "EventSubscriptionInput": {
-            "required": [
-                "callback"
-            ], 
-            "properties": {
-                "callback": {
-                    "type": "string", 
-                    "description": "The callback being registered."
-                }, 
-                "query": {
-                    "type": "string", 
-                    "description": "additional data to be passed"
-                }
-            }
-        }, 
-        "Error": {
-            "required": [
-                "code", 
-                "message"
-            ], 
-            "properties": {
-                "code": {
-                    "type": "integer", 
-                    "description": "An integer coding the error type. This is given to caller so he can translate them if required."
-                }, 
-                "message": {
-                    "type": "string", 
-                    "description": "A short localized string that describes the error."
-                }, 
-                "description": {
-                    "type": "string", 
-                    "description": "(optional) A long localized error description if needed. It can contain precise information about which parameter is missing, or what are the identifier acceptable values."
-                }, 
-                "infoURL": {
-                    "type": "string", 
-                    "description": "(optional) A URL to online documentation that provides more information about the error."
-                }
-            }
-        }
+      }
     }
+	,
+    "get": {
+      "tags": [
+         "customer"
+      ],          
+      "operationId": "customerFind",
+      "summary": "customerFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of Customer",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Customer"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/customer/{customerId}": {
+    "delete": {
+      "tags": [
+         "customer"
+      ],    
+      "operationId": "customerDelete",
+      "summary": "customerDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "customer"
+      ],    
+      "operationId": "customerGet",
+      "summary": "customerGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Customer",
+          "schema": {
+            "$ref": "#/definitions/Customer"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "customer"
+      ],            
+      "operationId": "customerPatch",
+      "summary": "customerPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "customer",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/Customer"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success Customer",
+          "schema": {
+            "$ref": "#/definitions/Customer"
+            }
+          }
+      }             
+    }
+	,
+    "put": {
+      "tags": [
+         "customer"
+      ],            
+      "operationId": "customerUpdate",
+      "summary": "customerUpdate",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "customer",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/Customer"
+         }
+        }                               
+      ], 
+      "responses": {
+        "201": {
+          "description": "Success Customer",
+          "schema": {
+            "$ref": "#/definitions/Customer"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/customerAccount": {        
+    "post": {
+      "tags": [
+         "customerAccount"
+      ],            
+      "operationId": "customerAccountCreate",
+      "summary": "customerAccountCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "customerAccount",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CustomerAccount"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "CustomerAccount",
+          "schema": {
+            "$ref": "#/definitions/CustomerAccount"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "customerAccount"
+      ],          
+      "operationId": "customerAccountFind",
+      "summary": "customerAccountFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of CustomerAccount",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/CustomerAccount"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/customerAccount/{customerAccountId}": {
+    "delete": {
+      "tags": [
+         "customerAccount"
+      ],    
+      "operationId": "customerAccountDelete",
+      "summary": "customerAccountDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerAccountId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "customerAccount"
+      ],    
+      "operationId": "customerAccountGet",
+      "summary": "customerAccountGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerAccountId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "CustomerAccount",
+          "schema": {
+            "$ref": "#/definitions/CustomerAccount"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "customerAccount"
+      ],            
+      "operationId": "customerAccountPatch",
+      "summary": "customerAccountPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerAccountId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "customerAccount",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/CustomerAccount"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success CustomerAccount",
+          "schema": {
+            "$ref": "#/definitions/CustomerAccount"
+            }
+          }
+      }             
+    }
+	,
+    "put": {
+      "tags": [
+         "customerAccount"
+      ],            
+      "operationId": "customerAccountUpdate",
+      "summary": "customerAccountUpdate",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "customerAccountId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "customerAccount",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/CustomerAccount"
+         }
+        }                               
+      ], 
+      "responses": {
+        "201": {
+          "description": "Success CustomerAccount",
+          "schema": {
+            "$ref": "#/definitions/CustomerAccount"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/paymentMean": {        
+    "post": {
+      "tags": [
+         "paymentMean"
+      ],            
+      "operationId": "paymentMeanCreate",
+      "summary": "paymentMeanCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "paymentMean",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/PaymentMean"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "PaymentMean",
+          "schema": {
+            "$ref": "#/definitions/PaymentMean"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "paymentMean"
+      ],          
+      "operationId": "paymentMeanFind",
+      "summary": "paymentMeanFind",
+      "description": "",       
+      "deprecated": false,
+        
+      "parameters": [    
+
+                                  
+        
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+  
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "List of PaymentMean",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PaymentMean"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/paymentMean/{paymentMeanId}": {
+    "delete": {
+      "tags": [
+         "paymentMean"
+      ],    
+      "operationId": "paymentMeanDelete",
+      "summary": "paymentMeanDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "paymentMeanId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "paymentMean"
+      ],    
+      "operationId": "paymentMeanGet",
+      "summary": "paymentMeanGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "paymentMeanId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+        {
+          "name": "fields",
+          "in": "query",
+          "required": false,            
+          "description": "",
+          
+          "type": "string"                      
+        }    
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "PaymentMean",
+          "schema": {
+            "$ref": "#/definitions/PaymentMean"
+            }
+          }
+      }        
+    }     
+	,
+    "patch": {
+      "tags": [
+         "paymentMean"
+      ],            
+      "operationId": "paymentMeanPatch",
+      "summary": "paymentMeanPatch",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "paymentMeanId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "paymentMean",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/PaymentMean"
+         }
+        }                               
+      ], 
+      "responses": {
+        "200": {
+          "description": "Success PaymentMean",
+          "schema": {
+            "$ref": "#/definitions/PaymentMean"
+            }
+          }
+      }             
+    }
+	,
+    "put": {
+      "tags": [
+         "paymentMean"
+      ],            
+      "operationId": "paymentMeanUpdate",
+      "summary": "paymentMeanUpdate",
+      "description": "",      
+      "deprecated": false, 
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "paymentMeanId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  ,
+               
+        {
+         "name": "paymentMean",
+         "in": "body",
+         "required": true,
+         "schema": {
+           "$ref": "#/definitions/PaymentMean"
+         }
+        }                               
+      ], 
+      "responses": {
+        "201": {
+          "description": "Success PaymentMean",
+          "schema": {
+            "$ref": "#/definitions/PaymentMean"
+            }
+          }
+      }             
+    }
+	
+    },    
+    "/hub": {        
+    "post": {
+      "tags": [
+         "hub"
+      ],            
+      "operationId": "hubCreate",
+      "summary": "hubCreate",
+      "description": "",       
+      "deprecated": false,
+      "parameters": [
+      
+                          
+        
+                      
+        {
+         "name": "hub",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }          
+      ],
+      "responses": {
+        "201": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+          }
+        }
+      }
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],          
+      "operationId": "hubFind",
+      "summary": "hubFind",
+      "description": "",       
+      "deprecated": false,
+         
+      "responses": {
+        "200": {
+          "description": "List of Hub",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Hub"
+            }
+          } 
+        }          
+      }
+    }
+	
+    },    
+    "/hub/{hubId}": {
+    "delete": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubDelete",
+      "summary": "hubDelete",
+      "description": "",
+      "deprecated": false,
+        
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+  
+        
+      ],
+         
+      "responses": {
+        "204": {
+          "description": "Success"
+          }  
+      }   
+    }
+	,
+    "get": {
+      "tags": [
+         "hub"
+      ],    
+      "operationId": "hubGet",
+      "summary": "hubGet",
+      "description": "",
+      "deprecated": false,
+            
+      "parameters": [
+      
+                                  
+            
+        {
+          "name": "hubId",
+          "in": "path",
+          "required": true,            
+          "type": "string"
+        }
+        
+
+      ],
+         
+      "responses": {
+        "200": {
+          "description": "Hub",
+          "schema": {
+            "$ref": "#/definitions/Hub"
+            }
+          }
+      }        
+    }     
+	
+    }
+  },
+"definitions": {
+  
+
+    "Customer": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "integer",
+          "format": "int64"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "status": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "customerRank": {
+          
+          "type": "string"
+        }
+        ,
+        "relatedParty": {
+          
+                "$ref": "#/definitions/Reference"
+  
+        }
+        ,
+        "characteristic": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Characteristic"
+  
+              }
+            
+        }
+        ,
+        "contactMedium": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ContactMedium"
+  
+              }
+            
+        }
+        ,
+        "customerAccount": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/CustomerAccount"
+  
+              }
+            
+        }
+        ,
+        "customerCreditProfile": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/CustomerCreditProfile"
+  
+              }
+            
+        }
+        ,
+        "paymentMean": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/PaymentMean"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerAccount": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "integer",
+          "format": "int64"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        ,
+        "status": {
+          
+          "type": "string"
+        }
+        ,
+        "accountType": {
+          
+          "type": "string"
+        }
+        ,
+        "creditLimit": {
+          
+          "type": "string"
+        }
+        ,
+        "pin": {
+          
+          "type": "string"
+        }
+        ,
+        "receivableBalance": {
+          
+          "type": "number",
+          "format": "float"
+        }
+        ,
+        "customerAccountTaxExemption": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/CustomerAccountTaxExemption"
+  
+              }
+            
+        }
+        ,
+        "customerAccountRelationship": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/CustomerAccountRelationship"
+  
+              }
+            
+        }
+        ,
+        "contact": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/Contact"
+  
+              }
+            
+        }
+        ,
+        "customer": {
+          
+                "$ref": "#/definitions/CustomerRef"
+  
+        }
+        ,
+        "customerAccountBalance": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/CustomerAccountBalance"
+  
+              }
+            
+        }
+        ,
+        "paymentPlan": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/PaymentPlan"
+  
+              }
+            
+        }
+        ,
+        "lastModified": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerCreditProfile": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "creditProfileDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "creditRiskRating": {
+          
+          "type": "string"
+        }
+        ,
+        "creditScore": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ContactMedium": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "medium": {
+          
+                "$ref": "#/definitions/Medium"
+  
+        }
+        ,
+        "preferred": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Medium": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "city": {
+          
+          "type": "string"
+        }
+        ,
+        "country": {
+          
+          "type": "string"
+        }
+        ,
+        "emailAddress": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "number": {
+          
+          "type": "string"
+        }
+        ,
+        "postcode": {
+          
+          "type": "string"
+        }
+        ,
+        "stateOrProvince": {
+          
+          "type": "string"
+        }
+        ,
+        "streetOne": {
+          
+          "type": "string"
+        }
+        ,
+        "streetTwo": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "PaymentMean": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "integer",
+          "format": "int64"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "bankAccount": {
+          
+                "$ref": "#/definitions/BankAccount"
+  
+        }
+        ,
+        "relatedParty": {
+          
+                "$ref": "#/definitions/Reference"
+  
+        }
+        ,
+        "creditCard": {
+          
+                "$ref": "#/definitions/CreditCard"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Characteristic": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "value": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Reference": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "role": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "ValidFor": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "startDateTime": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        ,
+        "endDateTime": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerAccountBalance": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "amount": {
+          
+          "type": "number",
+          "format": "float"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "status": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "PaymentPlan": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "status": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "priority": {
+          
+          "type": "string"
+        }
+        ,
+        "amount": {
+          
+          "type": "number",
+          "format": "float"
+        }
+        ,
+        "paymentFrequency": {
+          
+          "type": "string"
+        }
+        ,
+        "numberOfPayments": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "paymentMean": {
+          
+                "$ref": "#/definitions/PaymentMeanRef"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Contact": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "contactType": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "contactName": {
+          
+          "type": "string"
+        }
+        ,
+        "partyRoleType": {
+          
+          "type": "string"
+        }
+        ,
+        "contactMedium": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/ContactMedium"
+  
+              }
+            
+        }
+        ,
+        "relatedParty": {
+          
+                "$ref": "#/definitions/Reference"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerAccountRelationship": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "relationshipType": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        ,
+        "customerAccount": {
+          
+              "type": "array",
+              "items": {
+                  
+                "$ref": "#/definitions/CustomerAccountRef"
+  
+              }
+            
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerAccountTaxExemption": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "issuingJurisdiction": {
+          
+          "type": "string"
+        }
+        ,
+        "certificateNumber": {
+          
+          "type": "string"
+        }
+        ,
+        "reason": {
+          
+          "type": "string"
+        }
+        ,
+        "validFor": {
+          
+                "$ref": "#/definitions/ValidFor"
+  
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CreditCard": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "creditCardHolder": {
+          
+          "type": "string"
+        }
+        ,
+        "type": {
+          
+          "type": "string"
+        }
+        ,
+        "number": {
+          
+          "type": "string"
+        }
+        ,
+        "expirationDate": {
+          
+          "type": "string",
+          "format": "date-time"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "BankAccount": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "bIC": {
+          
+          "type": "string"
+        }
+        ,
+        "domiciliation": {
+          
+          "type": "string"
+        }
+        ,
+        "iBAN": {
+          
+          "type": "string"
+        }
+        ,
+        "accountHolder": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "PaymentMeanRef": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerAccountRef": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        ,
+        "status": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "CustomerRef": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "href": {
+          
+          "type": "string"
+        }
+        ,
+        "name": {
+          
+          "type": "string"
+        }
+        ,
+        "description": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  ,
+
+    "Hub": {
+      
+      "type": "object",
+      "properties": {      
+      
+        "id": {
+          
+          "type": "string"
+        }
+        ,
+        "callback": {
+          
+          "type": "string"
+        }
+        ,
+        "query": {
+          
+          "type": "string"
+        }
+        
+      }
+    }
+                
+  
+  }
 }
+	
