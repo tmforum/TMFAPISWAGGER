@@ -5,8 +5,8 @@
         "description": "This is Swagger UI environment generated for the TMF Product Catalog Management specification", 
         "version": "2.0"
     }, 
-    "host": "biologeek.orange-labs.fr", 
-    "basePath": "/api/productCatalogManagement", 
+    "host": "env-0693795.jelastic.servint.net", 
+    "basePath": "/DSProductCatalog/api/catalogManagement/v2", 
     "schemes": [
         "https"
     ], 
