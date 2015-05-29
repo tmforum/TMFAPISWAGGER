@@ -17,4 +17,6 @@ TMF APIs:
 
 - [customerManagement](http://repo-api.kermit.orange-labs.fr/swagger-ui/?url=http://repo-api.kermit.orange-labs.fr/apis/snapshot/tmf/customerManagement/v2/swagger2.json)
 
+- [productCatalog](http://repo-api.kermit.orange-labs.fr/swagger-ui/?url=http://repo-api.kermit.orange-labs.fr/apis/snapshot/tmf/productCatalog/v2/swagger2.json)
+
 
