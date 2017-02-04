@@ -7,7 +7,7 @@
     "title": "API ProductInventory"
   },
   "host": "http://env-0693795.jelastic.servint.net",
-  "basePath": "DSProductInventory/api/productInventory/v2",
+  "basePath": "/DSProductInventory/api/productInventory/v2",
   "schemes": [
       "http"
   ],
