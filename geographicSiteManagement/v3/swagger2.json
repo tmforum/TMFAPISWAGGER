@@ -2,15 +2,15 @@
 	"swagger": "2.0",
 	"host": "put.your.endpoint.here",
 	"info": {
-		"description": "This is Swagger UI environment generated for the TMF UserRoles and Permissions specification",
+		"description": "This is Swagger UI environment generated for the TMF Geographic Site Management specification",
 		"license": {
 			"name": "Apache 2.0",
 			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
 		},
-		"title": "UserRoles and Permissions",
+		"title": "GeographicSite Management",
 		"version": "1.0"
 	},
-	"basePath": "/usersandroles/v1",
+	"basePath": "/geographicSiteManagement/v1",
 	"schemes": ["http"],
 	"definitions": {
 		"GeographicSiteCreateType": {
