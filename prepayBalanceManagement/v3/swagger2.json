@@ -1,9 +1,9 @@
 {
     "swagger": "2.0", 
     "info": {
-        "title": "Enhancement to Prepay Balance Management API", 
+        "title": "Prepay Balance Management", 
         "description": "This is Swagger UI environment generated for the TMF Enhancement to Prepay Balance Management API specification", 
-        "version": "2.0"
+        "version": "3.0"
     }, 
     "host": "www.example.com", 
     "basePath": "/tmf-api/PrepayBalanceManagement", 

@@ -1,8 +1,8 @@
 ﻿swagger: '2.0'
 info:
-  description: ''
+  description: 'This is Swagger UI environment generated for the TMF Enhancement to Product Offering Qualification API specification'
   version: '2.0'
-  title: API ProductOrdering
+  title: Product Offering Qualification
 host: env-0693795.jelastic.servint.net
 basePath: /DSServiceQualification/api/productOfferingQualification/v1
 schemes:

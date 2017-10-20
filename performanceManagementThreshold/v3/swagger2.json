@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "",
-        "version": "2.0",
-        "title": "API Peformance Threshold"
+        "description": "This is Swagger UI environment generated for the TMF Performance Management Threshold specification",
+        "version": "3.0",
+        "title": "Peformance Management Threshold"
     },
     "host": "env-0693795.jelastic.servint.net",
     "basePath": "/DSPerformanceThreshold/api/performanceThreshold/v1",

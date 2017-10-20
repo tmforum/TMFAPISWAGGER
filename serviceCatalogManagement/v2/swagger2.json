@@ -3,7 +3,7 @@
     "info": {
         "title": "Service Catalog Management",
         "description": "This is Swagger UI environment generated for the TMF Service Catalog Management specification",
-        "version": “1.2”
+        "version": "1.2"
     },
     "host": "env-0693795.jelastic.servint.net",
     "basePath": "/ServiceCatalog/api/catalogManagement/v2",
