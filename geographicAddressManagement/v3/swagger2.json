@@ -3,8 +3,8 @@
   "swagger": "2.0",
   "info": {
     "description": "The Geographic Address API provides a standardized client interface to an Address management system.\nIt allows looking for worldwide addresses.\nIt can also be used to validate geographic address data, to be sure that it corresponds to a real address.\nFinally, it can be used to look for an address by: searching an area as a start (city, town …), then zooming on the streets of this area, and finally listing all the street segments (numbers) in a street.",    
-    "version": "2.0.1_inProgress",
-    "title": "API GeographicAddress"
+    "version": "2.0.1",
+    "title": "Geographic Address"
   },
   
   "host": "api.orange.com",
