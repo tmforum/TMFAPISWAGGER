@@ -807,8 +807,8 @@
 	},
 	"host": "tmforum.org",
 	"info": {
-		"description": "This is a sample representation of the TMForum Payments API using Swagger",
-		"title": "Payments TMF",
+		"description": "This is a sample representation of the TMForum Payments Management API using Swagger",
+		"title": "Payments Management",
 		"version": "0.1.6"
 	},
 	"paths": {
