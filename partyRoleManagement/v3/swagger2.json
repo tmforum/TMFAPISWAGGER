@@ -3,7 +3,7 @@
     "info": {
         "title": "Party Role Management", 
         "description": "This is Swagger UI environment generated for the TMF Party Role Management specification", 
-        "version": "2.0"
+        "version": "3.0"
     }, 
     "host": "biologeek.orange-labs.fr", 
     "basePath": "/tmf-api/partyRoleManagement", 

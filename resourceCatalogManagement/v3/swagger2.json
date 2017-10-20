@@ -3,7 +3,7 @@
     "info": {
         "title": "Resource Catalog Management", 
         "description": "This is Swagger UI environment generated for the TMF Resource Catalog Management specification", 
-        "version": "2.0"
+        "version": "3.0"
     }, 
     "host": "biologeek.orange-labs.fr", 
     "basePath": "/tmf-api/resourceCatalogManagement", 
