@@ -3,7 +3,7 @@
   "swagger": "2.0",
   "info": {
     "description": "##TMF API Reference: TMF 678 - Customer bill Management\n\n##Release: pre-release 17.5\n\nThe Customer Bill Management API allows to find and retrieve one or several customer bills (also called invoices) produced for a customer. A customer bill is an electronic or paper document produced at the end of the billing process. The customer bill gathers and displays different items (applied customer billing rates generated during the rating and billing processes) to be charged to a customer. It represents a total amount due for all the products during the billing period and all significant information like dates, bill reference...\nThis API provides also operations to find and retrieve the details of applied customer billing rates presented on a customer bill. \nFinally, this API allows to request in real-time a customer bill creation and to manage this request.\n\n### Resources \n- **customerBill** :  an electronic or paper document produced at the end of the billing process that  gathers and displays different items (applied customer billing rates generated during the rating and billing processes) to be charged to a customer.\n- **appliedCustomerBillingRate** : applied billing rates created before or during the billing process and displayed on a customer bill.\n- **customerBillOnDemand** : used to manage the creation request of a customer bill in real-time (on demand).\n\n###Customer Bill Management API performs the following operations :\n- Retrieve a customer bill or a collection of customer bills depending on filter criteria.\n- Partial update of  a customer bill (for administration purposes).\n-  Retrieve an applied customer billing rate or a collection of applied customerbilling rates depending on filter criteria.\n-  Create a customer bill on demand request, retrieve one or a collection of  customer bill on demand request(s) depending on filter criteria.\n\n- Manage notification of events on customer bill and customer bill on demand.\n\nCopyright © TM Forum 2017. All Rights Reserved.",    
-    "version": "2.1.1_inProgress",
+    "version": "2.1.2_release",
     "title": "API CustomerBill"
   },
   
@@ -483,7 +483,7 @@
               "type": "string",
               "format": "date-time"
         },
-        "billPeriod": {
+        "billingPeriod": {
           "description": "Billing period of the bill (used for onCycle bill only)",          
               "$ref": "#/definitions/TimePeriod"
         },
@@ -507,6 +507,18 @@
         "taxIncludedAmount": {
           "description": "Total tax included amount expressed in the given",          
               "$ref": "#/definitions/Money"
+        },
+        "@baseType": {
+          "description": "Indicates the base (class) type of the customer bill",
+              "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the (class) type of the customer bill",
+              "type": "string"
+        },
+        "@schemaLocation": {
+          "description": "Link to the schema describing the REST resource",
+              "type": "string"
         },
         "billDocument": {
           "description": "A list of documents accompanying an entity",
@@ -594,8 +606,20 @@
       
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Unique identifier of the attachment",
+              "type": "string"
+        },
+        "href": {
+          "description": "Reference of the attachment",
+              "type": "string"
+        },
         "name": {
           "description": "Name of the attachment",
+              "type": "string"
+        },
+        "description": {
+          "description": "Free short description of the attachment",
               "type": "string"
         },
         "mimeType": {
@@ -613,6 +637,14 @@
         },
         "url": {
           "description": "URL of the attachment",
+              "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the type of attachment",
+              "type": "string"
+        },
+        "@schemaLocation": {
+          "description": "Link to the schema describing the REST resource",
               "type": "string"
         }     
       }
@@ -651,6 +683,10 @@
         },
         "name": {
           "description": "Billing account name",
+              "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the type of the billing account",
               "type": "string"
         }     
       }
@@ -695,6 +731,10 @@
         "name": {
           "description": "Name of the payment method",
               "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the type of payment method",
+              "type": "string"
         }     
       }
             
@@ -720,6 +760,10 @@
         "role": {
           "description": "Role played by the related party",
               "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the type of related party",
+              "type": "string"
         }     
       }
             
@@ -742,12 +786,9 @@
           "description": "Account name",
               "type": "string"
         },
-        "accountBalance": {
-          "description": "Account Balances  linked to the account",
-          "type": "array",
-          "items": {          
-              "$ref": "#/definitions/AccountBalance"
-          }
+        "@type": {
+          "description": "Indicates the type of the financial account",
+              "type": "string"
         }     
       }
             
@@ -774,6 +815,10 @@
         "amount": {
           "description": "Payment amount done",          
               "$ref": "#/definitions/Money"
+        },
+        "@type": {
+          "description": "Indicates the type of payment",
+              "type": "string"
         }     
       }
             
@@ -813,14 +858,6 @@
           "description": "Reference of the customer applied billing rate",
               "type": "string"
         },
-        "name": {
-          "description": "Name of the customer applied billing rate",
-              "type": "string"
-        },
-        "description": {
-          "description": "Additional data to be displayed on the bill for this customer applied billing rate",
-              "type": "string"
-        },
         "type": {
           "description": "Type of the applied billing rate : appliedBillingCharge (any kind of charge except taxation charges : recurringCharge, oneTimeCharge, usageCharge),  appliedBillingCredit (any kind of credit : rebate or productAlteration) or appliedPenaltyCharge (penalty charges such as late fees, payment rejection fees,...)",
               "type": "string"
@@ -830,6 +867,14 @@
               "type": "string",
               "format": "date-time"
         },
+        "name": {
+          "description": "Name of the customer applied billing rate",
+              "type": "string"
+        },
+        "description": {
+          "description": "Additional data to be displayed on the bill for this customer applied billing rate",
+              "type": "string"
+        },
         "taxExcludedAmount": {
           "description": "Tax excluded amount to be charged on the bill (expressed in the given currency) for this applied billing rate",          
               "$ref": "#/definitions/Money"
@@ -838,17 +883,35 @@
           "description": "Tax included amount to be charged on the bill (expressed in the given currency) for this applied billing rate",          
               "$ref": "#/definitions/Money"
         },
+        "@baseType": {
+          "description": "Indicates the base (class) type of the applied customer billing rate",
+              "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the (class) type of the applied customer billing rate",
+              "type": "string"
+        },
+        "@schemaLocation": {
+          "description": "Link to the schema describing the REST resource",
+              "type": "string"
+        },
         "appliedTax": {
-          "description": "A list of applied billing tax rates. The applied billing tax rate represents taxes applied to billing rate it refers to. It is calculated during the billing process",          
+          "description": "A list of applied billing tax rates. The applied billing tax rate represents taxes applied to billing rate it refers to. It is calculated during the billing process",
+          "type": "array",
+          "items": {          
               "$ref": "#/definitions/AppliedBillingTaxRate"
+          }
         },
         "bill": {
           "description": "Reference of the bill on which the applied billing rate  is presented",          
               "$ref": "#/definitions/BillRef"
         },
         "characteristic": {
-          "description": "A list of applied billing rate characteristics. An applied billing rate has dynamic characteristics according to the its type (characteristics are based on the service type, line of business or on others parameters for example)",          
+          "description": "A list of applied billing rate characteristics. An applied billing rate has dynamic characteristics according to the its type (characteristics are based on the service type, line of business or on others parameters for example)",
+          "type": "array",
+          "items": {          
               "$ref": "#/definitions/AppliedBillingRateCharacteristic"
+          }
         }     
       }
             
@@ -892,6 +955,10 @@
         "href": {
           "description": "Reference of the bill",
               "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the (class) type of the bill",
+              "type": "string"
         }     
       }
             
@@ -909,27 +976,14 @@
         "value": {
           "description": "Value affected to the characteristic",
               "type": "string"
-        }     
-      }
-            
-    },
-    
-    "AccountBalance": {
-      "description": "AccountBalance linked to the account",
-      
-      "type": "object",
-      "properties": {
-        "amount": {
-          "description": "Balance amount",          
-              "$ref": "#/definitions/Money"
         },
-        "type": {
-          "description": "Type of the balance : deposit balance, disputed balance, loyalty balance, receivable balance....",
+        "@type": {
+          "description": "Indicates the (class) type of the characteristic",
               "type": "string"
         },
-        "validFor": {
-          "description": "Balance validity period",          
-              "$ref": "#/definitions/TimePeriod"
+        "@schemaLocation": {
+          "description": "Link to the schema describing the REST resource",
+              "type": "string"
         }     
       }
             
@@ -962,6 +1016,14 @@
         },
         "lastUpdate": {
           "description": "The last date time when the customer bill on demand has been updated",
+              "type": "string"
+        },
+        "@type": {
+          "description": "Indicates the (class) type of the customer bill on demand request",
+              "type": "string"
+        },
+        "@schemaLocation": {
+          "description": "Link to the schema describing the REST resource",
               "type": "string"
         },
         "billingAccount": {
