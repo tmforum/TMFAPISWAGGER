@@ -54,11 +54,25 @@
                         "description": "For filtering: It indicates the class type of the catalog"
                     }, 
                     {
+                        "type": "boolean", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "callbackFlag", 
+                        "description": "For filtering: "
+                    }, 
+                    {
                         "type": "string", 
                         "required": false, 
                         "in": "query", 
                         "name": "content", 
                         "description": "For filtering: The content of the communication message."
+                    }, 
+                    {
+                        "type": "boolean", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "logFlag", 
+                        "description": "For filtering: "
                     }, 
                     {
                         "type": "string", 
@@ -96,6 +110,13 @@
                         "in": "query", 
                         "name": "subject", 
                         "description": "For filtering: The title of the message. \nIt is necessary for the email and mobile app push."
+                    }, 
+                    {
+                        "type": "integer", 
+                        "required": false, 
+                        "in": "query", 
+                        "name": "tryTimes", 
+                        "description": "For filtering: "
                     }, 
                     {
                         "type": "string", 
@@ -216,27 +237,6 @@
                         "in": "query", 
                         "name": "attachment.url", 
                         "description": "For filtering: The name of attached file in the communication message"
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "option.callbackFlag", 
-                        "description": "For filtering: It is used to decide whether the contact message needs to be replied."
-                    }, 
-                    {
-                        "type": "string", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "option.logFlag", 
-                        "description": "For filtering: It is used to decide whether the contact log is need to be recorded."
-                    }, 
-                    {
-                        "type": "integer", 
-                        "required": false, 
-                        "in": "query", 
-                        "name": "option.tryTimes", 
-                        "description": "For filtering: If fail to send the communication message, how many times the system will retry."
                     }
                 ], 
                 "responses": {
@@ -283,84 +283,6 @@
                 "responses": {
                     "201": {
                         "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/CommunicationMessage"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-	"/communicationMessage/send": {
-            "post": {
-                "operationId": "sendCommunicationMessage", 
-                "summary": "Send a 'CommunicationMessage'", 
-                "tags": [
-                    "communicationMessage"
-                ], 
-                "parameters": [
-                    {
-                        "schema": {
-                            "$ref": "#/definitions/CommunicationMessage_Create"
-                        }, 
-                        "required": true, 
-                        "in": "body", 
-                        "name": "communicationMessage", 
-                        "description": "The Communication Message to be created"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Send Successfully", 
-                        "schema": {
-                            "$ref": "#/definitions/CommunicationMessage"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }, 
-	"/communicationMessage/{id}/send": {
-            "post": {
-                "operationId": "sendPredefinedCommunicationMessage", 
-                "summary": "Send a pre-defined 'CommunicationMessage'", 
-                "tags": [
-                    "communicationMessage"
-                ], 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "type": "string", 
-                        "name": "id", 
-                        "in": "path", 
-                        "description": "Identifier of the Communication Message"
-                    }
-                ], 
-                "responses": {
-                    "200": {
-                        "description": "Send Successfully", 
                         "schema": {
                             "$ref": "#/definitions/CommunicationMessage"
                         }
@@ -573,6 +495,9 @@
                     "type": "string", 
                     "description": "It indicates the class type of the catalog"
                 }, 
+                "callbackFlag": {
+                    "type": "boolean"
+                }, 
                 "content": {
                     "type": "string", 
                     "description": "The content of the communication message."
@@ -588,6 +513,9 @@
                 "id": {
                     "type": "string", 
                     "description": "Unique identifier of Communication Message"
+                }, 
+                "logFlag": {
+                    "type": "boolean"
                 }, 
                 "priority": {
                     "type": "string", 
@@ -610,6 +538,9 @@
                 "subject": {
                     "type": "string", 
                     "description": "The title of the message. \nIt is necessary for the email and mobile app push."
+                }, 
+                "tryTimes": {
+                    "type": "integer"
                 }, 
                 "type": {
                     "type": "string", 
@@ -635,9 +566,6 @@
                     "items": {
                         "$ref": "#/definitions/Attachment"
                     }
-                }, 
-                "option": {
-                    "$ref": "#/definitions/CommunicationOption"
                 }
             }
         }, 
@@ -663,6 +591,9 @@
                     "type": "string", 
                     "description": "It indicates the class type of the catalog"
                 }, 
+                "callbackFlag": {
+                    "type": "boolean"
+                }, 
                 "content": {
                     "type": "string", 
                     "description": "The content of the communication message."
@@ -670,6 +601,9 @@
                 "description": {
                     "type": "string", 
                     "description": "Description for the whole object"
+                }, 
+                "logFlag": {
+                    "type": "boolean"
                 }, 
                 "priority": {
                     "type": "string", 
@@ -692,6 +626,9 @@
                 "subject": {
                     "type": "string", 
                     "description": "The title of the message. \nIt is necessary for the email and mobile app push."
+                }, 
+                "tryTimes": {
+                    "type": "integer"
                 }, 
                 "type": {
                     "type": "string", 
@@ -717,9 +654,6 @@
                     "items": {
                         "$ref": "#/definitions/Attachment"
                     }
-                }, 
-                "option": {
-                    "$ref": "#/definitions/CommunicationOption"
                 }
             }
         }, 
@@ -739,6 +673,9 @@
                     "type": "string", 
                     "description": "It indicates the class type of the catalog"
                 }, 
+                "callbackFlag": {
+                    "type": "boolean"
+                }, 
                 "content": {
                     "type": "string", 
                     "description": "The content of the communication message."
@@ -746,6 +683,9 @@
                 "description": {
                     "type": "string", 
                     "description": "Description for the whole object"
+                }, 
+                "logFlag": {
+                    "type": "boolean"
                 }, 
                 "priority": {
                     "type": "string", 
@@ -768,6 +708,9 @@
                 "subject": {
                     "type": "string", 
                     "description": "The title of the message. \nIt is necessary for the email and mobile app push."
+                }, 
+                "tryTimes": {
+                    "type": "integer"
                 }, 
                 "type": {
                     "type": "string", 
@@ -793,9 +736,6 @@
                     "items": {
                         "$ref": "#/definitions/Attachment"
                     }
-                }, 
-                "option": {
-                    "$ref": "#/definitions/CommunicationOption"
                 }
             }
         }, 
@@ -894,24 +834,6 @@
                 "url": {
                     "type": "string", 
                     "description": "Uniform Resource Locator, is a web page address (a subset of URI)"
-                }
-            }
-        }, 
-        "CommunicationOption": {
-            "type": "object", 
-            "description": "<b><i>The options of the communication message.</i></b>", 
-            "properties": {
-                "callbackFlag": {
-                    "type": "string", 
-                    "description": "It is used to decide whether the contact message needs to be replied."
-                }, 
-                "logFlag": {
-                    "type": "string", 
-                    "description": "It is used to decide whether the contact log is need to be recorded."
-                }, 
-                "tryTimes": {
-                    "type": "integer", 
-                    "description": "If fail to send the communication message, how many times the system will retry."
                 }
             }
         }, 
