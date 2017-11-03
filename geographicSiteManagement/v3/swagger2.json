@@ -8,7 +8,7 @@
 			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
 		},
 		"title": "GeographicSite Management",
-		"version": "1.0"
+		"version": "2.0"
 	},
 	"basePath": "/geographicSiteManagement/v1",
 	"schemes": ["http"],
@@ -33,8 +33,12 @@
 				},
 				"address": {
 					"$ref": "#/definitions/AddressRefOrValueType",
-					"description": "Used to identify the physical place over the surface of the Earth that is associated to the site based on an entity uniquely identified in the server or providing the geographic address (textual description)  and the geographic location (geometry description) of the physical place"					
+					"description": "Used to identify the physical place over the surface of the Earth that is associated to the site based on an entity uniquely identified in the server or providing the geographic address (textual description)  and the geographic location (geometry description) of the physical place. Required if geographicLocation not included"					
 				},
+				"geographicLocation": {
+					"$ref": "#/definitions/GeographicLocationRefOrValueType",
+					"description": "A geo location reference, allows describing through coordinate(s) a point, a line or a space. Required if address not included"					
+				},								
 				"calendar": {
 					"$ref": "#/definitions/CalendarPeriodType",
 					"description": "A list of calendar period entries indicating the time availability of the site for different periods"					
@@ -46,9 +50,21 @@
 				"siteRelationship": {
 					"$ref": "#/definitions/SiteRelationshipType",
 					"description": "Linked sites"					
+				},
+				"@baseType": {
+					"type": "string",
+					"description": "Indicates the base type of the resource for extensibility and polymorphism purposes to differentiate the definition of different type of sites (enterprise, residential, ...)"
+				},
+				"@type": {
+					"type": "string",
+					"description": "Indicates the type of the resource for extensibility purposes"
+				},
+				"@schemaLocation": {
+					"type": "string",
+					"description": "A Link to the schema describing this REST Resource"						
 				}
 			},
-			"required": ["name","address"]
+			"required": ["name"]
 		},
 		"GeographicSiteResponseType": {
 			"properties": {
@@ -78,8 +94,12 @@
 				},
 				"address": {
 					"$ref": "#/definitions/AddressRefOrValueType",
-					"description": "Used to identify the physical place over the surface of the Earth that is associated to the site based on an entity uniquely identified in the server or providing the geographic address (textual description)  and the geographic location (geometry description) of the physical place"					
+					"description": "Used to identify the physical place over the surface of the Earth that is associated to the site based on an entity uniquely identified in the server or providing the geographic address (textual description)  and the geographic location (geometry description) of the physical place. Required if geographicLocation not included"					
 				},
+				"geographicLocation": {
+					"$ref": "#/definitions/GeographicLocationRefOrValueType",
+					"description": "A geo location reference, allows describing through coordinate(s) a point, a line or a space. Required if address not included"					
+				},				
 				"calendar": {
 					"$ref": "#/definitions/CalendarPeriodType",
 					"description": "A list of calendar period entries indicating the time availability of the site for different periods"					
@@ -91,9 +111,21 @@
 				"siteRelationship": {
 					"$ref": "#/definitions/SiteRelationshipType",
 					"description": "Linked sites"					
+				},
+				"@baseType": {
+					"type": "string",
+					"description": "Indicates the base type of the resource for extensibility and polymorphism purposes to differentiate the definition of different type of sites (enterprise, residential, ...)"
+				},
+				"@type": {
+					"type": "string",
+					"description": "Indicates the type of the resource for extensibility purposes"
+				},
+				"@schemaLocation": {
+					"type": "string",
+					"description": "A Link to the schema describing this REST Resource"											
 				}
 			},
-			"required": ["id","href","name","status","address"]
+			"required": ["id","href","name","status"]
 		},
 		"AddressRefOrValueType": {
 			"properties": {
@@ -160,6 +192,14 @@
 				"geographicSubAddress": {
 					"$ref": "#/definitions/SubAddressType",
 					"description": "A list of sub addresses. It is used for addressing within a property in an urban area (country properties are often defined differently). It may refer to a building, a building cluster, or a floor of a multistory building."
+				},
+				"@type": {
+					"type": "string",
+					"description": "Indicates the type of the resource for extensibility purposes. Here can be UrbanPropertyAddress, FormattedAddress, JapanesePropertyAddress , AustralianPropertyAddress, etc"
+				},
+				"@schemaLocation": {
+					"type": "string",
+					"description": "A Link to the schema describing this REST Resource. The basic resource describes UrbanPropertyAddress but a schema could be used for other property address description"																
 				}
 			},
 			"required": ["id"]
@@ -185,7 +225,15 @@
 				"geographicPoint": {
 					"$ref": "#/definitions/GeographicPointType",
 					"description": "A list of geo points. A GeoPoint defines a geographic point through coordinates"
-				}
+				},
+				"@type": {
+					"type": "string",
+					"description": "Indicates the type of the resource for extensibility purposes"
+				},
+				"@schemaLocation": {
+					"type": "string",
+					"description": "A Link to the schema describing this REST Resource"											
+				}					
 			}
 		},
 		"GeographicPointType": {
@@ -258,6 +306,14 @@
 				"privateStreetNumber": {
 					"type": "string",
 					"description": "Private streets numbers internal to a private street"					
+				},
+				"@type": {
+					"type": "string",
+					"description": "Indicates the type of the subresource for extensibility purposes"
+				},
+				"@schemaLocation": {
+					"type": "string",
+					"description": "A Link to the schema describing this REST subResource to allow for extensions"											
 				}
 			}
 		},
@@ -281,7 +337,11 @@
 				},
 				"validFor": {
 					"$ref": "#/definitions/TimePeriodType",
-					"description": "Validity for the relationship with the related party"					
+					"description": "Validity for the relationship with the related party"			
+				},
+				"@type": {
+					"type": "string",
+					"description": "Indicates the type of the subresource for extensibility/polymorphic purposes. Here can be Individual, Organization, etc"					
 				}
 			},
 			"required": ["id"]
@@ -319,7 +379,7 @@
 				},
 				"day": {
 					"type": "string",
-					"description": "Day where the calendar status applies (e.g.: monday, mon-to-fri, weekdays, weekend, all week, …)"					
+					"description": "Day where the calendar status applies (e.g.: monday, mon-to-fri, weekdays, weekend, all week, ...)"					
 				},
 				"timeZone": {
 					"type": "string",
@@ -357,7 +417,7 @@
 				}
 			},
 			"required": ["startDateTime"]
-		}		
+		}
 	},
 	"paths": {
 		"/geographicSite": {
