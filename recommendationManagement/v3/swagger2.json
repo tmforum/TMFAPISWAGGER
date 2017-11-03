@@ -3,7 +3,7 @@
     "info": {
         "title": "Recommendation Management", 
         "description": "This is Swagger UI environment generated for the TMF Recommendation Management specification", 
-        "version": "2.0"
+        "version": "2.1"
     }, 
     "host": "biologeek.orange-labs.fr", 
     "basePath": "/tmf-api/recommendationManagement", 
@@ -101,7 +101,7 @@
                         "type": "integer", 
                         "required": false, 
                         "in": "query", 
-                        "name": "item.rank", 
+                        "name": "item.priority", 
                         "description": "For filtering: The rank of the list of recommended offering."
                     }, 
                     {
@@ -145,6 +145,53 @@
                     }, 
                     "400": {
                         "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }, 
+        "/recommendation/{id}": {
+            "get": {
+                "operationId": "retrieveRecommendation", 
+                "summary": "Retrieves a 'Recommendation' by Id", 
+                "tags": [
+                    "recommendation"
+                ], 
+                "parameters": [
+                    {
+                        "required": true, 
+                        "type": "string", 
+                        "name": "id", 
+                        "in": "path", 
+                        "description": "Identifier of the Recommendation"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Ok", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Recommendation"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request", 
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found", 
                         "schema": {
                             "$ref": "#/definitions/Error"
                         }
@@ -288,7 +335,7 @@
                 "item": {
                     "type": "array", 
                     "items": {
-                        "$ref": "#/definitions/Item"
+                        "$ref": "#/definitions/RecommendationItem"
                     }
                 }, 
                 "party": {
@@ -368,11 +415,11 @@
                 }
             }
         }, 
-        "Item": {
+        "RecommendationItem": {
             "type": "object", 
             "description": "A list of recommendation items. Every item is a product offering and its rank.", 
             "properties": {
-                "rank": {
+                "priority": {
                     "type": "integer", 
                     "description": "The rank of the list of recommended offering."
                 }, 
