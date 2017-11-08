@@ -733,7 +733,8 @@
                     "description": "All taxes excluded amount (expressed in the given currency)"
                 }, 
                 "percentage": {
-                    "type": "float", 
+                    "type":"number",
+					"format": "float", 
                     "description": "Percentage to apply for ProdOfferPriceAlteration"
                 }, 
                 "taxIncludedAmount": {
@@ -741,7 +742,8 @@
                     "description": "All taxes included amount (expressed in the given currency)"
                 }, 
                 "taxRate": {
-                    "type": "float", 
+                    "type":"number",
+					"format": "float", 
                     "description": "Tax rate"
                 }
             }
@@ -800,7 +802,8 @@
                     "description": "Currency (ISO4217 norm uses 3 letters to define the currency)"
                 }, 
                 "value": {
-                    "type": "float", 
+                    "type":"number",
+					"format": "float", 
                     "description": "A positive floating point number"
                 }
             }
