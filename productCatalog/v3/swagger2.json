@@ -3,7 +3,7 @@
     "info": {
         "title": "Product Catalog Management", 
         "description": "This is Swagger UI environment generated for the TMF Product Catalog Management specification", 
-        "version": "3.0"
+        "version": "2.0"
     }, 
     "host": "biologeek.orange-labs.fr", 
     "basePath": "/tmf-api/productCatalogManagement", 
@@ -924,10 +924,11 @@
                         "description": "For filtering: A category that describes the price, such as recurring, discount, allowance, penalty, and so forth."
                     }, 
                     {
-                        "type": "float", 
+                        "name": "unitOfMeasure.value", 
+                        "format": "float", 
                         "required": false, 
                         "in": "query", 
-                        "name": "unitOfMeasure.value", 
+                        "type": "number", 
                         "description": "For filtering: A positive floating point number"
                     }, 
                     {
@@ -995,10 +996,11 @@
                         "description": "For filtering: the lifecycle status of this POP"
                     }, 
                     {
-                        "type": "float", 
+                        "name": "price.value", 
+                        "format": "float", 
                         "required": false, 
                         "in": "query", 
-                        "name": "price.value", 
+                        "type": "number", 
                         "description": "For filtering: A positive floating point number"
                     }, 
                     {
@@ -1009,10 +1011,11 @@
                         "description": "For filtering: Currency (ISO4217 norm uses 3 letters to define the currency)"
                     }, 
                     {
-                        "type": "float", 
+                        "name": "percentage", 
+                        "format": "float", 
                         "required": false, 
                         "in": "query", 
-                        "name": "percentage", 
+                        "type": "number", 
                         "description": "For filtering: Percentage to apply for ProdOfferPriceAlteration (Discount)"
                     }, 
                     {
@@ -1163,10 +1166,11 @@
                         "description": "For filtering: The class type of this PLA"
                     }, 
                     {
-                        "type": "float", 
+                        "name": "tax.taxRate", 
+                        "format": "float", 
                         "required": false, 
                         "in": "query", 
-                        "name": "tax.taxRate", 
+                        "type": "number", 
                         "description": "For filtering: Tax rate"
                     }
                 ], 
@@ -2619,7 +2623,8 @@
                     "description": "The amount of money that characterizes the price."
                 }, 
                 "percentage": {
-                    "type": "float", 
+                    "type": "number", 
+                    "format": "float", 
                     "description": "Percentage to apply for ProdOfferPriceAlteration (Discount)"
                 }, 
                 "bundledPopRelationships": {
@@ -2705,7 +2710,7 @@
                     "description": "A user-friendly name for the place, such as \"Paris Store\", \"London Store\", \"Main Home\""
                 }, 
                 "geoLocationUrl": {
-                    "$ref": "#/definitions/Sring", 
+                    "type": "string", 
                     "description": "A url providing a map for localizing the place"
                 }, 
                 "address": {
@@ -3009,7 +3014,7 @@
                     "type": "string", 
                     "description": "Name of the BundledProductOffering"
                 }, 
-                "bundledProductOfferingOption": {
+                "bundledProductOffering": {
                     "$ref": "#/definitions/BundledProdOfferOption"
                 }
             }
@@ -3058,7 +3063,8 @@
             "description": "A base / value and unit  used to represent quantity", 
             "properties": {
                 "amount": {
-                    "$ref": "#/definitions/Long", 
+                    "type": "integer",
+                    "format": "int64", 
                     "description": "A quantity of something, typically the total of a thing or things in number, size, value, extent, or money."
                 }, 
                 "units": {
@@ -3080,11 +3086,13 @@
                     "description": "All taxes excluded amount (expressed in the given currency)"
                 }, 
                 "taxRate": {
-                    "type": "float", 
+                    "type": "number", 
+                    "format": "float", 
                     "description": "Tax rate"
                 }, 
                 "percentage": {
-                    "type": "float", 
+                    "type": "number", 
+                    "format": "float", 
                     "description": "Percentage to apply for ProdOfferPriceAlteration"
                 }
             }
@@ -3139,7 +3147,8 @@
             "description": "A base / value business entity used to represent money", 
             "properties": {
                 "value": {
-                    "type": "float", 
+                    "type": "number", 
+                    "format": "float", 
                     "description": "A positive floating point number"
                 }, 
                 "unit": {
@@ -3184,7 +3193,7 @@
                 }, 
                 "value": {
                     "type": "string", 
-                    "description": "A discrete value that the characteristic can take on"
+                    "description": "A discrete value that the characteristic can take on. the value type is defined by 'valueType' characteristic"
                 }, 
                 "valueFrom": {
                     "type": "string", 
@@ -3553,7 +3562,8 @@
                     "description": "A categorization of the tax rate."
                 }, 
                 "taxRate": {
-                    "type": "float", 
+                    "type": "number", 
+                    "format": "float", 
                     "description": "Tax rate"
                 }
             }
