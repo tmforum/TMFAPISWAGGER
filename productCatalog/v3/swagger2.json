@@ -3,7 +3,7 @@
     "info": {
         "title": "Product Catalog Management", 
         "description": "This is Swagger UI environment generated for the TMF Product Catalog Management specification", 
-        "version": "2.0"
+        "version": "3.0"
     }, 
     "host": "biologeek.orange-labs.fr", 
     "basePath": "/tmf-api/productCatalogManagement", 
